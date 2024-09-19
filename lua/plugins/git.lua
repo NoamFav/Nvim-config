@@ -1,5 +1,4 @@
 -- Git configuration file
-
 return {
   -- Git integration via Fugitive
   {
