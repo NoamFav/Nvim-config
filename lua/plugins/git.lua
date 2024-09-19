@@ -80,7 +80,7 @@ return {
     end
     },
 
-    { 'akinsho/git-conflict.nvim', tag = "*", config = function()
+    { 'akinsho/git-conflict.nvim', config = function()
         require('git-conflict').setup {
             default_mappings = true, -- Enable default keymaps
             highlights = { -- You can customize the colors of the conflict markers
