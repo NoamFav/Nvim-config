@@ -15,5 +15,6 @@ return {
         },
       },
     })
+    vim.api.nvim_set_keymap('n', '<leader>db', ':Dashboard<CR>', { noremap = true, silent = true })
   end
 }
