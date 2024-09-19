@@ -66,16 +66,29 @@ return {
   },
 
   { 'lewis6991/gitsigns.nvim',
-dependencies = { 'nvim-lua/plenary.nvim' },
-config = function()
-	require('gitsigns').setup {
-  	signs = {
-    		add          = { text = '' },  -- Plus sign for added lines
-    		change       = { text = '' },  -- Dot icon for changed lines
-    		delete       = { text = '✘' },  -- Cross icon for deleted lines
-    		topdelete    = { text = '' },  -- Arrow up for topdelete
-    		changedelete = { text = '' },  -- Circular arrow for changed + deleted
-  },
-}
-end}
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+	    require('gitsigns').setup {
+  	    signs = {
+    	    add          = { text = '' },  -- Plus sign for added lines
+    	    change       = { text = '' },  -- Dot icon for changed lines
+    	    delete       = { text = '✘' },  -- Cross icon for deleted lines
+    	    topdelete    = { text = '' },  -- Arrow up for topdelete
+    	    changedelete = { text = '' },  -- Circular arrow for changed + deleted
+            },
+        }
+    end
+    },
+
+    { 'akinsho/git-conflict.nvim', tag = "*", config = function()
+        require('git-conflict').setup {
+            default_mappings = true, -- Enable default keymaps
+            highlights = { -- You can customize the colors of the conflict markers
+                incoming = 'DiffText',
+                current = 'DiffAdd',
+            },
+            disable_diagnostics = true, -- Disable diagnostics during conflict resolution
+        }
+    end
+    }
 }
