@@ -78,6 +78,15 @@ nnoremap <leader>gf :Telescope git_files<CR>
 nnoremap <leader>gs :Telescope grep_string<CR>
 nnoremap <leader>fe :Telescope file_browser<CR>
 
+" Maven shortcuts
+nnoremap <leader>mm :!mvn clean install<CR>
+nnoremap <leader>mp :!mvn clean package<CR>
+nnoremap <leader>mc :!mvn clean<CR>
+nnoremap <leader>mt :!mvn test<CR>
+nnoremap <leader>me :!mvn exec:exec<CR>
+nnoremap <leader>mf :!mvn javafx:run<CR>
+nnoremap <leader>mj :!mvn javadoc:javadoc<CR>
+
 " Toggle Tagbar
 nnoremap <leader>tf :lua ToggleTagbarFocus()<CR>
 let g:tagbar_autofocus = 1
