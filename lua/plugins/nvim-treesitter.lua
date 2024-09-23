@@ -12,3 +12,4 @@ fold = {
         vim.o.foldlevel = 99 -- Automatically unfold everything on startup
     end
 }
+}
