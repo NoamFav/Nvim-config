@@ -10,18 +10,6 @@ return {
     vim.api.nvim_set_keymap('n', '<leader>lg', ':LazyGit<CR>', { noremap = true, silent = true })
   end
 },
-  -- Git integration via Fugitive
-  {
-    'tpope/vim-fugitive',
-    config = function()
-      -- Fugitive doesn't need much configuration, but you can add keymaps here
-      -- Example keymap for opening Git status
-      vim.api.nvim_set_keymap('n', '<leader>gg', ':G<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>gb', ':G log --graph --oneline --all<CR>', { noremap = true })
-      vim.api.nvim_set_keymap('n', '<leader>gd', ':Gdiff<CR>', { noremap = true })
-    end
-  },
-
   -- Git blame annotations
   {
     'f-person/git-blame.nvim',
@@ -49,34 +37,7 @@ return {
       }
     end
   },
-
-  -- Git conflict markers
-  {
-    'tanvirtin/vgit.nvim',
-    config = function()
-      require('vgit').setup {
-        settings = {
-          live_blame = {
-            enabled = true,
-          },
-          scene = {
-            diff_preference = 'split',
-          },
-          diff_strategy = 'index',
-        },
-      }
-    end
-  },
-
-  -- Git messenger for commit messages
-  {
-    'rhysd/git-messenger.vim',
-    config = function()
-      -- Use floating window for commit messages
-      vim.api.nvim_set_keymap('n', '<leader>gm', ':GitMessenger<CR>', { noremap = true, silent = true })
-    end
-  },
-
+ 
   { 'lewis6991/gitsigns.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
