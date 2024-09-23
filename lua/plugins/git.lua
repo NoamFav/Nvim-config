@@ -7,6 +7,8 @@ return {
       -- Fugitive doesn't need much configuration, but you can add keymaps here
       -- Example keymap for opening Git status
       vim.api.nvim_set_keymap('n', '<leader>gg', ':G<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>gb', ':G log --graph --oneline --all<CR>', { noremap = true })
+      vim.api.nvim_set_keymap('n', '<leader>gd', ':Gdiff<CR>', { noremap = true })
     end
   },
 
