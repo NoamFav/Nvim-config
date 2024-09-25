@@ -1,4 +1,3 @@
-# Neovim Configuration
 
 This repository contains my personal Neovim configuration files, optimized for development, Git integration, and general programming workflows.
 
