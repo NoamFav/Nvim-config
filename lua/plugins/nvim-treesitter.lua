@@ -45,5 +45,7 @@ return {
       }
     end
   },
+
+  { 'jaxbot/semantic-highlight.vim'}
 }
 
