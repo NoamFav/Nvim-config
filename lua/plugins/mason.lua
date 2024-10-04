@@ -7,12 +7,11 @@ return {
       require('mason-lspconfig').setup({
         ensure_installed = {
           'jdtls', 'pyright', 'rust_analyzer', 'clangd', 'gopls',
-          'emmet_ls', 'html', 'cssls', 'jsonls', 'solargraph', 'sqlls',
+          'emmet_ls', 'html', 'tailwindcss', 'jsonls', 'solargraph', 'sqlls',
           'yamlls', 'bashls', 'dockerls', 'elixirls', 'vimls', 'lua_ls',
           'eslint', 'graphql', 'phpactor', 'perlnavigator', 'terraformls',
           'hls', 'volar', 'kotlin_language_server', 'tailwindcss',
-          'marksman', 'svelte', 'texlab', 'lemminx',
-        },
+          'marksman', 'svelte', 'texlab', 'lemminx'},
         automatic_installation = true,
 	auto_install = true,
       })

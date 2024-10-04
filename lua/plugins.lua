@@ -3,6 +3,7 @@ return {
   { 'navarasu/onedark.nvim' },
   { 'akai54/2077.nvim' },
   { 'sainnhe/sonokai' },
+  {'maxmellon/vim-jsx-pretty'},
 
   -- Utilities
   { 'nvim-lua/plenary.nvim' },
