@@ -45,15 +45,5 @@ return {
       }
     end
   },
-
-  -- Optional: Add additional treesitter-based functionality
-  {
-    'romgrk/nvim-treesitter-context',
-    config = function()
-      require('treesitter-context').setup {
-        enable = true, -- Enable this plugin (Can be manually disabled later)
-      }
-    end,
-  },
 }
 
