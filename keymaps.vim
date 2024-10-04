@@ -87,6 +87,8 @@ nnoremap <leader>me :!mvn exec:exec<CR>
 nnoremap <leader>mf :!mvn javafx:run<CR>
 nnoremap <leader>mj :!mvn javadoc:javadoc<CR>
 
+nnoremap <Leader>s :SemanticHighlightToggle<cr>
+
 " Toggle Tagbar
 nnoremap <leader>tf :lua ToggleTagbarFocus()<CR>
 let g:tagbar_autofocus = 1
