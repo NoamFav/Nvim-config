@@ -11,7 +11,7 @@ return {
           'yamlls', 'bashls', 'dockerls', 'elixirls', 'vimls', 'lua_ls',
           'eslint', 'graphql', 'phpactor', 'perlnavigator', 'terraformls',
           'hls', 'volar', 'kotlin_language_server', 'tailwindcss',
-          'marksman', 'svelte', 'texlab', 'lemminx'},
+          'marksman', 'svelte', 'lemminx'},
         automatic_installation = true,
 	auto_install = true,
       })

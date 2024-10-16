@@ -1,25 +1,20 @@
 return {
-    {
-        'lervag/vimtex',
-        config = function()
-            -- Vimtex settings
-            vim.g.vimtex_view_method = 'skim'  -- Choose your PDF viewer (zathura, skim, etc.)
-            vim.g.vimtex_compiler_method = 'latexmk' -- Auto compile using latexmk
-            vim.g.vimtex_compiler_latexmk = {
-                build_dir = 'build',
-                continuous = 1,
-                options = {
-                    '-pdf',
-                    '-shell-escape',
-                    '-verbose',
-                    '-file-line-error',
-                    '-synctex=1',
-                    '-interaction=nonstopmode'
-                },
-            }
-
-            -- Optionally disable conceal feature if it gets in the way
-            vim.g.vimtex_syntax_conceal = 0
-        end,
-    }
+  "lervag/vimtex",
+  lazy = false,     -- we don't want to lazy load VimTeX
+  -- tag = "v2.15", -- uncomment to pin to a specific release
+  init = function()
+  vim.g.vimtex_view_method = "general"
+  vim.g.vimtex_compiler_method = "latexmk"
+  -- Use Vimscript for complex configurations
+  vim.cmd([[
+    let g:vimtex_compiler_latexmk = {
+      \ 'build_dir' : 'build',
+      \ 'options' : [
+      \   '-pdf',
+      \   '-interaction=nonstopmode',
+      \   '-synctex=1',
+      \ ],
+    \ }
+  ]])
+end,
 }
