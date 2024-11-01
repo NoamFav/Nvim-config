@@ -134,7 +134,7 @@ require'lspconfig'.sqlls.setup{
   end
 }
 require'lspconfig'.matlab_ls.setup {
-    cmd = { 'java', '-jar', '/path/to/matlab-language-server/target/matlab-language-server-1.0.0.jar' },
+    cmd = { 'java', '-jar', '/matlab-language-server-1.0.0.jar' },
     filetypes = { 'matlab' },
     root_dir = function(fname)
         return require'lspconfig'.util.find_git_ancestor(fname) or vim.fn.getcwd()
