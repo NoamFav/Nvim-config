@@ -11,7 +11,7 @@ return {
           'yamlls', 'bashls', 'dockerls', 'elixirls', 'vimls', 'lua_ls',
           'eslint', 'graphql', 'phpactor', 'perlnavigator', 'terraformls',
           'hls', 'volar', 'kotlin_language_server', 'tailwindcss',
-          'marksman', 'svelte', 'lemminx', 'ltex', 'matlab-ls'},
+          'marksman', 'svelte', 'lemminx', 'ltex'},
         automatic_installation = true,
 	auto_install = true,
       })
@@ -132,6 +132,15 @@ require'lspconfig'.sqlls.setup{
   root_dir = function(fname)
     return require'lspconfig'.util.root_pattern('.sql_project', '.git')(fname) or require'lspconfig'.util.path.dirname(fname)
   end
+}
+require'lspconfig'.matlab_ls.setup {
+    cmd = { 'java', '-jar', '/path/to/matlab-language-server/target/matlab-language-server-1.0.0.jar' },
+    filetypes = { 'matlab' },
+    root_dir = function(fname)
+        return require'lspconfig'.util.find_git_ancestor(fname) or vim.fn.getcwd()
+    end,
+    on_attach = function(client, bufnr)
+    end,
 }
     end
   }
