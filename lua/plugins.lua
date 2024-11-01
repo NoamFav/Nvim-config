@@ -39,4 +39,6 @@ return {
 
   -- Harpoon
   { 'ThePrimeagen/harpoon' },
+
+  {'daeyun/vim-matlab'},
 }

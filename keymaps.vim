@@ -100,6 +100,8 @@ lua require("toggleterm").setup{}
 
 nnoremap <C-t> :ToggleTerm<CR>
 
+nnoremap <leader>rm :w<CR>:!matlab -nodisplay -nosplash -nodesktop -r "run('%:p'), exit"<CR>
+
 " Basic Settings
 set number
 set relativenumber
