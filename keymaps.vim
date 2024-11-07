@@ -54,15 +54,6 @@ nnoremap <leader>df :lua vim.lsp.buf.format()<CR>
 " Show quick fix/code action options
 nnoremap <leader>qf :lua vim.lsp.buf.code_action()<CR>
 
-" Show diagnostics
-nnoremap <leader>xx :Trouble diagnostics toggle<CR>
-nnoremap <leader>xX :Trouble diagnostics toggle filter.buf=0<CR>
-nnoremap <leader>cs :Trouble symbols toggle<CR>
-nnoremap <leader>cc :Trouble close<CR>
-nnoremap <leader>cl :Trouble lsp toggle focus=false win.position=right<CR>
-nnoremap <leader>xL :Trouble loclist toggle<CR>
-nnoremap <leader>xQ :Trouble qflist toggle<CR>
-
 " Toggle NvimTree
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
@@ -77,6 +68,7 @@ nnoremap <leader>fh :Telescope help_tags<CR>
 nnoremap <leader>gf :Telescope git_files<CR>
 nnoremap <leader>gs :Telescope grep_string<CR>
 nnoremap <leader>fe :Telescope file_browser<CR>
+nnoremap <leader>fd :Telescope diagnostics<CR>
 
 " Maven shortcuts
 nnoremap <leader>mm :!mvn clean install<CR>
