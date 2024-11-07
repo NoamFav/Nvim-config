@@ -81,15 +81,6 @@ return {
 		end,
 	},
 	{
-		"folke/trouble.nvim",
-		dependencies = { "kyazdani42/nvim-web-devicons" },
-		config = function()
-			require("trouble").setup({
-				-- your trouble config here
-			})
-		end,
-	},
-	{
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("lspconfig").ts_ls.setup({
