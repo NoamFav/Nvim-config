@@ -198,6 +198,8 @@ return {
 				filetype = {
 					javascript = { require("formatter.filetypes.javascript").prettier },
 					typescript = { require("formatter.filetypes.javascript").prettier },
+					javascriptreact = { require("formatter.filetypes.javascript").prettier },
+					typescriptreact = { require("formatter.filetypes.typescript").prettier },
 					python = { require("formatter.filetypes.python").black },
 					lua = { require("formatter.filetypes.lua").stylua },
 					cpp = { require("formatter.filetypes.cpp").clangformat },
