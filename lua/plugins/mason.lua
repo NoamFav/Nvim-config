@@ -12,35 +12,35 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					-- Language Servers
-					"jdtls",
-					"pyright",
-					"rust_analyzer",
-					"clangd",
-					"gopls",
-					"emmet_ls",
-					"html",
-					"tailwindcss",
-					"jsonls",
-					"solargraph",
-					"sqlls",
-					"yamlls",
-					"bashls",
-					"dockerls",
-					"elixirls",
-					"vimls",
-					"lua_ls",
-					"eslint",
-					"graphql",
-					"phpactor",
-					"perlnavigator",
-					"terraformls",
-					"hls",
-					"volar",
-					"kotlin_language_server",
-					"marksman",
-					"svelte",
-					"lemminx",
-					"ltex",
+					"jdtls", -- Java
+					"pyright", -- Python
+					"rust_analyzer", -- Rust
+					"clangd", -- C/C++
+					"gopls", -- Go
+					"emmet_ls", -- HTML/CSS
+					"html", -- HTML
+					"tailwindcss", -- Tailwind CSS
+					"jsonls", -- JSON
+					"solargraph", -- Ruby
+					"sqlls", -- SQL
+					"yamlls", -- YAML
+					"bashls", -- Bash
+					"dockerls", -- Docker
+					"elixirls", -- Elixir
+					"vimls", -- Vim
+					"lua_ls", -- Lua
+					"eslint", -- JavaScript/TypeScript
+					"graphql", -- GraphQL
+					"phpactor", -- PHP
+					"perlnavigator", -- Perl
+					"terraformls", -- Terraform
+					"hls", -- Haskell
+					"volar", -- Vue
+					"kotlin_language_server", -- Kotlin
+					"marksman", -- Markdown
+					"svelte", -- Svelte
+					"lemminx", -- XML
+					"ltex", -- LaTeX
 				},
 				automatic_installation = true,
 				auto_install = true,
