@@ -81,6 +81,15 @@ nnoremap <leader>mj :!mvn javadoc:javadoc<CR>
 
 nnoremap <Leader>s :SemanticHighlightToggle<cr>
 
+" Cmake shortcuts
+nnoremap <leader>cc :!cmake .<CR>
+nnoremap <leader>cm :!cmake --build .<CR>
+nnoremap <leader>cr :!cmake --build . --target run<CR>
+nnoremap <leader>ct :!ctest<CR>
+
+" unique cmake shortcuts (only for my projects)
+nnoremap <leader>cb :!cmr<CR>
+
 " Toggle Tagbar
 nnoremap <leader>tf :lua ToggleTagbarFocus()<CR>
 let g:tagbar_autofocus = 1
