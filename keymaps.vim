@@ -15,6 +15,10 @@ imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 " Use <C-K> to dismiss a suggestion
 imap <silent><script><expr> <C-K> copilot#Dismiss()
 
+highlight Comment cterm=italic gui=italic
+  highlight Keyword cterm=italic gui=italic
+  highlight Function cterm=italic gui=italic
+
 " buffers
 nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprev<CR>
