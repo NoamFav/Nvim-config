@@ -165,6 +165,9 @@ return {
 						or require("lspconfig").util.path.dirname(fname)
 				end,
 			})
+			require("lspconfig").perlnavigator.setup({
+				root_dir = require("lspconfig").util.root_pattern(".git", "."), -- Find the git directory or the current directory
+			})
 		end,
 	},
 	{
