@@ -12,8 +12,6 @@ end
 
 vim.g.mapleader = " "
 
-vim.env.OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 

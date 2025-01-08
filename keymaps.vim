@@ -107,11 +107,6 @@ nnoremap <C-t> :ToggleTerm<CR>
 
 nnoremap <leader>rm :w<CR>:!matlab -nojvm -nosplash -nodesktop -r "run('%:p')"<CR>
 
-" Open ai inline 
-nnoremap <leader>ai :ChatGPT<CR>
-nnoremap <leader>ac :ChatGPTCompleteCode<CR>
-nnoremap <leader>ae :ChatGPTEditWithInstruction<CR>
-
 " Basic Settings
 set number
 set relativenumber
