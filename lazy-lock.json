@@ -16,6 +16,7 @@
   "git-blame.nvim": { "branch": "master", "commit": "2883a7460f611c2705b23f12d58d398d5ce6ec00" },
   "git-conflict.nvim": { "branch": "main", "commit": "a1badcd070d176172940eb55d9d59029dad1c5a6" },
   "gitsigns.nvim": { "branch": "main", "commit": "5f808b5e4fef30bd8aca1b803b4e555da07fc412" },
+  "glow.nvim": { "branch": "main", "commit": "238070a686c1da3bccccf1079700eb4b5e19aea4" },
   "harpoon": { "branch": "master", "commit": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3" },
   "impatient.nvim": { "branch": "main", "commit": "47302af74be7b79f002773011f0d8e85679a7618" },
   "indent-blankline.nvim": { "branch": "master", "commit": "259357fa4097e232730341fa60988087d189193a" },

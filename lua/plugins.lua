@@ -16,6 +16,9 @@ return {
 	-- QuickAction
 	{ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" },
 
+	-- Markdown Preview
+	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+
 	-- Snippets
 	{ "L3MON4D3/LuaSnip" },
 
