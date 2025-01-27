@@ -16,6 +16,7 @@ return {
 					"pyright", -- Python
 					"rust_analyzer", -- Rust
 					"clangd", -- C/C++
+
 					"gopls", -- Go
 					"emmet_ls", -- HTML/CSS
 					"html", -- HTML
@@ -116,6 +117,84 @@ return {
 						or require("lspconfig.util").path.dirname(fname)
 				end,
 			})
+			-- Define the Unity project path
+			local unity_project_path = vim.fn.expand("~/Git_projects/ShadowedHunterMetroidvania")
+			local solution_path = unity_project_path .. "/ShadowedHunterMetroidvania.sln"
+
+			require("lspconfig").omnisharp.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				on_attach = function(client, bufnr)
+					vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+					local bufopts = { noremap = true, silent = true, buffer = bufnr }
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+				end,
+				handlers = {
+					["textDocument/definition"] = function(...)
+						local status, extended = pcall(require, "omnisharp_extended")
+						if status then
+							return extended.handler(...)
+						else
+							return vim.lsp.handlers["textDocument/definition"](...)
+						end
+					end,
+				},
+				cmd = {
+					vim.fn.expand("~/.local/bin/omnisharp"),
+					"--languageserver",
+					"--solution-path=" .. solution_path,
+					"--hostPID",
+					tostring(vim.fn.getpid()),
+				},
+				root_dir = function(fname)
+					-- First try to find Unity-specific files
+					local unity_root = require("lspconfig").util.root_pattern(
+						"Assembly-CSharp.csproj",
+						"*.sln",
+						"Assets",
+						"Packages/manifest.json"
+					)(fname)
+
+					if unity_root then
+						return unity_root
+					end
+
+					-- Fallback to standard patterns
+					return require("lspconfig").util.root_pattern("*.sln", "*.csproj", ".git")(fname)
+						or require("lspconfig").util.path.dirname(fname)
+				end,
+				filetypes = { "cs", "vb" },
+				init_options = {
+					enableDecompilationSupport = true,
+					useEditorConfig = true,
+					enableMsBuildLoadProjectsOnDemand = true,
+					enableAnalyzersSupport = true,
+					enableImportCompletion = true,
+					maxProjectResults = 250,
+					enablePackageRestore = true,
+					sdk = {
+						name = "Microsoft.NET.Sdk",
+						version = "6.0.0",
+					},
+				},
+				-- Unity-specific settings
+				settings = {
+					omnisharp = {
+						useModernNet = false, -- Unity typically uses Mono
+						enableMsBuildLoadProjectsOnDemand = true,
+						enableRoslynAnalyzers = true,
+						enableEditorConfigSupport = true,
+						enableImportCompletion = true,
+						enableAsyncCompletion = true,
+						projectLoadTimeout = 120,
+						useGlobalMono = "always", -- Force using Mono for Unity projects
+						monoPath = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/mono",
+					},
+				},
+			})
 			require("lspconfig").kotlin_language_server.setup({
 				cmd = { "kotlin-language-server" },
 				root_dir = require("lspconfig").util.root_pattern("build.gradle", "settings.gradle", ".git"),
@@ -215,6 +294,7 @@ return {
 					css = { require("formatter.filetypes.css").prettier },
 					json = { require("formatter.filetypes.json").prettier },
 					yaml = { require("formatter.filetypes.yaml").prettier },
+					toml = { require("formatter.filetypes.toml").prettier },
 					markdown = { require("formatter.filetypes.markdown").prettier },
 					sql = {
 						function()

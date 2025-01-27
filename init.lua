@@ -23,6 +23,8 @@ vim.diagnostic.config({
 	severity_sort = true,
 })
 
+vim.g.OmniSharp_server_use_mono = 0
+
 local harpoon = require("harpoon")
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")

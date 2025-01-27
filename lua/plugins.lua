@@ -3,7 +3,16 @@ return {
 	{ "navarasu/onedark.nvim" },
 	{ "akai54/2077.nvim" },
 	{ "sainnhe/sonokai" },
-	{ "folke/tokyonight.nvim" },
+	{
+		"folke/tokyonight.nvim",
+		opts = {
+			transparent = true,
+			styles = {
+				sidebars = "transparent",
+				floats = "transparent",
+			},
+		},
+	},
 	{ "maxmellon/vim-jsx-pretty" },
 
 	-- Utilities
@@ -41,5 +50,13 @@ return {
 	-- Harpoon
 	{ "ThePrimeagen/harpoon" },
 
+	-- OmniSharp Extended
+	{
+		"Hoffs/omnisharp-extended-lsp.nvim",
+		lazy = true,
+		event = { "BufReadPre *.cs", "BufNewFile *.cs" },
+	},
+
 	{ "daeyun/vim-matlab" },
+	{ "OXY2DEV/markview.nvim" },
 }
