@@ -5,7 +5,7 @@ return {
 		config = function()
 			require("lualine").setup({
 				options = {
-					--theme = dofile(vim.fn.expand("~/2077.nvim/lua/lualine/themes/2077.lua")),
+					--theme = dofile(vim.fn.expand("~/2077.nvim/lua/lualine/themes/2077.lua")), -- IF you want to use 2077 theme (contact me for the file)
 					theme = "tokyonight-night",
 					section_separators = { left = "", right = "" },
 					component_separators = { left = "", right = "" },

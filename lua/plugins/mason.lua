@@ -118,7 +118,7 @@ return {
 				end,
 			})
 			-- Define the Unity project path
-			local unity_project_path = vim.fn.expand("~/Git_projects/ShadowedHunterMetroidvania")
+			local unity_project_path = vim.fn.expand("~/Neoware/ShadowedHunterMetroidvania")
 			local solution_path = unity_project_path .. "/ShadowedHunterMetroidvania.sln"
 
 			require("lspconfig").omnisharp.setup({
@@ -259,6 +259,7 @@ return {
 					"isort", -- Python imports sorting
 					"stylua", -- Lua
 					"clang-format", -- C/C++
+					"csharpier", -- C#
 					"google-java-format", -- Java
 					"ktlint", -- Kotlin
 					"shfmt", -- Shell scripts
@@ -286,6 +287,15 @@ return {
 					lua = { require("formatter.filetypes.lua").stylua },
 					cpp = { require("formatter.filetypes.cpp").clangformat },
 					c = { require("formatter.filetypes.c").clangformat },
+					cs = {
+						function()
+							return {
+								exe = "dotnet-csharpier",
+								args = { "--write-stdout" },
+								stdin = true,
+							}
+						end,
+					},
 					java = { require("formatter.filetypes.java").google_java_format },
 					sh = { require("formatter.filetypes.sh").shfmt },
 					rust = { require("formatter.filetypes.rust").rustfmt },
@@ -323,6 +333,7 @@ return {
 							}
 						end,
 					},
+
 					dockerfile = {
 						function()
 							return {

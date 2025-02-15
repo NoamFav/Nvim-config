@@ -1,8 +1,28 @@
 return {
 	-- Color scheme
-	{ "navarasu/onedark.nvim" },
-	{ "akai54/2077.nvim" },
-	{ "sainnhe/sonokai" },
+	{
+		"navarasu/onedark.nvim",
+		opts = {
+			transparent = true,
+			styles = {
+				sidebars = "transparent",
+				floats = "transparent",
+			},
+		},
+	},
+	{
+		"akai54/2077.nvim",
+	},
+	{
+		"sainnhe/sonokai",
+		opts = {
+			transparent = true,
+			styles = {
+				sidebars = "transparent",
+				floats = "transparent",
+			},
+		},
+	},
 	{
 		"folke/tokyonight.nvim",
 		opts = {
@@ -58,5 +78,10 @@ return {
 	},
 
 	{ "daeyun/vim-matlab" },
+
+	-- MarkView (Markdown Preview)
 	{ "OXY2DEV/markview.nvim" },
+
+	{ "NoamFav/apple_music.nvim" },
+	{ "Matchiye/noisemachine.nvim", dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" } },
 }

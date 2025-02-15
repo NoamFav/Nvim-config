@@ -75,8 +75,8 @@ nnoremap <leader>fe :Telescope file_browser<CR>
 nnoremap <leader>fd :Telescope diagnostics<CR>
 
 " Maven shortcuts
-nnoremap <leader>mm :!mvn clean install<CR>
-nnoremap <leader>mp :!mvn clean package<CR>
+nnoremap <leader>mi :!mvn clean install<CR>
+nnoremap <leader>mk :!mvn clean package<CR>
 nnoremap <leader>mc :!mvn clean<CR>
 nnoremap <leader>mt :!mvn test<CR>
 nnoremap <leader>me :!mvn exec:exec<CR>
