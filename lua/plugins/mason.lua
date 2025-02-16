@@ -1,5 +1,24 @@
 return {
-	{ "neovim/nvim-lspconfig" },
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = { "saghen/blink.cmp" },
+
+		-- example using `opts` for defining servers
+		opts = {
+			servers = {
+				lua_ls = {},
+			},
+		},
+		config = function(_, opts)
+			local lspconfig = require("lspconfig")
+			for server, config in pairs(opts.servers) do
+				-- passing config.capabilities to blink.cmp merges with the capabilities in your
+				-- `opts[server].capabilities, if you've defined it
+				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+				lspconfig[server].setup(config)
+			end
+		end,
+	},
 	{
 		"williamboman/mason.nvim",
 		config = function()
@@ -62,7 +81,7 @@ return {
 
 							-- Other setup like key mappings, etc.
 						end,
-						capabilities = require("cmp_nvim_lsp").default_capabilities(),
+						capabilities = require("blink.cmp").get_lsp_capabilities(),
 					})
 				end,
 			})
@@ -122,7 +141,7 @@ return {
 			local solution_path = unity_project_path .. "/ShadowedHunterMetroidvania.sln"
 
 			require("lspconfig").omnisharp.setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				capabilities = require("blink-cmp").get_lsp_capabilities(),
 				on_attach = function(client, bufnr)
 					vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 					local bufopts = { noremap = true, silent = true, buffer = bufnr }

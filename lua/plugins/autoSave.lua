@@ -8,6 +8,7 @@ return {
 					message = function()
 						return "AutoSave: saved at fucking " .. vim.fn.strftime("%H:%M:%S")
 					end,
+
 					dim = 0.18,
 					cleaning_interval = 250,
 				},
