@@ -61,5 +61,14 @@ return {
 				winblend = 10, -- Transparency
 			},
 		},
+		image = {
+			enabled = true,
+			relative = "cursor",
+			border = "rounded",
+			focusable = false,
+			backdrop = false,
+			row = 1,
+			col = 1,
+		},
 	},
 }
