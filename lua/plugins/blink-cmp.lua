@@ -258,7 +258,6 @@ return {
 					require("luasnip").jump(direction)
 				end,
 			}
-
 			-- The default preset used by lazyvim accepts completions with enter
 			-- I don't like using enter because if on markdown and typing
 			-- something, but you want to go to the line below, if you press enter,
