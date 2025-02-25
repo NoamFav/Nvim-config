@@ -61,6 +61,8 @@ return {
 					"svelte", -- Svelte
 					"lemminx", -- XML
 					"ltex", -- LaTeX
+					"ts_ls", -- TypeScript
+					"tailwindcss", -- Tailwind CSS
 				},
 				automatic_installation = true,
 				auto_install = true,
@@ -293,6 +295,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		"mhartington/formatter.nvim",
 		config = function()
