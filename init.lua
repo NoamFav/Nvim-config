@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.g.mapleader = " "
-
+vim.opt.termguicolors = true
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
