@@ -40,7 +40,6 @@ return {
 				end
 				return true
 			end
-
 			-- NOTE: The new way to enable LuaSnip
 			-- Merge custom sources with the existing ones from lazyvim
 			-- NOTE: by default lazyvim already includes the lazydev source, so not adding it here again
