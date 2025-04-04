@@ -50,5 +50,4 @@ return {
 	{ "OXY2DEV/markview.nvim" },
 
 	{ "NoamFav/apple_music.nvim" },
-	{ "Matchiye/noisemachine.nvim", dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" } },
 }
