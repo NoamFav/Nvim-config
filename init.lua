@@ -17,6 +17,8 @@ require("lazy").setup("plugins")
 
 vim.cmd("source ~/.config/nvim/keymaps.vim")
 
+vim.g.copilot_enabled = false
+
 vim.diagnostic.config({
 	virtual_text = true,
 	update_in_insert = true,
