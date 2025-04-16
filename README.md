@@ -8,8 +8,6 @@
 
 **A powerful, feature-rich Neovim setup for modern development**
 
-![Neovim Screenshot](https://i.imgur.com/placeholder-image.png)
-
 </div>
 
 ---
