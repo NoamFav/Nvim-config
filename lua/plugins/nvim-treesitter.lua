@@ -27,18 +27,30 @@ return {
 			})
 		end,
 	},
-
-	-- Rainbow plugin for variable highlighting
 	{
-		"p00f/nvim-ts-rainbow",
-		requires = { "nvim-treesitter/nvim-treesitter" },
+		"HiPhish/rainbow-delimiters.nvim",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				rainbow = {
-					enable = true,
-					extended_mode = true, -- Also highlight variables
+			local rainbow_delimiters = require("rainbow-delimiters")
+
+			vim.g.rainbow_delimiters = {
+				strategy = {
+					[""] = rainbow_delimiters.strategy["global"],
+					vim = rainbow_delimiters.strategy["local"],
 				},
-			})
+				query = {
+					[""] = "rainbow-delimiters",
+					lua = "rainbow-blocks",
+				},
+				highlight = {
+					"RainbowDelimiterRed",
+					"RainbowDelimiterYellow",
+					"RainbowDelimiterBlue",
+					"RainbowDelimiterOrange",
+					"RainbowDelimiterGreen",
+					"RainbowDelimiterViolet",
+					"RainbowDelimiterCyan",
+				},
+			}
 		end,
 	},
 
