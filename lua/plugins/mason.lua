@@ -27,47 +27,42 @@ return {
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					-- Language Servers
-					"jdtls", -- Java
-					"pyright", -- Python
-					"rust_analyzer", -- Rust
-					"clangd", -- C/C++
-
-					"gopls", -- Go
-					"emmet_ls", -- HTML/CSS
-					"html", -- HTML
-					"tailwindcss", -- Tailwind CSS
-					"jsonls", -- JSON
-					"solargraph", -- Ruby
-					"sqlls", -- SQL
-					"yamlls", -- YAML
-					"bashls", -- Bash
-					"dockerls", -- Docker
-					"elixirls", -- Elixir
-					"vimls", -- Vim
-					"lua_ls", -- Lua
-					"eslint", -- JavaScript/TypeScript
-					"graphql", -- GraphQL
-					"phpactor", -- PHP
-					"perlnavigator", -- Perl
-					"terraformls", -- Terraform
-					"hls", -- Haskell
-					"volar", -- Vue
-					"kotlin_language_server", -- Kotlin
-					"marksman", -- Markdown
-					"svelte", -- Svelte
-					"lemminx", -- XML
-					"ltex", -- LaTeX
-					"ts_ls", -- TypeScript
-					"tailwindcss", -- Tailwind CSS
-				},
-				automatic_installation = true,
-				auto_install = true,
-			})
-			require("mason-lspconfig").setup_handlers({
+		opts = {
+			ensure_installed = {
+				-- Language Servers
+				"jdtls", -- Java
+				"pyright", -- Python
+				"rust_analyzer", -- Rust
+				"clangd", -- C/C++
+				"gopls", -- Go
+				"emmet_ls", -- HTML/CSS
+				"html", -- HTML
+				"tailwindcss", -- Tailwind CSS
+				"jsonls", -- JSON
+				"solargraph", -- Ruby
+				"sqlls", -- SQL
+				"yamlls", -- YAML
+				"bashls", -- Bash
+				"dockerls", -- Docker
+				"elixirls", -- Elixir
+				"vimls", -- Vim
+				"lua_ls", -- Lua
+				"eslint", -- JavaScript/TypeScript
+				"graphql", -- GraphQL
+				"phpactor", -- PHP
+				"perlnavigator", -- Perl
+				"terraformls", -- Terraform
+				"hls", -- Haskell
+				"kotlin_language_server", -- Kotlin
+				"marksman", -- Markdown
+				"svelte", -- Svelte
+				"lemminx", -- XML
+				"ltex", -- LaTeX
+				"ts_ls", -- TypeScript
+				"tailwindcss", -- Tailwind CSS
+			},
+			automatic_installation = true,
+			handlers = {
 				function(server_name)
 					require("lspconfig")[server_name].setup({
 						on_attach = function(client, bufnr)
@@ -77,17 +72,13 @@ return {
 							local function buf_set_option(...)
 								vim.api.nvim_buf_set_option(bufnr, ...)
 							end
-
-							-- Enable completion triggered by <c-x><c-o>
 							buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-							-- Other setup like key mappings, etc.
 						end,
 						capabilities = require("blink.cmp").get_lsp_capabilities(),
 					})
 				end,
-			})
-		end,
+			},
+		},
 	},
 	{
 		"nvimdev/lspsaga.nvim",
