@@ -39,7 +39,7 @@ return {
 	end,
 	keys = {
 		-- Toggle diagnostics view on the right side
-		{ "<leader>xx", ":Trouble diagnostics toggle focus=false win.position=right<CR>", desc = "Toggle Diagnostics" },
+		{ "<leader>xx", ":Trouble diagnostics toggle focus=false <CR>", desc = "Toggle Diagnostics" },
 
 		-- Toggle diagnostics for the current buffer only
 		{ "<leader>xX", ":Trouble diagnostics toggle filter.buf=0<CR>", desc = "Toggle Diagnostics (Current Buffer)" },
