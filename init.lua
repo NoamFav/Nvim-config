@@ -24,6 +24,7 @@ vim.diagnostic.config({
 	update_in_insert = true,
 	severity_sort = true,
 })
+vim.filetype.add({ extension = { ino = "arduino" } })
 
 vim.g.OmniSharp_server_use_mono = 0
 

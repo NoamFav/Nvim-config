@@ -369,6 +369,15 @@ return {
 							}
 						end,
 					},
+					arduino = {
+						function()
+							return {
+								exe = "clang-format",
+								args = { "--assume-filename=sketch.ino" }, -- helps style detection
+								stdin = true,
+							}
+						end,
+					},
 				},
 			})
 
