@@ -60,6 +60,7 @@ return {
 				"ltex", -- LaTeX
 				"ts_ls", -- TypeScript
 				"tailwindcss", -- Tailwind CSS
+				"arduino_language_server", -- Arduino
 			},
 			automatic_installation = true,
 			handlers = {
@@ -258,6 +259,18 @@ return {
 			})
 			require("lspconfig").perlnavigator.setup({
 				root_dir = require("lspconfig").util.root_pattern(".git", "."), -- Find the git directory or the current directory
+			})
+			require("lspconfig").arduino_language_server.setup({
+				cmd = {
+					"arduino-language-server",
+					"-cli",
+					"arduino-cli",
+					"-cli-config",
+					vim.fn.expand("~/.arduino15/arduino-cli.yaml"),
+					"-fqbn",
+					"adafruit:samd:adafruit_feather_m0",
+				},
+				filetypes = { "arduino", "ino" },
 			})
 		end,
 	},
