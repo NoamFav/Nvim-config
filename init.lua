@@ -25,6 +25,12 @@ vim.diagnostic.config({
 	severity_sort = true,
 })
 vim.filetype.add({ extension = { ino = "arduino" } })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*.ttl",
+	callback = function()
+		vim.bo.filetype = "turtle"
+	end,
+})
 
 vim.g.OmniSharp_server_use_mono = 0
 
