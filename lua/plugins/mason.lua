@@ -272,6 +272,10 @@ return {
 				},
 				filetypes = { "arduino", "ino" },
 			})
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "turtle" },
+				highlight = { enable = true },
+			})
 		end,
 	},
 	{
