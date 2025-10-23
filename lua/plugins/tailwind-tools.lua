@@ -7,5 +7,7 @@ return {
 		"nvim-telescope/telescope.nvim", -- optional
 		"neovim/nvim-lspconfig", -- optional
 	},
-	opts = {}, -- your configuration
+	opts = {
+		server = { override = false },
+	},
 }
