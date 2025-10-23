@@ -1,0 +1,42 @@
+return {
+	"folke/trouble.nvim",
+	cmd = "Trouble",
+	keys = {
+		{ "<leader>xx", ":Trouble diagnostics toggle focus=false<CR>", desc = "Toggle Diagnostics" },
+		{ "<leader>xX", ":Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer Diagnostics" },
+		{ "<leader>cs", ":Trouble symbols toggle<CR>", desc = "Symbols" },
+		{ "<leader>cc", ":Trouble close<CR>", desc = "Close Trouble" },
+		{ "<leader>cl", ":Trouble lsp toggle focus=false win.position=right<CR>", desc = "LSP References" },
+		{ "<leader>xL", ":Trouble loclist toggle<CR>", desc = "Location List" },
+		{ "<leader>xQ", ":Trouble qflist toggle<CR>", desc = "Quickfix List" },
+	},
+	opts = {
+		position = "right",
+		width = 40,
+		icons = {
+			error = "",
+			warning = "",
+			hint = "",
+			information = "",
+		},
+		auto_close = true,
+		auto_open = false,
+		use_diagnostic_signs = true,
+		action_keys = {
+			close = "q",
+			cancel = "<esc>",
+			refresh = "r",
+			jump = { "<cr>", "<tab>" },
+		},
+		fold_open = "",
+		fold_closed = "",
+		indent_lines = false,
+		auto_preview = false,
+		signs = {
+			error = "",
+			warning = "",
+			hint = "",
+			information = "",
+		},
+	},
+}
