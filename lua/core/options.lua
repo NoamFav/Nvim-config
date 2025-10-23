@@ -31,7 +31,7 @@ opt.swapfile = false
 opt.backup = false
 opt.writebackup = false
 opt.undofile = true
-opt.undodir = vim.fn.expand("~/.config/nvim/undo")
+opt.undodir = vim.fn.expand("~/.undo-nvim")
 
 -- Splits
 opt.splitright = true
