@@ -27,10 +27,13 @@ opt.hlsearch = true
 opt.incsearch = true
 
 -- Files
-opt.swapfile = false
-opt.backup = false
-opt.writebackup = false
+opt.swapfile = true
+opt.backup = true
+opt.writebackup = true
 opt.undofile = true
+opt.undodir = vim.fn.expand("~/.undo-nvim")
+opt.backupdir = vim.fn.expand("~/.backup-nvim")
+opt.directory = vim.fn.expand("~/.swap-nvim")
 opt.undodir = vim.fn.expand("~/.undo-nvim")
 
 -- Splits
