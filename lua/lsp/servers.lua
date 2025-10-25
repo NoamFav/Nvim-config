@@ -1,104 +1,112 @@
--- LSP server configurations
+-- lua/lsp/servers.lua
+-- Central place to declare server lists and per-server configs
+-- Neovim 0.11+ native LSP style: vim.lsp.config(...) + root_markers
+
 local M = {}
-local function _as_path(fname_or_buf)
-	if type(fname_or_buf) == "number" then
-		local n = vim.api.nvim_buf_get_name(fname_or_buf)
-		return (n ~= "" and n) or vim.loop.cwd()
-	end
-	return fname_or_buf ~= "" and fname_or_buf or vim.loop.cwd()
-end
+
 M.get_server_list = function()
 	return {
+		-- core
 		"jdtls",
 		"pyright",
 		"rust_analyzer",
 		"clangd",
 		"gopls",
-		"emmet_ls",
+		"lua_ls",
+
+		-- web / js
+		"ts_ls",
+		"eslint",
 		"html",
+		"emmet_ls",
 		"tailwindcss",
 		"jsonls",
-		"solargraph",
-		"sqlls",
-		"yamlls",
+		"svelte",
+		"graphql",
+
+		-- misc langs & tools
 		"bashls",
 		"dockerls",
-		"elixirls",
 		"vimls",
-		"lua_ls",
-		"eslint",
-		"graphql",
-		"phpactor",
-		"perlnavigator",
-		"terraformls",
-		"kotlin_language_server",
-		"marksman",
-		"svelte",
+		"yamlls",
 		"lemminx",
+		"marksman",
 		"ltex",
-		"ts_ls",
+		"phpactor",
+		"solargraph",
+		"terraformls",
+		"sqlls",
+		"perlnavigator",
+		"kotlin_language_server",
 		"arduino_language_server",
 	}
 end
 
 M.setup_server_configs = function()
-	local lspconfig = require("lspconfig")
-
-	-- TypeScript
+	---------------------------------------------------------------------------
+	-- Minimal/no-op configs (let defaults do their thing)
+	---------------------------------------------------------------------------
 	vim.lsp.config("ts_ls", {})
 	vim.lsp.config("tailwindcss", {})
 
+	---------------------------------------------------------------------------
 	-- Java (JDTLS)
+	-- NOTE: no `require("jdtls.setup")` and no `root_dir` callback.
+	---------------------------------------------------------------------------
 	vim.lsp.config("jdtls", {
 		cmd = { "jdtls" },
-		root_dir = function(fname)
-			local util = require("lspconfig.util")
-			local f = _as_path(fname)
-			return require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" }, f)
-				or util.find_git_ancestor(f)
-				or util.path.dirname(f)
-		end,
+		filetypes = { "java" },
+		root_markers = {
+			".git",
+			"mvnw",
+			"pom.xml",
+			"gradlew",
+			"build.gradle",
+			"settings.gradle",
+		},
 	})
 
+	---------------------------------------------------------------------------
 	-- Python
+	---------------------------------------------------------------------------
 	vim.lsp.config("pyright", {
-		root_dir = function(fname)
-			local util = require("lspconfig.util")
-			local f = _as_path(fname)
-			return util.find_git_ancestor(f)
-				or util.root_pattern("pyproject.toml", "setup.py", "requirements.txt", ".git")(f)
-				or util.path.dirname(f)
-		end,
+		filetypes = { "python" },
+		root_markers = {
+			"pyproject.toml",
+			"setup.cfg",
+			"setup.py",
+			"requirements.txt",
+			".git",
+		},
 	})
 
+	---------------------------------------------------------------------------
 	-- C# / Unity (OmniSharp)
-	local unity_project_path = vim.fn.expand("~/Neoware/ShadowedHunterMetroidvania")
-	local solution_path = unity_project_path .. "/ShadowedHunterMetroidvania.sln"
-
+	-- Keep your custom cmd/settings; just provide root_markers.
+	---------------------------------------------------------------------------
+	local unity_solution = vim.fn.expand("~/Neoware/ShadowedHunterMetroidvania/ShadowedHunterMetroidvania.sln")
 	vim.lsp.config("omnisharp", {
+		cmd = {
+			vim.fn.expand("~/.local/bin/omnisharp"),
+			"--languageserver",
+			"--solution-path=" .. unity_solution,
+			"--hostPID",
+			tostring(vim.fn.getpid()),
+		},
+		filetypes = { "cs", "vb" },
+		root_markers = {
+			"*.sln",
+			"*.csproj",
+			"Assets",
+			"Packages/manifest.json",
+			".git",
+		},
 		handlers = {
 			["textDocument/definition"] = function(...)
 				local ok, extended = pcall(require, "omnisharp_extended")
 				return ok and extended.handler(...) or vim.lsp.handlers["textDocument/definition"](...)
 			end,
 		},
-		cmd = {
-			vim.fn.expand("~/.local/bin/omnisharp"),
-			"--languageserver",
-			"--solution-path=" .. solution_path,
-			"--hostPID",
-			tostring(vim.fn.getpid()),
-		},
-		root_dir = function(fname)
-			local util = lspconfig.util
-			local unity_root =
-				util.root_pattern("Assembly-CSharp.csproj", "*.sln", "Assets", "Packages/manifest.json")(fname)
-			if unity_root then
-				return unity_root
-			end
-			return util.root_pattern("*.sln", "*.csproj", ".git")(fname) or util.path.dirname(fname)
-		end,
-		filetypes = { "cs", "vb" },
 		init_options = {
 			enableDecompilationSupport = true,
 			useEditorConfig = true,
@@ -124,36 +132,36 @@ M.setup_server_configs = function()
 		},
 	})
 
+	---------------------------------------------------------------------------
 	-- Kotlin
+	---------------------------------------------------------------------------
 	vim.lsp.config("kotlin_language_server", {
 		cmd = { "kotlin-language-server" },
-		root_dir = function(fname)
-			local util = require("lspconfig.util")
-			local f = _as_path(fname)
-			return util.root_pattern("build.gradle", "settings.gradle", ".git")(f) or util.path.dirname(f)
-		end,
+		filetypes = { "kotlin" },
+		root_markers = {
+			"build.gradle",
+			"settings.gradle",
+			"pom.xml",
+			".git",
+		},
 	})
 
+	---------------------------------------------------------------------------
 	-- Swift
+	---------------------------------------------------------------------------
 	vim.lsp.config("sourcekit", {
 		cmd = { "xcrun", "sourcekit-lsp" },
 		filetypes = { "swift" },
-		root_dir = function(fname)
-			local util = require("lspconfig.util")
-			local f = _as_path(fname)
-			return util.root_pattern("Package.swift", ".git")(f) or util.path.dirname(f)
-		end,
+		root_markers = { "Package.swift", ".git" },
 	})
 
+	---------------------------------------------------------------------------
 	-- Dart
+	---------------------------------------------------------------------------
 	vim.lsp.config("dartls", {
 		cmd = { "dart", "language-server", "--protocol=lsp" },
 		filetypes = { "dart" },
-		root_dir = function(fname)
-			local util = require("lspconfig.util")
-			local f = _as_path(fname)
-			return util.root_pattern("pubspec.yaml", ".git")(f) or util.path.dirname(f)
-		end,
+		root_markers = { "pubspec.yaml", ".git" },
 		init_options = {
 			closingLabels = true,
 			flutterOutline = true,
@@ -169,13 +177,12 @@ M.setup_server_configs = function()
 		},
 	})
 
+	---------------------------------------------------------------------------
 	-- Scala (Metals)
+	---------------------------------------------------------------------------
 	vim.lsp.config("metals", {
-		root_dir = function(fname)
-			local util = require("lspconfig.util")
-			local f = _as_path(fname)
-			return util.root_pattern("build.sbt", "build.sc", ".git")(f) or util.path.dirname(f)
-		end,
+		filetypes = { "scala", "sbt" },
+		root_markers = { "build.sbt", "build.sc", ".git" },
 		settings = {
 			metals = {
 				showImplicitArguments = true,
@@ -185,25 +192,23 @@ M.setup_server_configs = function()
 		},
 	})
 
+	---------------------------------------------------------------------------
 	-- SQL
+	---------------------------------------------------------------------------
 	vim.lsp.config("sqlls", {
-		root_dir = function(fname)
-			local util = require("lspconfig.util")
-			local f = _as_path(fname)
-			return util.root_pattern(".sql_project", ".git")(f) or util.path.dirname(f)
-		end,
+		root_markers = { ".sql_project", ".git" },
 	})
 
+	---------------------------------------------------------------------------
 	-- Perl
+	---------------------------------------------------------------------------
 	vim.lsp.config("perlnavigator", {
-		root_dir = function(fname)
-			local util = require("lspconfig.util")
-			local f = _as_path(fname)
-			return util.root_pattern(".git", ".")(f) or util.path.dirname(f)
-		end,
+		root_markers = { ".git" },
 	})
 
+	---------------------------------------------------------------------------
 	-- Arduino
+	---------------------------------------------------------------------------
 	vim.lsp.config("arduino_language_server", {
 		cmd = {
 			"arduino-language-server",
@@ -215,6 +220,7 @@ M.setup_server_configs = function()
 			"adafruit:samd:adafruit_feather_m0",
 		},
 		filetypes = { "arduino", "ino" },
+		root_markers = { ".git" }, -- adjust to your sketch layout if needed
 	})
 end
 
