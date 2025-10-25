@@ -4,23 +4,34 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		options = {
-			--theme = dofile(vim.fn.expand("~/2077.nvim/lua/lualine/themes/2077.lua")), -- IF you want to use 2077 theme (contact me for the file)
-			theme = "tokyonight-night",
+			theme = "auto", -- follow active colorscheme
+			globalstatus = true,
+			disabled_filetypes = { "snacks_dashboard" },
 			section_separators = { left = "", right = "" },
 			component_separators = { left = "", right = "" },
+			always_divide_middle = true,
+			icons_enabled = true,
 		},
 		sections = {
-			lualine_a = { "mode" },
-			lualine_b = { "branch" },
-			lualine_c = { "filename", "diagnostics" },
-			lualine_x = { "encoding", "fileformat", "filetype" },
-			lualine_y = { "progress" },
-			lualine_z = { "location" },
+			lualine_a = { {
+				"mode",
+				fmt = function(str)
+					return str:sub(1, 1)
+				end,
+			} },
+			lualine_b = { { "branch", icon = "" }, "diff" },
+			lualine_c = {
+				{ "diagnostics", symbols = { error = " ", warn = " ", info = " ", hint = " " } },
+				{ "filename", path = 1, symbols = { modified = " ", readonly = " " } },
+			},
+			lualine_x = { { "filetype", icon_only = true }, "encoding", "fileformat" },
+			lualine_y = { { "progress" } },
+			lualine_z = { { "location" } },
 		},
 		tabline = {
-			lualine_a = { { "buffers", use_mode_colors = true } },
+			lualine_a = { { "buffers", use_mode_colors = true, symbols = { alternate_file = "" } } },
 			lualine_z = { { "tabs", use_mode_colors = true } },
 		},
-		extensions = {},
+		extensions = { "nvim-tree", "quickfix", "fugitive" },
 	},
 }

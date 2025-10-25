@@ -27,11 +27,33 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {
+			style = "night",
 			transparent = true,
+			terminal_colors = true,
 			styles = {
+				comments = { italic = true },
+				keywords = { italic = true },
 				sidebars = "transparent",
 				floats = "transparent",
 			},
+			lualine_bold = true,
+			on_highlights = function(hl, c)
+				-- make floats/globals super clean
+				hl.NormalFloat = { bg = "NONE" }
+				hl.FloatBorder = { fg = c.border_highlight or c.blue, bg = "NONE" }
+				hl.FloatTitle = { fg = c.blue, bold = true, bg = "NONE" }
+				hl.Pmenu = { bg = "NONE" }
+				hl.PmenuSel = { bg = c.bg_highlight, bold = true }
+				hl.CursorLine = { bg = c.bg_highlight }
+				hl.WinSeparator = { fg = c.bg_highlight }
+
+				-- subtle inlay hints & diagnostics
+				hl.LspInlayHint = { fg = c.comment, bg = "NONE", italic = true }
+				hl.DiagnosticUnderlineError = { sp = c.red, undercurl = true }
+				hl.DiagnosticUnderlineWarn = { sp = c.yellow, undercurl = true }
+				hl.DiagnosticUnderlineInfo = { sp = c.blue, undercurl = true }
+				hl.DiagnosticUnderlineHint = { sp = c.teal, undercurl = true }
+			end,
 		},
 		config = function(_, opts)
 			require("tokyonight").setup(opts)
