@@ -9,7 +9,6 @@ opt.signcolumn = "yes"
 
 -- Behavior
 opt.mouse = "a"
-opt.clipboard = "unnamedplus"
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.updatetime = 300
 opt.timeoutlen = 400
