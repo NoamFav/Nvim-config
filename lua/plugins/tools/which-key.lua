@@ -20,9 +20,7 @@ return {
 		win = {
 			border = "rounded",
 			padding = { 2, 2, 2, 2 },
-			no_overlap = true,
-			row = 1,
-			col = 0.5,
+			no_overlap = false,
 		},
 		layout = {
 			height = { min = 4, max = 25 },

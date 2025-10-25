@@ -45,5 +45,4 @@ opt.scrolloff = 8
 opt.sidescrolloff = 8
 
 -- Global variables
-g.copilot_enabled = false
 g.OmniSharp_server_use_mono = 0

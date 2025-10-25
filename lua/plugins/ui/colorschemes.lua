@@ -86,7 +86,6 @@ return {
 				harpoon = true,
 				indent_blankline = true,
 				mason = true,
-				copilot_vim = true,
 				snacks = {
 					enabled = true,
 					indent_scope_color = "",

@@ -1,6 +1,12 @@
 -- LSP server configurations
 local M = {}
-
+local function _as_path(fname_or_buf)
+	if type(fname_or_buf) == "number" then
+		local n = vim.api.nvim_buf_get_name(fname_or_buf)
+		return (n ~= "" and n) or vim.loop.cwd()
+	end
+	return fname_or_buf ~= "" and fname_or_buf or vim.loop.cwd()
+end
 M.get_server_list = function()
 	return {
 		"jdtls",
@@ -25,7 +31,6 @@ M.get_server_list = function()
 		"phpactor",
 		"perlnavigator",
 		"terraformls",
-		"hls",
 		"kotlin_language_server",
 		"marksman",
 		"svelte",
@@ -47,22 +52,22 @@ M.setup_server_configs = function()
 	vim.lsp.config("jdtls", {
 		cmd = { "jdtls" },
 		root_dir = function(fname)
-			return require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" }, fname)
+			local util = require("lspconfig.util")
+			local f = _as_path(fname)
+			return require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" }, f)
+				or util.find_git_ancestor(f)
+				or util.path.dirname(f)
 		end,
-		settings = {
-			java = {
-				contentProvider = { preferred = "fernflower" },
-			},
-		},
 	})
 
 	-- Python
 	vim.lsp.config("pyright", {
 		root_dir = function(fname)
 			local util = require("lspconfig.util")
-			return util.find_git_ancestor(fname)
-				or util.root_pattern("pyproject.toml", "setup.py", "requirements.txt", ".git")(fname)
-				or util.path.dirname(fname)
+			local f = _as_path(fname)
+			return util.find_git_ancestor(f)
+				or util.root_pattern("pyproject.toml", "setup.py", "requirements.txt", ".git")(f)
+				or util.path.dirname(f)
 		end,
 	})
 
@@ -122,14 +127,22 @@ M.setup_server_configs = function()
 	-- Kotlin
 	vim.lsp.config("kotlin_language_server", {
 		cmd = { "kotlin-language-server" },
-		root_dir = lspconfig.util.root_pattern("build.gradle", "settings.gradle", ".git"),
+		root_dir = function(fname)
+			local util = require("lspconfig.util")
+			local f = _as_path(fname)
+			return util.root_pattern("build.gradle", "settings.gradle", ".git")(f) or util.path.dirname(f)
+		end,
 	})
 
 	-- Swift
 	vim.lsp.config("sourcekit", {
 		cmd = { "xcrun", "sourcekit-lsp" },
 		filetypes = { "swift" },
-		root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
+		root_dir = function(fname)
+			local util = require("lspconfig.util")
+			local f = _as_path(fname)
+			return util.root_pattern("Package.swift", ".git")(f) or util.path.dirname(f)
+		end,
 	})
 
 	-- Dart
@@ -137,8 +150,9 @@ M.setup_server_configs = function()
 		cmd = { "dart", "language-server", "--protocol=lsp" },
 		filetypes = { "dart" },
 		root_dir = function(fname)
-			local util = lspconfig.util
-			return util.root_pattern("pubspec.yaml", ".git")(fname) or util.path.dirname(fname)
+			local util = require("lspconfig.util")
+			local f = _as_path(fname)
+			return util.root_pattern("pubspec.yaml", ".git")(f) or util.path.dirname(f)
 		end,
 		init_options = {
 			closingLabels = true,
@@ -158,8 +172,9 @@ M.setup_server_configs = function()
 	-- Scala (Metals)
 	vim.lsp.config("metals", {
 		root_dir = function(fname)
-			local util = lspconfig.util
-			return util.root_pattern("build.sbt", "build.sc", ".git")(fname) or util.path.dirname(fname)
+			local util = require("lspconfig.util")
+			local f = _as_path(fname)
+			return util.root_pattern("build.sbt", "build.sc", ".git")(f) or util.path.dirname(f)
 		end,
 		settings = {
 			metals = {
@@ -173,14 +188,19 @@ M.setup_server_configs = function()
 	-- SQL
 	vim.lsp.config("sqlls", {
 		root_dir = function(fname)
-			local util = lspconfig.util
-			return util.root_pattern(".sql_project", ".git")(fname) or util.path.dirname(fname)
+			local util = require("lspconfig.util")
+			local f = _as_path(fname)
+			return util.root_pattern(".sql_project", ".git")(f) or util.path.dirname(f)
 		end,
 	})
 
 	-- Perl
 	vim.lsp.config("perlnavigator", {
-		root_dir = lspconfig.util.root_pattern(".git", "."),
+		root_dir = function(fname)
+			local util = require("lspconfig.util")
+			local f = _as_path(fname)
+			return util.root_pattern(".git", ".")(f) or util.path.dirname(f)
+		end,
 	})
 
 	-- Arduino
