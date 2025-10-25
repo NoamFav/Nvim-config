@@ -41,7 +41,7 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		dependencies = { "williamboman/mason.nvim" },
+		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
 		opts = function()
 			local servers = require("lsp.servers").get_server_list()
 			return {
@@ -50,12 +50,14 @@ return {
 			}
 		end,
 		config = function(_, opts)
-			require("mason-lspconfig").setup(opts)
+			local mlsp = require("mason-lspconfig")
+			mlsp.setup(opts)
 
-			-- Enable all servers
-			for _, name in ipairs(opts.ensure_installed) do
-				pcall(vim.lsp.enable, name)
-			end
+			vim.schedule(function()
+				for _, name in ipairs(opts.ensure_installed) do
+					pcall(vim.lsp.enable, name)
+				end
+			end)
 		end,
 	},
 

@@ -72,15 +72,3 @@ keymap("n", "<leader>cb", ":!cmr<CR>", opts)
 
 -- MATLAB
 keymap("n", "<leader>rm", ":w<CR>:!matlab -nojvm -nosplash -nodesktop -r \"run('%:p')\"<CR>", opts)
-
--- Copilot
-vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
-	expr = true,
-	replace_keycodes = false,
-	silent = true,
-})
-vim.keymap.set("i", "<C-K>", "copilot#Dismiss()", {
-	expr = true,
-	replace_keycodes = false,
-	silent = true,
-})
