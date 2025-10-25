@@ -7,7 +7,6 @@ return {
 		config = function()
 			local caps = require("blink.cmp").get_lsp_capabilities()
 
-			-- Apply shared defaults
 			vim.lsp.config("*", {
 				capabilities = caps,
 				on_attach = function(_, bufnr)
@@ -15,8 +14,12 @@ return {
 				end,
 			})
 
-			-- Setup all server configurations
-			require("lsp.servers").setup_server_configs()
+			local ok, servers = pcall(require, "lsp.servers")
+			if not ok then
+				vim.notify("Failed to load lsp.servers: " .. tostring(servers), vim.log.levels.ERROR)
+				return
+			end
+			servers.setup_server_configs()
 		end,
 	},
 
