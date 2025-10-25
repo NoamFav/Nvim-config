@@ -23,20 +23,22 @@ return {
 		},
 	},
 	opts = {
-		update_focused_file = {
-			enable = true,
-			update_cwd = false,
-		},
+		hijack_cursor = true,
 		sync_root_with_cwd = true,
-		git = {
-			enable = true,
-			ignore = false,
-		},
+		update_focused_file = { enable = true, update_cwd = false },
+		view = { adaptive_size = true, side = "left", width = 34 },
+		git = { enable = true, ignore = false, show_on_dirs = true, timeout = 400 },
 		renderer = {
+			root_folder_label = false,
+			highlight_git = true,
+			highlight_opened_files = "name",
+			indent_markers = { enable = true, inline_arrows = true },
 			icons = {
+				webdev_colors = true,
 				glyphs = {
 					default = "",
 					symlink = "",
+					modified = "●",
 					git = {
 						unstaged = "✗",
 						staged = "✓",
@@ -58,6 +60,11 @@ return {
 					},
 				},
 			},
+		},
+		filters = { dotfiles = false, custom = { "^\\.DS_Store$" } },
+		actions = {
+			open_file = { resize_window = true, quit_on_open = false },
+			change_dir = { enable = true, global = true },
 		},
 	},
 }

@@ -2,10 +2,10 @@ return {
 	"glepnir/nerdicons.nvim",
 	cmd = "NerdIcons",
 	opts = {
-		border = "single",
+		border = "rounded",
 		prompt = "󰨭 ",
 		preview_prompt = " ",
-		width = 0.5,
+		width = 0.55,
 		down = "<Tab>",
 		up = "<S-Tab>",
 		copy = "<C-y>",

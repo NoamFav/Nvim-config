@@ -26,10 +26,21 @@ return {
 		},
 	},
 	opts = {
-		stages = "fade_in_slide_out",
-		timeout = 3000,
-		background_colour = "#000000",
-		fps = 30,
+		stages = "slide",
+		timeout = 2500,
+		top_down = true,
+		fps = 60,
+		render = "compact",
+		max_width = function()
+			return math.floor(vim.o.columns * 0.38)
+		end,
+		max_height = function()
+			return math.floor(vim.o.lines * 0.28)
+		end,
+		background_colour = "NONE",
+		on_open = function(win)
+			vim.api.nvim_win_set_option(win, "winblend", 0)
+		end,
 		icons = {
 			ERROR = "",
 			WARN = "",

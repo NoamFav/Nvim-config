@@ -3,39 +3,15 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
-		bigfile = {
-			enabled = true,
-			auto_disable_lsp = true,
-			auto_disable_treesitter = true,
-		},
+		bigfile = { enabled = true, auto_disable_lsp = true, auto_disable_treesitter = true },
 		dashboard = {
 			enabled = true,
 			sections = {
 				{ section = "header" },
-				{
-					pane = 2,
-					section = "terminal",
-					cmd = "colorscript -e fade",
-					height = 5,
-					padding = 1,
-				},
+				{ pane = 2, section = "terminal", cmd = "colorscript -e fade", height = 5, padding = 1 },
 				{ section = "keys", gap = 1, padding = 1 },
-				{
-					pane = 2,
-					icon = " ",
-					title = "Recent Files",
-					section = "recent_files",
-					indent = 2,
-					padding = 1,
-				},
-				{
-					pane = 2,
-					icon = " ",
-					title = "Projects",
-					section = "projects",
-					indent = 2,
-					padding = 1,
-				},
+				{ pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+				{ pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 				{
 					pane = 2,
 					icon = " ",
@@ -53,12 +29,7 @@ return {
 		},
 		terminal = {
 			enabled = true,
-			float_opts = {
-				border = "rounded",
-				width = 0.8,
-				height = 0.8,
-				winblend = 10,
-			},
+			float_opts = { border = "rounded", width = 0.85, height = 0.85, winblend = 0 },
 		},
 		image = {
 			enabled = true,
