@@ -72,3 +72,9 @@ keymap("n", "<leader>cb", ":!cmr<CR>", opts)
 
 -- MATLAB
 keymap("n", "<leader>rm", ":w<CR>:!matlab -nojvm -nosplash -nodesktop -r \"run('%:p')\"<CR>", opts)
+
+-- yank/paste to system clipboard without enabling unnamedplus
+keymap({ "n", "x" }, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })
+keymap("n", "<leader>Y", [["+Y]], { desc = "Yank line to system clipboard" })
+keymap("n", "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
+keymap("n", "<leader>P", [["+P]], { desc = "Paste before from system clipboard" })
