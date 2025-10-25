@@ -80,6 +80,23 @@ M.setup_server_configs = function()
 		},
 	})
 
+	----------------------------------------------------------------------------
+	-- Lua
+	---------------------------------------------------------------------------
+	vim.lsp.config("lua_ls", {
+		settings = {
+			Lua = {
+				runtime = { version = "LuaJIT" },
+				diagnostics = { globals = { "vim" } }, -- <- fixes “undefined global `vim`”
+				workspace = {
+					checkThirdParty = false,
+					library = vim.api.nvim_get_runtime_file("", true),
+				},
+				telemetry = { enable = false },
+			},
+		},
+	})
+
 	---------------------------------------------------------------------------
 	-- C# / Unity (OmniSharp)
 	-- Keep your custom cmd/settings; just provide root_markers.
