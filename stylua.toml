@@ -1,5 +1,0 @@
-column_width = 240
-collapse_simple_statement = "Never"
-indent_width = 4
-quote_style = "double"
-call_parentheses = "Always"
