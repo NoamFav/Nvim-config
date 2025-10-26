@@ -36,25 +36,8 @@ end, { desc = "Next diagnostic" })
 keymap("n", "<leader>df", vim.lsp.buf.format, opts)
 keymap("n", "<leader>qf", vim.lsp.buf.code_action, opts)
 
--- File explorer (NvimTree)
-keymap("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
-keymap("n", "<leader>r", ":NvimTreeRefresh<CR>", opts)
-keymap("n", "<leader>n", ":NvimTreeFindFile<CR>", opts)
-
--- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
-keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
-keymap("n", "<leader>gf", ":Telescope git_files<CR>", opts)
-keymap("n", "<leader>gs", ":Telescope grep_string<CR>", opts)
-keymap("n", "<leader>fd", ":Telescope diagnostics<CR>", opts)
-
 -- Terminal
 keymap("n", "<C-t>", ":ToggleTerm<CR>", opts)
-
--- Tagbar
-keymap("n", "<leader>t", ":TagbarToggle<CR>:wincmd l<CR>", opts)
 
 -- Semantic Highlight
 keymap("n", "<Leader>s", ":SemanticHighlightToggle<cr>", opts)
