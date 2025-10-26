@@ -1,14 +1,4 @@
 return {
-	-- LazyGit
-	{
-		"kdheepak/lazygit.nvim",
-		cmd = "LazyGit",
-		keys = {
-			{ "<leader>lg", ":LazyGit<CR>", desc = "LazyGit" },
-		},
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
-
 	-- Git Blame
 	{
 		"f-person/git-blame.nvim",
