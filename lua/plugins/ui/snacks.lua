@@ -5,6 +5,9 @@ return {
 	opts = {
 		bigfile = { enabled = true, auto_disable_lsp = true, auto_disable_treesitter = true },
 		explorer = { enabled = true },
+        animate = {enabled = true },
+        indent = {enabled = true},
+        scroll = {enabled = true},
 		dashboard = {
 			enabled = true,
 			sections = {
@@ -32,10 +35,6 @@ return {
 			enabled = true,
 			timeout = 3000,
 		},
-		terminal = {
-			enabled = true,
-			float_opts = { border = "rounded", width = 0.85, height = 0.85, winblend = 0 },
-		},
 		image = {
 			enabled = true,
 			relative = "cursor",
@@ -47,6 +46,7 @@ return {
 		},
 		picker = { enabled = true },
 		rename = { enabled = true },
+        toggle = { enabled = true },
 	},
 	keys = {
     -- Top Pickers & Explorer
@@ -80,7 +80,6 @@ return {
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
     { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
-    { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
     { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },

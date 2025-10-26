@@ -33,7 +33,6 @@ return {
 		local wk = require("which-key")
 		wk.setup(opts)
 
-		-- NEW spec style for your groups
 		wk.add({
 			{ "<leader>b", group = "buffer" },
 			{ "<leader>c", group = "code" },
