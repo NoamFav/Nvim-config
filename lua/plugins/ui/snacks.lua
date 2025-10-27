@@ -31,6 +31,10 @@ return {
 				{ section = "startup" },
 			},
 		},
+		notifier = {
+			enabled = true,
+			timeout = 3000,
+		},
 		image = {
 			enabled = true,
 			relative = "cursor",
