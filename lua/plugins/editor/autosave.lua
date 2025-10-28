@@ -10,7 +10,7 @@ return {
 			dim = 0.18,
 			cleaning_interval = 250,
 		},
-		events = { "BufLeave" },
+		trigger_events = { "InsertLeave" },
 		conditions = {
 			exists = true,
 			filename_is_not = {},
