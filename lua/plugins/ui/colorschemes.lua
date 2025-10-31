@@ -10,7 +10,7 @@ return {
 		},
 	},
 	{
-		"akai54/2077.nvim",
+		"NoamFav/2077.nvim",
 	},
 	{
 		"sainnhe/sonokai",
