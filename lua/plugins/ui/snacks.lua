@@ -38,8 +38,34 @@ return {
 		image = {
 			enabled = true,
 			relative = "cursor",
+			img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments" },
+			force = true,
 			border = "rounded",
 			focusable = false,
+			math = {
+				enabled = true,
+				typst = {
+					tpl = [[
+        #set page(width: auto, height: auto, margin: (x: 2pt, y: 2pt))
+        #show math.equation.where(block: false): set text(top-edge: "bounds", bottom-edge: "bounds")
+        #set text(size: 12pt, fill: rgb("${color}"))
+        ${header}
+        ${content}]],
+				},
+			},
+			latex = {
+				font_size = "Large",
+				packages = { "amsmath", "amssymb", "amsfonts", "amscd", "mathtools" },
+				tpl = [[
+                    \documentclass[preview,border=0pt,varwidth,12pt]{standalone}
+                    \usepackage{${packages}}
+                    \begin{document}
+                    ${header}
+                    { \${font_size} \selectfont
+                      \color[HTML]{${color}}
+                    ${content}}
+                    \end{document}]],
+			},
 			backdrop = false,
 			row = 1,
 			col = 1,
