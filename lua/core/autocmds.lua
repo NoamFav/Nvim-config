@@ -2,6 +2,7 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- Filetype detection
 vim.filetype.add({ extension = { ino = "arduino" } })
+vim.filetype.add({ extension = { m = "matlab" } })
 
 autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.ttl",

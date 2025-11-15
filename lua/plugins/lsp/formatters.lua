@@ -43,6 +43,7 @@ return {
 					lua = { require("formatter.filetypes.lua").stylua },
 					cpp = { require("formatter.filetypes.cpp").clangformat },
 					c = { require("formatter.filetypes.c").clangformat },
+
 					cs = {
 						function()
 							return { exe = "dotnet-csharpier", args = { "--write-stdout" }, stdin = true }
