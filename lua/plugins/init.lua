@@ -5,7 +5,7 @@ return {
 
 	-- Simple plugins without config
 	{ "tfnico/vim-gradle" },
-	{ "NoamFav/apple_music.nvim" },
+	{ "NoamFav/Zarya.nvim" },
 	{ "jaxbot/semantic-highlight.vim" },
 	{ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" },
 	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
