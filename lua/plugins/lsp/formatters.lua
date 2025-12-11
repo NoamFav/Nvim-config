@@ -27,6 +27,28 @@ return {
 		},
 	},
 
+	{
+		"nvimtools/none-ls.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvimtools/none-ls-extras.nvim",
+		},
+		config = function()
+			local null_ls = require("null-ls")
+
+			null_ls.setup({
+				sources = {
+					require("none-ls.diagnostics.flake8").with({
+						diagnostics_postprocess = function(diagnostic)
+							diagnostic.severity = vim.diagnostic.severity.HINT
+						end,
+					}),
+				},
+			})
+		end,
+	},
+
 	-- Formatter
 	{
 		"mhartington/formatter.nvim",
