@@ -158,11 +158,11 @@ return {
 							--
 							-- Do not specify a file, just the path, and in the path you need to
 							-- have your .txt files
-							dictionary_directories = { vim.fn.expand("~/github/dotfiles-latest/dictionaries") },
+							dictionary_directories = { vim.fn.expand("~/.config/dictionaries") },
 							-- Notice I'm also adding the words I add to the spell dictionary
 							dictionary_files = {
-								vim.fn.expand("~/github/dotfiles-latest/neovim/neobean/spell/en.utf-8.add"),
-								vim.fn.expand("~/github/dotfiles-latest/neovim/neobean/spell/es.utf-8.add"),
+								vim.fn.expand("~/.config/spell/en.utf-8.add"),
+								vim.fn.expand("~/.config/spell/es.utf-8.add"),
 							},
 							-- --  NOTE: To disable the definitions uncomment this section below
 							--
