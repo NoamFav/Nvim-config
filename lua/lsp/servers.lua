@@ -99,14 +99,13 @@ M.setup_server_configs = function()
 
 	---------------------------------------------------------------------------
 	-- C# / Unity (OmniSharp)
-	-- Keep your custom cmd/settings; just provide root_markers.
+	-- root_markers drives project detection; no hardcoded solution path.
 	---------------------------------------------------------------------------
-	local unity_solution = vim.fn.expand("~/Neoware/ShadowedHunterMetroidvania/ShadowedHunterMetroidvania.sln")
+	local mono_path = vim.fn.exepath("mono")
 	vim.lsp.config("omnisharp", {
 		cmd = {
 			vim.fn.expand("~/.local/bin/omnisharp"),
 			"--languageserver",
-			"--solution-path=" .. unity_solution,
 			"--hostPID",
 			tostring(vim.fn.getpid()),
 		},
@@ -143,8 +142,8 @@ M.setup_server_configs = function()
 				enableImportCompletion = true,
 				enableAsyncCompletion = true,
 				projectLoadTimeout = 120,
-				useGlobalMono = "always",
-				monoPath = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/mono",
+				useGlobalMono = mono_path ~= "" and "always" or "never",
+				monoPath = mono_path ~= "" and mono_path or nil,
 			},
 		},
 	})
