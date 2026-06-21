@@ -70,7 +70,14 @@ return {
 			row = 1,
 			col = 1,
 		},
-		picker = { enabled = true },
+		picker = {
+			enabled = true,
+			sources = {
+				files = { exclude = { "assets", "third_party" } },
+				smart = { exclude = { "assets", "third_party" } },
+				grep = { exclude = { "assets", "third_party" } },
+			},
+		},
 		rename = { enabled = true },
 		toggle = { enabled = true },
 	},

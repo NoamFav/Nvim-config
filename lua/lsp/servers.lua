@@ -168,9 +168,9 @@ M.setup_server_configs = function()
 	vim.lsp.config("sourcekit", {
 		cmd = { "xcrun", "sourcekit-lsp" },
 		filetypes = { "swift" },
-		root_markers = { "Package.swift", ".git" },
+		root_markers = { "Package.swift", "*.xcodeproj", "*.xcworkspace" },
 	})
-
+	vim.lsp.enable("sourcekit")
 	---------------------------------------------------------------------------
 	-- Dart
 	---------------------------------------------------------------------------
