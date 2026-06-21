@@ -30,9 +30,9 @@ opt.swapfile = true
 opt.backup = true
 opt.writebackup = true
 opt.undofile = true
-opt.backupdir = vim.fn.expand("~/.backup-nvim")
-opt.directory = vim.fn.expand("~/.swap-nvim")
-opt.undodir = vim.fn.expand("~/.undo-nvim")
+opt.backupdir = vim.fn.expand("~/.logs/nvim/backup")
+opt.directory = vim.fn.expand("~/.logs/nvim/swap")
+opt.undodir = vim.fn.expand("~/.logs/nvim/undo")
 
 -- Splits
 opt.splitright = true
