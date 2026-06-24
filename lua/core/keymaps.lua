@@ -67,4 +67,4 @@ keymap("n", "<leader>Y", [["+Y]], { desc = "Yank line to system clipboard" })
 keymap("n", "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
 keymap("n", "<leader>P", [["+P]], { desc = "Paste before from system clipboard" })
 
-keymap("n", "<leader>cf", ":!c_formatter_42 %<CR>", opts)
+keymap("n", "<leader>cf", ":!c_formatter_42 %<CR>:edit!<CR>", opts)
