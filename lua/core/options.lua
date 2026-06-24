@@ -44,3 +44,6 @@ opt.sidescrolloff = 8
 
 -- Global variables
 g.OmniSharp_server_use_mono = 0
+
+vim.g.user42 = "yourlogin"
+vim.g.mail42 = "yourlogin@student.42.fr"
