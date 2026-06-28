@@ -1,10 +1,14 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		build = ":TSUpdate",
 		event = { "BufReadPost", "BufNewFile" },
-		opts = {
-			ensure_installed = {
+		config = function()
+			require("nvim-treesitter").setup()
+
+			-- install parsers (main branch API)
+			require("nvim-treesitter").install({
 				"lua",
 				"vim",
 				"vimdoc",
@@ -15,20 +19,35 @@ return {
 				"cpp",
 				"java",
 				"turtle",
-			},
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			indent = { enable = true },
-			fold = {
-				enable = true,
-			},
-		},
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
+			})
+
+			-- enable highlight + indent per-filetype (main branch style)
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(args)
+					local ft = args.match
+					local langs = {
+						lua = true,
+						vim = true,
+						vimdoc = true,
+						python = true,
+						javascript = true,
+						typescript = true,
+						c = true,
+						cpp = true,
+						java = true,
+						turtle = true,
+					}
+					if langs[ft] then
+						pcall(vim.treesitter.start)
+						-- treesitter-based indentexpr (optional)
+						vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+					end
+				end,
+			})
+
+			-- folding via treesitter
 			vim.opt.foldmethod = "expr"
-			vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+			vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 			vim.opt.foldlevel = 99
 		end,
 	},
