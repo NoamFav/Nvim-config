@@ -10,7 +10,12 @@ return {
 			-- install parsers (main branch API)
 			require("nvim-treesitter").install({
 				"lua",
+				"bash",
 				"vim",
+				"swift",
+				"go",
+				"rust",
+				"c_sharp",
 				"vimdoc",
 				"python",
 				"javascript",
@@ -27,6 +32,11 @@ return {
 					local ft = args.match
 					local langs = {
 						lua = true,
+						bash = true,
+						swift = true,
+						go = true,
+						rust = true,
+						c_sharp = true,
 						vim = true,
 						vimdoc = true,
 						python = true,
