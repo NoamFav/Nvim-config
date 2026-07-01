@@ -50,6 +50,51 @@ M.setup_server_configs = function()
 	vim.lsp.config("tailwindcss", {})
 
 	---------------------------------------------------------------------------
+	-- Go (gopls) — favourite language, so give it the works.
+	-- NOTE: semanticTokens MUST be on for the @lsp.* styling in
+	-- core/semantic_tokens.lua to reach Go at all (gopls keeps them off by default).
+	---------------------------------------------------------------------------
+	vim.lsp.config("gopls", {
+		filetypes = { "go", "gomod", "gowork", "gotmpl" },
+		root_markers = { "go.work", "go.mod", ".git" },
+		settings = {
+			gopls = {
+				semanticTokens = true, -- <- unlocks semantic-token styling for Go
+				staticcheck = true,
+				gofumpt = true,
+				usePlaceholders = true,
+				completeUnimported = true,
+				analyses = {
+					unusedparams = true,
+					unusedwrite = true,
+					nilness = true,
+					shadow = true,
+					useany = true,
+				},
+				hints = {
+					assignVariableTypes = true,
+					compositeLiteralFields = true,
+					compositeLiteralTypes = true,
+					constantValues = true,
+					functionTypeParameters = true,
+					parameterNames = true,
+					rangeVariableTypes = true,
+				},
+			},
+		},
+	})
+
+	-- Turn on inlay hints for Go buffers (kept out of gopls on_attach so the
+	-- wildcard on_attach that sets omnifunc still applies).
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function(args)
+			if vim.bo[args.buf].filetype == "go" then
+				pcall(vim.lsp.inlay_hint.enable, true, { bufnr = args.buf })
+			end
+		end,
+	})
+
+	---------------------------------------------------------------------------
 	-- Java (JDTLS)
 	-- NOTE: no `require("jdtls.setup")` and no `root_dir` callback.
 	---------------------------------------------------------------------------
