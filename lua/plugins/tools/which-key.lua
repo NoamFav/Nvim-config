@@ -40,7 +40,7 @@ return {
 			{ "<leader>f", group = "find" },
 			{ "<leader>g", group = "git" },
 			{ "<leader>l", group = "lsp" },
-			{ "<leader>m", group = "maven" },
+			{ "<leader>m", group = "make/42" },
 			{ "<leader>n", group = "notifications" },
 			{ "<leader>t", group = "tabs/terminal" },
 			{ "<leader>x", group = "trouble" },

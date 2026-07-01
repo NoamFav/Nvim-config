@@ -64,13 +64,6 @@ return {
 		end,
 	},
 
-	-- OmniSharp Extended
-	{
-		"Hoffs/omnisharp-extended-lsp.nvim",
-		lazy = true,
-		ft = { "cs" },
-	},
-
 	-- LSP UI Enhancement
 	{
 		"nvimdev/lspsaga.nvim",

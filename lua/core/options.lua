@@ -42,8 +42,6 @@ opt.splitbelow = true
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 
--- Global variables
-g.OmniSharp_server_use_mono = 0
-
-vim.g.user42 = "yourlogin"
-vim.g.mail42 = "yourlogin@student.42.fr"
+-- 42 identity (used by 42-header.nvim & the norminette workflow)
+g.user42 = "nfavier"
+g.mail42 = "nfavier@student.42.fr"

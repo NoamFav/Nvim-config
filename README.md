@@ -1,68 +1,81 @@
-# ⚡ Nvim-config
+# 🟩 nvim-42
 
 <div align="center">
 
 <img src="https://img.shields.io/badge/neovim-0.11+-57A143.svg?style=for-the-badge&logo=neovim" alt="Neovim">
 <img src="https://img.shields.io/badge/lua-5.1+-2C2D72.svg?style=for-the-badge&logo=lua" alt="Lua">
+<img src="https://img.shields.io/badge/42-piscine-000000.svg?style=for-the-badge" alt="42">
 <img src="https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge" alt="License">
 
-**Modern, feature-rich Neovim configuration built for productivity**
+**A Neovim config obsessed with C, shell, and Makefiles — built for the 42 piscine.**
 
-[Installation](#installation) · [Key Mappings](#key-mappings) · [Languages](#supported-languages)
+[Install](#installation) · [Workflow](#the-42-workflow) · [Key Mappings](#key-mappings)
 
 </div>
 
 ---
 
-A fully loaded Neovim setup using lazy.nvim — 40+ LSP servers, blink.cmp completion, Treesitter syntax highlighting, Harpoon navigation, LazyGit integration, and multiple colorschemes including Tokyo Night and Catppuccin.
+This is the `42` branch: the polyglot IDE has been stripped down to the three things that
+actually matter at 42 — **C**, **shell (sh/bash)**, and **Makefiles** — plus the **norminette**
+code standard and a fast norm → build → run loop (the piscine's local "CI/CD"). All the pretty
+stuff stays: colorschemes, statusline, dashboard, icons, rainbow brackets, git signs,
+todo-comments, and the symbol outline.
+
+- **`c_formatter_42`** as the C formatter (norminette-style; clang-format is gone).
+- **`42-header.nvim`** (`<F1>`) and **`norminette42.nvim`** (lint C/H on save).
+- **`overseer.nvim`** task runner with a full 42 pipeline (make targets, norminette, single-file
+  compile with `-Wall -Wextra -Werror`, run, and a chained norm+build gate).
+- **`clangd`** with clangd_extensions (inlay hints, AST view).
+- 42 boilerplate snippets: `main`, `mainargs`, `ftfn`, `guard`, and a norm-compliant `makefile`.
+- Trimmed LSP: `clangd`, `bashls`, and a little `lua_ls` for editing this config.
 
 ---
 
 ## Requirements
 
-- Neovim >= 0.11.0
-- Git >= 2.19.0
-- Node.js >= 16.0 (for certain LSP servers)
-- Python >= 3.8
-- A [Nerd Font](https://www.nerdfonts.com/)
-- Terminal with true color support
+- Neovim >= 0.11.0, Git, a [Nerd Font](https://www.nerdfonts.com/), true-color terminal.
+- **External tools on `$PATH`:**
 
 ```bash
-# Optional — better search performance
-brew install fzf ripgrep fd
+pip install c-formatter-42 norminette   # formatter + the Norm checker
+brew install shellcheck fzf ripgrep fd  # shell linting + faster pickers
 ```
+
+Mason auto-installs the rest (`shfmt`, `stylua`, `bash-language-server`).
 
 ---
 
 ## Installation
 
 ```bash
-# Backup existing config
-mv ~/.config/nvim ~/.config/nvim.bak
-mv ~/.local/share/nvim ~/.local/share/nvim.bak
+# Back up any existing config first
+mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
 
-# Clone this config
-git clone https://github.com/NoamFav/Nvim-config ~/.config/nvim
-
-# Create backup directories
-mkdir -p ~/.backup-nvim ~/.swap-nvim ~/.undo-nvim
-
-# Launch Neovim — lazy.nvim installs all plugins automatically
-nvim
+git clone -b 42 https://github.com/NoamFav/Nvim-config ~/.config/nvim
+nvim   # lazy.nvim installs everything on first launch
 ```
 
 ---
 
-## Structure
+## The 42 workflow
 
-```
-~/.config/nvim/
-├── init.lua
-└── lua/
-    ├── core/        # options, keymaps, autocmds, diagnostics
-    ├── lsp/         # server configurations
-    └── plugins/     # coding, editor, lang, lsp, tools, ui
-```
+Everything hangs off the `<leader>m` ("make/42") group and streams into a bottom task list +
+quickfix. Tasks are also available via `<leader>ml` (`:OverseerRun`).
+
+| Key | Action |
+|-----|--------|
+| `<leader>mm` | `make` |
+| `<leader>mr` | `make re` |
+| `<leader>mc` | `make clean` |
+| `<leader>mf` | `make fclean` |
+| `<leader>mn` | norminette (current file) |
+| `<leader>mN` | norminette (whole project) |
+| `<leader>mb` | `cc -Wall -Wextra -Werror` on the current file |
+| `<leader>mx` | run `./a.out` |
+| `<leader>mp` | **pipeline:** norminette → make |
+| `<leader>mo` | toggle the task list |
+| `<leader>cf` | format current C file with `c_formatter_42` |
+| `<F1>` | insert / update the 42 header |
 
 ---
 
@@ -77,7 +90,7 @@ nvim
 | `<leader>ff` | Find files |
 | `<leader>/` | Live grep |
 | `<leader>a` | Add file to Harpoon |
-| `<leader>1-4` | Jump to Harpoon file |
+| `<leader>1`–`4` | Jump to Harpoon file |
 
 ### LSP
 | Key | Action |
@@ -98,21 +111,24 @@ nvim
 
 ---
 
-## Colorschemes
+## Structure
 
-Switch with `<leader>uC`:
-
-- **Tokyo Night** (default)
-- **Catppuccin**
-- **Cyberdream**
-- **OneDark**
-- **2077**
+```
+~/.config/nvim/
+├── init.lua
+└── lua/
+    ├── core/        # options, keymaps, autocmds, diagnostics
+    ├── lsp/         # clangd / bashls / lua_ls
+    ├── snippets/    # 42 piscine boilerplate
+    └── plugins/     # coding, editor, lang (c), lsp, tools, ui
+```
 
 ---
 
-## Supported Languages
+## Colorschemes
 
-Go, Rust, Python, Swift, Java, Kotlin, C/C++, C#, Lua, TypeScript/JavaScript, React, HTML/CSS, Tailwind, Svelte, GraphQL, SQL, Markdown, LaTeX, PHP, Ruby, Dart, Arduino, MATLAB, and more.
+Switch with `<leader>uC`: **Tokyo Night** (default), **Catppuccin**, **Cyberdream**,
+**OneDark**, **2077**.
 
 ---
 
@@ -123,5 +139,5 @@ MIT
 ---
 
 <div align="center">
-Made with ❤️ by <a href="https://github.com/NoamFav">NoamFav</a>
+Made with ❤️ by <a href="https://github.com/NoamFav">NoamFav</a> · <code>nfavier</code>
 </div>

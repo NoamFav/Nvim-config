@@ -6,114 +6,45 @@ return {
 		dependencies = { "williamboman/mason.nvim" },
 		opts = {
 			ensure_installed = {
-				"prettierd",
-				"black",
-				"isort",
+				-- 42: shell + a bit of Lua for this config. C uses c_formatter_42
+				-- (installed via pip, not Mason).
 				"stylua",
-				"clang-format",
-				"csharpier",
-				"google-java-format",
-				"ktlint",
 				"shfmt",
-				"beautysh",
-				"rustywind",
-				"gofumpt",
-				"sqlfmt",
-				"xmlformatter",
-				"latexindent",
+				"shellcheck",
+				"bash-language-server",
 			},
 			auto_update = true,
 			run_on_start = true,
 		},
 	},
 
-	{
-		"nvimtools/none-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvimtools/none-ls-extras.nvim",
-		},
-		config = function()
-			local null_ls = require("null-ls")
-
-			null_ls.setup({
-				sources = {
-					require("none-ls.diagnostics.flake8").with({
-						diagnostics_postprocess = function(diagnostic)
-							diagnostic.severity = vim.diagnostic.severity.HINT
-						end,
-					}),
-				},
-			})
-		end,
-	},
+	-- NOTE: no none-ls. Shell linting is handled by bash-language-server, which
+	-- runs ShellCheck automatically when the `shellcheck` binary is on $PATH.
 
 	-- Formatter
 	{
 		"mhartington/formatter.nvim",
 		event = "VeryLazy",
 		opts = function()
-			local util = require("formatter.util")
+			-- c_formatter_42: the norminette-style formatter. With no filename it
+			-- reads the buffer from stdin and writes the formatted result to stdout,
+			-- which is exactly what formatter.nvim wants.
+			local function c_formatter_42()
+				return { exe = "c_formatter_42", args = {}, stdin = true }
+			end
+
 			return {
 				filetype = {
-					javascript = { require("formatter.filetypes.javascript").prettier },
-					typescript = { require("formatter.filetypes.javascript").prettier },
-					javascriptreact = { require("formatter.filetypes.javascript").prettier },
-					typescriptreact = { require("formatter.filetypes.typescript").prettier },
-					python = { require("formatter.filetypes.python").black },
+					-- Enough Lua to keep this config tidy
 					lua = { require("formatter.filetypes.lua").stylua },
-					cpp = { require("formatter.filetypes.cpp").clangformat },
-					c = { require("formatter.filetypes.c").clangformat },
 
-					cs = {
-						function()
-							return { exe = "dotnet-csharpier", args = { "--write-stdout" }, stdin = true }
-						end,
-					},
-					java = { require("formatter.filetypes.java").google_java_format },
+					-- Shell
 					sh = { require("formatter.filetypes.sh").shfmt },
-					rust = { require("formatter.filetypes.rust").rustfmt },
-					go = { require("formatter.filetypes.go").gofmt },
-					html = { require("formatter.filetypes.html").prettier },
-					css = { require("formatter.filetypes.css").prettier },
-					json = { require("formatter.filetypes.json").prettier },
-					yaml = { require("formatter.filetypes.yaml").prettier },
-					toml = { require("formatter.filetypes.toml").prettier },
-					markdown = { require("formatter.filetypes.markdown").prettier },
-					sql = {
-						function()
-							return { exe = "sqlfmt", args = { "-" }, stdin = true }
-						end,
-					},
-					xml = {
-						function()
-							return { exe = "xmlformatter", args = { "-" }, stdin = true }
-						end,
-					},
-					latex = {
-						function()
-							return { exe = "latexindent", args = { "-" }, stdin = true }
-						end,
-					},
-					dockerfile = {
-						function()
-							return {
-								exe = "dockerfilelint",
-								args = { vim.api.nvim_buf_get_name(0) },
-								stdin = true,
-							}
-						end,
-					},
-					arduino = {
-						function()
-							return {
-								exe = "clang-format",
-								args = { "--assume-filename=sketch.ino" },
-								stdin = true,
-							}
-						end,
-					},
+					bash = { require("formatter.filetypes.sh").shfmt },
+
+					-- C / C++ — norm-compliant formatting only
+					c = { c_formatter_42 },
+					cpp = { c_formatter_42 },
 				},
 			}
 		end,

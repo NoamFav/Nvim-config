@@ -7,23 +7,17 @@ return {
 		config = function()
 			require("nvim-treesitter").setup()
 
-			-- install parsers (main branch API)
+			-- install parsers (main branch API) — 42 focus + config editing
 			require("nvim-treesitter").install({
-				"lua",
-				"bash",
-				"vim",
-				"swift",
-				"go",
-				"rust",
-				"c_sharp",
-				"vimdoc",
-				"python",
-				"javascript",
-				"typescript",
 				"c",
 				"cpp",
-				"java",
-				"turtle",
+				"bash",
+				"make",
+				"lua",
+				"vim",
+				"vimdoc",
+				"markdown",
+				"comment",
 			})
 
 			-- enable highlight + indent per-filetype (main branch style)
@@ -31,21 +25,15 @@ return {
 				callback = function(args)
 					local ft = args.match
 					local langs = {
-						lua = true,
-						bash = true,
-						swift = true,
-						go = true,
-						rust = true,
-						c_sharp = true,
-						vim = true,
-						vimdoc = true,
-						python = true,
-						javascript = true,
-						typescript = true,
 						c = true,
 						cpp = true,
-						java = true,
-						turtle = true,
+						bash = true,
+						sh = true,
+						make = true,
+						lua = true,
+						vim = true,
+						vimdoc = true,
+						markdown = true,
 					}
 					if langs[ft] then
 						pcall(vim.treesitter.start)

@@ -10,6 +10,17 @@ return {
 		scroll = { enabled = true },
 		dashboard = {
 			enabled = true,
+			preset = {
+				header = [[
+██╗  ██╗██████╗
+██║  ██║╚════██╗
+███████║ █████╔╝
+╚════██║██╔═══╝
+     ██║███████╗
+     ╚═╝╚══════╝
+   C · SHELL · MAKEFILE
+ norm it. make it. run it.]],
+			},
 			sections = {
 				{ section = "header" },
 				{ pane = 2, section = "terminal", cmd = "colorscript -e fade", height = 5, padding = 1 },
