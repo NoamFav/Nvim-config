@@ -13,16 +13,8 @@ return {
 			require("42header").setup(opts)
 		end,
 	},
-	{
-		"hardyrafael17/norminette42.nvim",
-		event = { "BufReadPre *.c", "BufReadPre *.h" },
-		config = function()
-			local norminette = require("norminette")
-			norminette.setup({
-				runOnSave = true,
-				maxErrorsToShow = 5,
-				active = true,
-			})
-		end,
-	},
+	-- NOTE: norminette42.nvim was removed — it ran `norminette` synchronously on
+	-- the UI thread (BufEnter + every save) and hard-froze Neovim when norminette
+	-- was slow/hung. Diagnostics are now provided asynchronously by
+	-- lua/core/norminette.lua (wired up in init.lua).
 }
