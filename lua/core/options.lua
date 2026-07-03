@@ -42,6 +42,12 @@ opt.splitbelow = true
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 
--- 42 identity (used by 42-header.nvim & the norminette workflow)
-g.user42 = "nfavier"
-g.mail42 = "nfavier@student.42.fr"
+-- 42 identity (used by 42-header.nvim & the norminette workflow).
+-- Auto-detected so the header carries *your* login on any machine:
+--   * USER42 / MAIL42 env vars win if set
+--   * otherwise fall back to $USER (your intra login on a 42 box)
+-- Prefer overriding via the env vars over editing this file, so `git pull`
+-- stays conflict-free.
+local login = vim.env.USER42 or vim.env.USER or "your_login"
+g.user42 = login
+g.mail42 = vim.env.MAIL42 or (login .. "@student.42.fr")

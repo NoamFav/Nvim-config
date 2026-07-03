@@ -43,17 +43,56 @@ brew install shellcheck fzf ripgrep fd  # shell linting + faster pickers
 
 Mason auto-installs the rest (`shfmt`, `stylua`, `bash-language-server`).
 
+> **On a 42 cluster iMac?** You usually can't `brew`/`sudo`. Install the Python
+> tools per-user instead: `pip install --user c-formatter-42 norminette` and make
+> sure `~/.local/bin` is on your `$PATH`. `norminette` is the only hard dependency
+> for the Norm workflow; everything else degrades gracefully if missing.
+
+---
+
+## Set your 42 identity
+
+The 42 header stamps **your** login, not mine — it's read from your environment,
+so there's nothing to edit. Just make sure these are exported (they already are on
+a real 42 box):
+
+```bash
+export USER="your_login"                 # e.g. nfavier
+export MAIL="your_login@student.42.fr"
+```
+
+Prefer to be explicit / override? Export `USER42` and `MAIL42` and they win. No
+config file to edit means `git pull` never conflicts.
+
 ---
 
 ## Installation
 
 ```bash
-# Back up any existing config first
-mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
+# Back up any existing config first (won't clobber an existing backup)
+[ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.bak.$(date +%s)
 
 git clone -b 42 https://github.com/NoamFav/Nvim-config ~/.config/nvim
 nvim   # lazy.nvim installs everything on first launch
 ```
+
+---
+
+## No Neovim? Bare-Vim fallback
+
+Stuck on plain `vim` on the cluster with no way to install plugins? This repo
+ships a self-contained [`vimrc`](vimrc) — no plugins, no plugin manager — with the
+42 C style (tabs, column-80 marker, trailing-whitespace flags) and a **byte-correct
+42 header** on `<F1>` that passes the Norm:
+
+```bash
+cp ~/.config/nvim/vimrc ~/.vimrc
+# or fetch it directly:
+# curl -fsSL https://raw.githubusercontent.com/NoamFav/Nvim-config/42/vimrc > ~/.vimrc
+```
+
+It also wires up `<leader>mm` (`make`), `<leader>mn` (`norminette %`), and
+`<leader>mb` (`cc -Wall -Wextra -Werror % && ./a.out`) straight from Vim.
 
 ---
 
@@ -129,6 +168,19 @@ quickfix. Tasks are also available via `<leader>ml` (`:OverseerRun`).
 
 Switch with `<leader>uC`: **Tokyo Night** (default), **Catppuccin**, **Cyberdream**,
 **OneDark**, **2077**.
+
+---
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Red errors / boxes on first launch | It's still installing. Quit, run `nvim` again, then `:Lazy sync`. |
+| Icons show as `□` / tofu | Your terminal font isn't a Nerd Font. Install one and select it in your terminal. |
+| `norminette` / `c_formatter_42` "not found" | Not on `$PATH`. `pip install --user norminette c-formatter-42` and add `~/.local/bin` to `$PATH`. |
+| Header shows the wrong login | `export USER`/`MAIL` (or `USER42`/`MAIL42`) — see [Set your 42 identity](#set-your-42-identity). |
+| Colors look washed out | Terminal isn't true-color. Set `TERM=xterm-256color` and enable truecolor. |
+| Check the config's health | `:checkhealth` inside Neovim. |
 
 ---
 

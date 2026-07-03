@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Local, machine-specific overrides (identity, extra plugins) — not tracked
+lua/local.lua
+local.lua
+
+# Runtime junk if ever generated in-tree
+*.log
+tags

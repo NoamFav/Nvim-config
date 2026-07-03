@@ -6,8 +6,12 @@ return {
 		opts = {
 			default_map = true,
 			auto_update = true,
-			user = "nfavier",
-			mail = "nfavier@student.42.fr",
+			-- Auto-detect from the environment so the header carries *your* login,
+			-- not the config author's. On a 42 machine $USER is your intra login.
+			-- Override by exporting USER42 / MAIL42, or by setting vim.g.user42 /
+			-- vim.g.mail42 in a local file (see core/options.lua).
+			user = vim.g.user42,
+			mail = vim.g.mail42,
 		},
 		config = function(_, opts)
 			require("42header").setup(opts)
