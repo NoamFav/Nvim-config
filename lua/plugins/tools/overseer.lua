@@ -221,5 +221,17 @@ return {
 			end,
 			condition = { filetype = { "c", "cpp", "make" } },
 		})
+
+		overseer.register_template({
+			name = "42: valgrind",
+			builder = function()
+				return {
+					cmd = { "valgrind" },
+					args = { "*/*" },
+					cwd = project_root(),
+					components = { { "on_output_quickfix", open = true }, "default" },
+				}
+			end,
+		})
 	end,
 }

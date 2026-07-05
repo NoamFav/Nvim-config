@@ -36,15 +36,15 @@ return {
 			return {
 				filetype = {
 					-- Enough Lua to keep this config tidy
-					lua = { require("formatter.filetypes.lua").stylua },
+					--lua = { require("formatter.filetypes.lua").stylua },
 
 					-- Shell
-					sh = { require("formatter.filetypes.sh").shfmt },
-					bash = { require("formatter.filetypes.sh").shfmt },
+					--sh = { require("formatter.filetypes.sh").shfmt },
+					--bash = { require("formatter.filetypes.sh").shfmt },
 
 					-- C / C++ — norm-compliant formatting only
-					c = { c_formatter_42 },
-					cpp = { c_formatter_42 },
+					--c = { c_formatter_42 },
+					--icpp = { c_formatter_42 },
 				},
 			}
 		end,
