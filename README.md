@@ -111,6 +111,7 @@ quickfix. Tasks are also available via `<leader>ml` (`:OverseerRun`).
 | `<leader>mN` | norminette (whole project) |
 | `<leader>mb` | `cc -Wall -Wextra -Werror` on the current file |
 | `<leader>mx` | run `./a.out` |
+| `<leader>mv` | valgrind leak check on the binary _(Linux/cluster only)_ |
 | `<leader>mp` | **pipeline:** norminette → make |
 | `<leader>mo` | toggle the task list |
 | `<leader>cf` | format current C file with `c_formatter_42` |

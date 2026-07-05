@@ -76,6 +76,20 @@ return {
 			end,
 			desc = "pipeline: norm + build",
 		},
+		{
+			"<leader>mv",
+			function()
+				local overseer = require("overseer")
+				-- Open the task terminal in a split so the leak report is visible
+				-- (and the program under test can still read stdin).
+				overseer.run_template({ name = "42: valgrind" }, function(task)
+					if task then
+						overseer.run_action(task, "open hsplit")
+					end
+				end)
+			end,
+			desc = "valgrind (leak check)",
+		},
 		{ "<leader>mo", "<cmd>OverseerToggle<cr>", desc = "toggle task list" },
 		{ "<leader>ml", "<cmd>OverseerRun<cr>", desc = "run task (menu)" },
 	},
@@ -222,16 +236,30 @@ return {
 			condition = { filetype = { "c", "cpp", "make" } },
 		})
 
+		-- Run the compiled binary under valgrind with the 42-standard leak checks.
+		-- Resolves the binary the same way "42: run" does: source stem, else a.out.
+		-- NOTE: valgrind is Linux-only — this works on the cluster, not on macOS.
 		overseer.register_template({
 			name = "42: valgrind",
 			builder = function()
+				local dir = vim.fn.expand("%:p:h")
+				local bin = vim.fn.expand("%:p:r")
+				if vim.fn.filereadable(bin) == 0 and vim.fn.filereadable(dir .. "/a.out") == 1 then
+					bin = dir .. "/a.out"
+				end
 				return {
+					name = "42: valgrind " .. vim.fn.fnamemodify(bin, ":t"),
 					cmd = { "valgrind" },
-					args = { "*/*" },
-					cwd = project_root(),
-					components = { { "on_output_quickfix", open = true }, "default" },
+					args = {
+						"--leak-check=full",
+						"--show-leak-kinds=all",
+						"--track-origins=yes",
+						bin,
+					},
+					cwd = dir,
 				}
 			end,
+			condition = { filetype = { "c", "cpp" } },
 		})
 	end,
 }
