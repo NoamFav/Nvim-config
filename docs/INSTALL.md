@@ -1,8 +1,8 @@
 # Installation Guide
 
-Platform-specific setup for this config. For *why* each dependency is needed, see the [Requirements](../README.md#requirements) section of the README — this doc is just the install commands, per OS.
+Platform-specific setup for this config. For *why* each dependency is needed, see [Requirements](REQUIREMENTS.md) — this doc is just the install commands, per OS.
 
-← Back to [README](../README.md) · See also [Plugin Reference](PLUGINS.md)
+← Back to [README](../README.md) · See also [Requirements](REQUIREMENTS.md) · [Plugin Reference](PLUGINS.md)
 
 ---
 
@@ -33,7 +33,7 @@ Regardless of OS, you need on `$PATH` before first launch:
 - A [Nerd Font](https://www.nerdfonts.com/), set as your terminal's font
 - A true-color terminal (Kitty, WezTerm, Ghostty, iTerm2, Windows Terminal, Alacritty…)
 
-Everything else (language runtimes, LSP servers, formatters) is either installed by Mason automatically or listed per-language in the [Requirements](../README.md#requirements) table — install only what you actually code in.
+Everything else (language runtimes, LSP servers, formatters) is either installed by Mason automatically or listed per-language in the [Requirements](REQUIREMENTS.md#language-runtimes) table — install only what you actually code in.
 
 ---
 
@@ -167,7 +167,7 @@ nvim
 
 ## Language runtimes by package manager
 
-Only install what you actually need — see the [Requirements](../README.md#requirements) table in the README for which plugin/server needs each one.
+Only install what you actually need — see the [Requirements](REQUIREMENTS.md#language-runtimes) table for which plugin/server needs each one.
 
 | Language | macOS (brew) | Ubuntu/Debian (apt) | Fedora (dnf) | Arch (pacman) |
 |---|---|---|---|---|
@@ -205,7 +205,7 @@ Only install what you actually need — see the [Requirements](../README.md#requ
 | Boxes/question marks instead of icons | Terminal font isn't a Nerd Font, or the terminal is caching an old font list — restart the terminal |
 | `:TSUpdate` fails / parsers won't compile | Missing tree-sitter CLI or C compiler — see [Minimum requirements](#minimum-requirements) |
 | `tagbar` does nothing | Universal Ctags isn't installed, or the distro's default `ctags` (BSD/Emacs variant) shadows it — check `ctags --version` mentions "Universal Ctags" |
-| Jupyter cells render as text, no plots | Not running Kitty/WezTerm/Ghostty, or `image.nvim`'s Python deps aren't installed — see [Requirements](../README.md#requirements) |
-| C# / OmniSharp doesn't attach | Binary not placed at `~/.local/bin/omnisharp` — see [Manual Setup: OmniSharp](../README.md#manual-setup-omnisharp) |
+| Jupyter cells render as text, no plots | Not running Kitty/WezTerm/Ghostty, or `image.nvim`'s Python deps aren't installed — see [Requirements](REQUIREMENTS.md#jupyter-notebooks-molten--imagenvim) |
+| C# / OmniSharp doesn't attach | Binary not placed at `~/.local/bin/omnisharp` — see [Manual Setup: OmniSharp](REQUIREMENTS.md#manual-setup-omnisharp) |
 | Swift/Dart/Scala LSP not attaching | Those servers aren't Mason-managed — install `sourcekit-lsp` (Xcode CLT), the Dart SDK, or Metals manually |
 | `<leader>gg` does nothing | `lazygit` isn't installed or not on `$PATH` |

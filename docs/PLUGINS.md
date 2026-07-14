@@ -2,7 +2,7 @@
 
 Every plugin installed by this config, grouped the same way [`lua/plugins/`](../lua/plugins/) is organized on disk. Each entry links to its `lua/plugins/**/*.lua` spec and its upstream repo.
 
-← Back to [README](../README.md)
+← Back to [README](../README.md) · See also [Features](FEATURES.md) · [Key Mappings](KEYMAPS.md) · [Architecture](ARCHITECTURE.md)
 
 ---
 
@@ -47,7 +47,7 @@ Small, self-contained plugins that don't warrant their own file.
 | [navarasu/onedark.nvim](https://github.com/navarasu/onedark.nvim) | Atom One Dark colorscheme port |
 | [sainnhe/sonokai](https://github.com/sainnhe/sonokai) | High-contrast, vivid colorscheme |
 | [NoamFav/2077.nvim](https://github.com/NoamFav/2077.nvim) | A cyberpunk-themed colorscheme |
-| [folke/snacks.nvim](https://github.com/folke/snacks.nvim) | The Swiss-army-knife plugin: fuzzy picker, file explorer, dashboard, notifier, LazyGit launcher, scratch buffers, big-file handling, and more — see [Key Mappings](../README.md#key-mappings) for the full command surface |
+| [folke/snacks.nvim](https://github.com/folke/snacks.nvim) | The Swiss-army-knife plugin: fuzzy picker, file explorer, dashboard, notifier, LazyGit launcher, scratch buffers, big-file handling, and more — see [Key Mappings](KEYMAPS.md) for the full command surface |
 | [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Statusline + tabline/bufferline, theme-aware |
 | [j-hui/fidget.nvim](https://github.com/j-hui/fidget.nvim) | LSP progress spinners and a notification history window (also overrides `vim.notify`) |
 | [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) | (configured again here with custom overrides, e.g. a distinct `.env` icon) |
@@ -76,7 +76,7 @@ Small, self-contained plugins that don't warrant their own file.
 |---|---|
 | [saghen/blink.cmp](https://github.com/saghen/blink.cmp) | The completion engine — LSP, path, snippet, buffer, emoji, and dictionary sources, all scored and merged |
 | [moyiz/blink-emoji.nvim](https://github.com/moyiz/blink-emoji.nvim) | Emoji completion source for blink.cmp |
-| [Kaiser-Yang/blink-cmp-dictionary](https://github.com/Kaiser-Yang/blink-cmp-dictionary) | Dictionary/word-list completion source for blink.cmp (needs `fzf`; see [Requirements](../README.md#requirements)) |
+| [Kaiser-Yang/blink-cmp-dictionary](https://github.com/Kaiser-Yang/blink-cmp-dictionary) | Dictionary/word-list completion source for blink.cmp (needs `fzf`; see [Requirements](REQUIREMENTS.md#dictionary-completion-optional)) |
 | [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip) | Snippet engine that powers blink.cmp's `snippets` source |
 | [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | A large pre-built VS Code-style snippet collection, loaded lazily by LuaSnip |
 
