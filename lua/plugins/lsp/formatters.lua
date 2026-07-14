@@ -45,6 +45,7 @@ return {
 					-- C / C++ — norm-compliant formatting only
 					--c = { c_formatter_42 },
 					--icpp = { c_formatter_42 },
+					--cpp = { c_formatter_42 },
 				},
 			}
 		end,

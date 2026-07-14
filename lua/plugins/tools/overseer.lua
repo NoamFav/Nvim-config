@@ -61,11 +61,7 @@ return {
 				local overseer = require("overseer")
 				-- Open the task's terminal in a split so output is visible and the
 				-- program can read stdin (piscine binaries often do).
-				overseer.run_template({ name = "42: run" }, function(task)
-					if task then
-						overseer.run_action(task, "open hsplit")
-					end
-				end)
+				overseer.run_template({ name = "42: run" })
 			end,
 			desc = "run compiled binary",
 		},
@@ -140,7 +136,6 @@ return {
 						args = target ~= "" and { target } or {},
 						cwd = project_root(),
 						components = {
-							{ "on_output_quickfix", open = false },
 							"default",
 						},
 					}
@@ -161,7 +156,6 @@ return {
 				return {
 					cmd = { "norminette" },
 					args = { vim.fn.expand("%:p") },
-					components = { { "on_output_quickfix", open = true }, "default" },
 				}
 			end,
 			condition = { filetype = { "c", "cpp" } },
@@ -174,7 +168,6 @@ return {
 				return {
 					cmd = { "norminette" },
 					cwd = project_root(),
-					components = { { "on_output_quickfix", open = true }, "default" },
 				}
 			end,
 		})
@@ -193,7 +186,6 @@ return {
 					args = { "-Wall", "-Wextra", "-Werror", src, "-o", out },
 					cwd = vim.fn.expand("%:p:h"),
 					components = {
-						{ "on_output_quickfix", open = true }, -- open on compile errors
 						{ "on_complete_notify", statuses = { "SUCCESS", "FAILURE" } },
 						"default",
 					},
@@ -232,12 +224,10 @@ return {
 							{
 								cmd = { "norminette" },
 								cwd = root,
-								components = { { "on_output_quickfix", open = true }, "default" },
 							},
 							{
 								cmd = { "make" },
 								cwd = root,
-								components = { { "on_output_quickfix", open = false }, "default" },
 							},
 						},
 					},
