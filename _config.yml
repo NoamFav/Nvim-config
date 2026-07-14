@@ -1,6 +1,6 @@
 title: Nvim-config
 description: "A batteries-included Neovim configuration — 28 LSP servers, blink.cmp, Treesitter, Snacks, and more."
-theme: jekyll-theme-cayman
+theme: jekyll-theme-midnight
 show_downloads: false
 
 plugins:
@@ -10,6 +10,14 @@ plugins:
 relative_links:
   enabled: true
   collections: false
+
+# GitHub.com's own renderer parses Markdown inside raw HTML blocks (the
+# <div>/<table> wrappers used for centering/layout throughout these docs).
+# kramdown does not do this by default, which is why badges/tables/links
+# inside those blocks were showing up as literal text — this makes kramdown
+# match GitHub's behavior.
+kramdown:
+  parse_block_html: true
 
 exclude:
   - lua
