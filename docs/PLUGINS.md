@@ -1,3 +1,7 @@
+---
+title: Plugin Reference
+---
+
 # Plugin Reference
 
 Every plugin installed by this config, grouped the same way [`lua/plugins/`](../lua/plugins/) is organized on disk. Each entry links to its `lua/plugins/**/*.lua` spec and its upstream repo.

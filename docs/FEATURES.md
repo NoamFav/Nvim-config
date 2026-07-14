@@ -1,3 +1,7 @@
+---
+title: Features
+---
+
 # Features
 
 A tour of what this config actually does, day-to-day. For the plugin behind each feature, see [Plugin Reference](PLUGINS.md); for the exact keys, see [Key Mappings](KEYMAPS.md).

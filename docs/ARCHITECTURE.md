@@ -1,3 +1,7 @@
+---
+title: Architecture
+---
+
 # Architecture
 
 How this config is put together, for anyone extending it. For *what it does* see [Features](FEATURES.md); for *what's installed* see [Plugin Reference](PLUGINS.md).
