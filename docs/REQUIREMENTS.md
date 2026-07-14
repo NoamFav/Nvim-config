@@ -1,3 +1,7 @@
+---
+title: Requirements
+---
+
 # Requirements
 
 What this config needs installed, and *why* — organized by category. For OS-specific install commands (Homebrew/apt/dnf/pacman/winget), see [Install Guide](INSTALL.md) instead; this doc is the reference for what each dependency is for.

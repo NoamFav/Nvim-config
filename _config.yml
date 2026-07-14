@@ -1,0 +1,21 @@
+title: Nvim-config
+description: "A batteries-included Neovim configuration — 28 LSP servers, blink.cmp, Treesitter, Snacks, and more."
+theme: jekyll-theme-cayman
+show_downloads: false
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-readme-index
+
+relative_links:
+  enabled: true
+  collections: false
+
+exclude:
+  - lua
+  - init.lua
+  - lazy-lock.json
+  - .claude
+  - .github
+  - .gitignore
+  - .DS_Store

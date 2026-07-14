@@ -1,3 +1,7 @@
+---
+title: Key Mappings
+---
+
 # Key Mappings
 
 Every keymap defined in this config, grouped by what it's for. Leader key is `Space`.

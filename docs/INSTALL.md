@@ -1,3 +1,7 @@
+---
+title: Installation Guide
+---
+
 # Installation Guide
 
 Platform-specific setup for this config. For *why* each dependency is needed, see [Requirements](REQUIREMENTS.md) — this doc is just the install commands, per OS.
