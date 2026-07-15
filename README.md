@@ -140,6 +140,17 @@ Full write-up, with the reasoning behind each pick, in **[docs/FEATURES.md](docs
 
 <br>
 
+**Option A — scripted** (macOS/Linux). Backs up any existing config, installs core deps + a Nerd Font, optionally installs language runtimes (prompted interactively, or pass `-l go,rust,python`, or `-l all`), fetches OmniSharp if you picked `dotnet`, clones, and launches:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/NoamFav/Nvim-config/main/scripts/install.sh | bash -s -- -l go,rust,python
+# or just `... | bash` to be prompted for languages, or add -y to skip every prompt
+```
+
+See `scripts/install.sh --help` (or the top of the file) for every flag.
+
+**Option B — manual**:
+
 ```bash
 # Core requirements (macOS/Homebrew shown — see docs/INSTALL.md for Linux/Windows)
 brew install neovim git ripgrep fd lazygit tree-sitter universal-ctags
@@ -164,6 +175,9 @@ nvim
 
 > [!NOTE]
 > Only need a couple of languages? Don't install every runtime in [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) — Mason only installs servers/formatters, not compilers/SDKs, so add those as you actually need them.
+
+> [!WARNING]
+> [scripts/install.sh](scripts/install.sh) covers macOS (Homebrew), Ubuntu/Debian (apt), Fedora (dnf), and Arch (pacman) — no Windows/WSL path. Language runtimes it can't install cleanly (e.g. Dart/Terraform on apt, most AUR-only packages on Arch) print a warning with a link instead of silently skipping. Piping any script into `bash` runs arbitrary code with your permissions — read it first if that matters to you: [scripts/install.sh](scripts/install.sh).
 
 <!-- Divider -->
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">

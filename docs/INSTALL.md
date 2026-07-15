@@ -10,6 +10,14 @@ Platform-specific setup for this config. For *why* each dependency is needed, se
 
 ---
 
+> [!TIP]
+> macOS/Linux: [scripts/install.sh](../scripts/install.sh) automates the backup/clone/prep-dirs steps, the *core* installs below, a Nerd Font, and (if you opt in) language runtimes + OmniSharp, for Homebrew, apt, dnf, and pacman:
+> ```bash
+> curl -fsSL https://raw.githubusercontent.com/NoamFav/Nvim-config/main/scripts/install.sh | bash -s -- -l go,rust,python
+> # or `| bash` alone to be prompted, or add -y to skip all prompts; --help lists every flag
+> ```
+> Everything past this point is what that script automates, spelled out per OS — read on if you're on Windows, want to understand what it's doing, or it doesn't cover your setup.
+
 ## Table of Contents
 
 - [Minimum requirements](#minimum-requirements)
