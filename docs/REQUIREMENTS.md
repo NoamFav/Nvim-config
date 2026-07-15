@@ -108,7 +108,7 @@ cp /usr/share/dict/words ~/.config/dictionaries/words.txt
 
 ## Manual Setup: OmniSharp
 
-`servers.lua` expects the OmniSharp binary at `~/.local/bin/omnisharp` (not installed by Mason):
+`servers.lua` expects the OmniSharp binary at `~/.local/bin/omnisharp` (not installed by Mason). [scripts/install.sh](../scripts/install.sh) fetches this automatically on macOS/Linux if you include `dotnet` in its language selection — otherwise:
 
 ```bash
 mkdir -p ~/.local/bin
