@@ -20,8 +20,8 @@ return {
 		lsp_keymaps = false, -- keep existing LSP keymaps (snacks/lspsaga)
 		trouble = true, -- route lists through trouble.nvim (already installed)
 		luasnip = true, -- register gotests snippets with LuaSnip
-		dap_debug = false, -- no nvim-dap in this config
-		dap_debug_gui = false,
+		dap_debug = true, -- nvim-dap is installed (lua/plugins/tools/dap.lua), let go.nvim wire up dlv
+		dap_debug_gui = true,
 	},
 	config = function(_, opts)
 		require("go").setup(opts)

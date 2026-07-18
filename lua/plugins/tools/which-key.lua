@@ -36,12 +36,14 @@ return {
 		wk.add({
 			{ "<leader>b", group = "buffer" },
 			{ "<leader>c", group = "code" },
-			{ "<leader>d", group = "diagnostics" },
+			{ "<leader>d", group = "diagnostics/debug" },
 			{ "<leader>f", group = "find" },
 			{ "<leader>g", group = "git" },
 			{ "<leader>l", group = "lsp" },
 			{ "<leader>m", group = "maven" },
 			{ "<leader>n", group = "notifications" },
+			{ "<leader>o", group = "octo/pr" },
+			{ "<leader>r", group = "run/rename" },
 			{ "<leader>t", group = "tabs/terminal" },
 			{ "<leader>x", group = "trouble" },
 		})
