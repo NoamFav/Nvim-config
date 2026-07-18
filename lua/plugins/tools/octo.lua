@@ -1,6 +1,5 @@
--- PR review, requires the `gh` CLI authenticated.
--- :Octo review start opens the diff, <leader>ca comments on a line,
--- <leader>vs submits with approve/request-changes (octo's own keymaps).
+-- PR review. Needs `gh` authenticated.
+-- :Octo review start opens the diff; <leader>ca to comment, <leader>vs to submit.
 return {
 	"pwntester/octo.nvim",
 	dependencies = {

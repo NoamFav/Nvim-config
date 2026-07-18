@@ -1,5 +1,4 @@
--- Async build/task runner; auto-detects Makefiles so libft-style `make`
--- targets show up as runnable tasks with async output.
+-- Async build/task runner. Picks up Makefiles automatically.
 return {
 	"stevearc/overseer.nvim",
 	cmd = { "OverseerRun", "OverseerToggle" },
@@ -8,10 +7,8 @@ return {
 		{ "<leader>rt", "<cmd>OverseerToggle<cr>", desc = "Toggle task list" },
 	},
 	opts = {
-		-- No component here ever opens a window (the "open_output" component,
-		-- which would, is deliberately left out) — the task list only appears
-		-- via the <leader>rt keymap. Completion is reported through
-		-- on_complete_notify (vim.notify, routed through fidget.nvim).
+		-- Keep the default components notify-only (skip open_output) so
+		-- nothing pops a window on its own — <leader>rt is the only way in.
 		component_aliases = {
 			default = {
 				"on_exit_set_status",

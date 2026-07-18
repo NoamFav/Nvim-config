@@ -1,8 +1,7 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- Better window navigation: <C-h/j/k/l> are now owned by smart-splits.nvim
--- (see lua/plugins/tools/smart-splits.lua)
+-- Window nav moved to smart-splits.nvim (lua/plugins/tools/smart-splits.lua)
 
 -- Buffer navigation
 keymap("n", "<leader>bn", ":bnext<CR>", opts)
