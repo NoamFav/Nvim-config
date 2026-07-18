@@ -1,5 +1,5 @@
--- Debugger: nvim-dap + dap-ui, with dap-go for Go and codelldb for C.
--- Install codelldb via :MasonInstall codelldb.
+-- nvim-dap + dap-ui. dap-go for Go, codelldb for C.
+-- codelldb needs :MasonInstall codelldb first.
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {

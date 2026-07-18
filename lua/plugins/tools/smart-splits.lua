@@ -1,5 +1,5 @@
--- Window navigation/resizing, tmux/Wezterm-pane aware.
--- Owns <C-h/j/k/l> (moved here from core/keymaps.lua) and adds <A-h/j/k/l> resize.
+-- Window nav/resize, tmux/Wezterm aware.
+-- Took over <C-h/j/k/l> from core/keymaps.lua, added <A-h/j/k/l> for resize.
 return {
 	"mrjones2014/smart-splits.nvim",
 	lazy = false,
