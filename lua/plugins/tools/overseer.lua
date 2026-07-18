@@ -105,6 +105,16 @@ return {
 				["<CR>"] = "RunAction",
 			},
 		},
+		-- Keep "default" notify-only. Templates below either use it as-is or
+		-- add their own on_output_quickfix for norminette/build errors —
+		-- <leader>mo is still the only thing that opens the task list.
+		component_aliases = {
+			default = {
+				"on_exit_set_status",
+				"on_complete_notify",
+				{ "on_complete_dispose", require_view = { "SUCCESS", "FAILURE" } },
+			},
+		},
 	},
 	config = function(_, opts)
 		local overseer = require("overseer")

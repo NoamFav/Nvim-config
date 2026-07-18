@@ -1,11 +1,7 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- Window nav moved to smart-splits.nvim (lua/plugins/tools/smart-splits.lua)
 
 -- Buffer navigation
 keymap("n", "<leader>bn", ":bnext<CR>", opts)

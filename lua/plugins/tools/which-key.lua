@@ -36,7 +36,7 @@ return {
 		wk.add({
 			{ "<leader>b", group = "buffer" },
 			{ "<leader>c", group = "code" },
-			{ "<leader>d", group = "diagnostics" },
+			{ "<leader>d", group = "diagnostics/debug" },
 			{ "<leader>f", group = "find" },
 			{ "<leader>g", group = "git" },
 			{ "<leader>l", group = "lsp" },
