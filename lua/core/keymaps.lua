@@ -2,7 +2,27 @@ local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Window nav moved to smart-splits.nvim (lua/plugins/tools/smart-splits.lua)
+-- Semantic Highlight
+keymap("n", "<Leader>s", ":SemanticHighlightToggle<cr>", opts)
 
+-- Maven shortcuts
+keymap("n", "<leader>mi", ":!mvn clean install<CR>", opts)
+keymap("n", "<leader>mk", ":!mvn clean package<CR>", opts)
+keymap("n", "<leader>mc", ":!mvn clean<CR>", opts)
+keymap("n", "<leader>mt", ":!mvn test<CR>", opts)
+keymap("n", "<leader>me", ":!mvn exec:exec<CR>", opts)
+keymap("n", "<leader>mf", ":!mvn javafx:run<CR>", opts)
+keymap("n", "<leader>mj", ":!mvn javadoc:javadoc<CR>", opts)
+
+-- CMake shortcuts
+keymap("n", "<leader>cc", ":!cmake .<CR>", opts)
+keymap("n", "<leader>cm", ":!cmake --build .<CR>", opts)
+keymap("n", "<leader>cr", ":!cmake --build . --target run<CR>", opts)
+keymap("n", "<leader>ct", ":!ctest<CR>", opts)
+keymap("n", "<leader>cb", ":!cmr<CR>", opts)
+
+-- MATLAB
+keymap("n", "<leader>rm", ":w<CR>:!matlab -nojvm -nosplash -nodesktop -r \"run('%:p')\"<CR>", opts)
 -- Buffer navigation
 keymap("n", "<leader>bn", ":bnext<CR>", opts)
 keymap("n", "<leader>bp", ":bprev<CR>", opts)
@@ -34,28 +54,6 @@ keymap("n", "<leader>qf", vim.lsp.buf.code_action, opts)
 
 -- Terminal
 keymap("n", "<C-t>", ":ToggleTerm<CR>", opts)
-
--- Semantic Highlight
-keymap("n", "<Leader>s", ":SemanticHighlightToggle<cr>", opts)
-
--- Maven shortcuts
-keymap("n", "<leader>mi", ":!mvn clean install<CR>", opts)
-keymap("n", "<leader>mk", ":!mvn clean package<CR>", opts)
-keymap("n", "<leader>mc", ":!mvn clean<CR>", opts)
-keymap("n", "<leader>mt", ":!mvn test<CR>", opts)
-keymap("n", "<leader>me", ":!mvn exec:exec<CR>", opts)
-keymap("n", "<leader>mf", ":!mvn javafx:run<CR>", opts)
-keymap("n", "<leader>mj", ":!mvn javadoc:javadoc<CR>", opts)
-
--- CMake shortcuts
-keymap("n", "<leader>cc", ":!cmake .<CR>", opts)
-keymap("n", "<leader>cm", ":!cmake --build .<CR>", opts)
-keymap("n", "<leader>cr", ":!cmake --build . --target run<CR>", opts)
-keymap("n", "<leader>ct", ":!ctest<CR>", opts)
-keymap("n", "<leader>cb", ":!cmr<CR>", opts)
-
--- MATLAB
-keymap("n", "<leader>rm", ":w<CR>:!matlab -nojvm -nosplash -nodesktop -r \"run('%:p')\"<CR>", opts)
 
 -- yank/paste to system clipboard without enabling unnamedplus
 keymap({ "n", "x" }, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })

@@ -1,9 +1,29 @@
 -- C / C++ readability layer.
---   * clangd_extensions — inlay hints (param names, types) + AST view
---   * hlargs            — function parameters get one distinct colour everywhere
---
--- Cross-language semantic-token styling (const/macros/stdlib/mutable/…) lives in
--- lua/core/semantic_tokens.lua and covers C/C++ too, so it isn't repeated here.
+--   * clangd_extensions — inlay hints + AST view
+--   * hlargs           — function parameters get a distinct colour everywhere
+--   * semantic tuning  — clangd's semantic tokens styled so const / macros /
+--                        libc calls / struct members read at a glance
+-- clangd itself is configured natively in lua/lsp/servers.lua.
+
+-- Re-style clangd semantic-token roles. Built off well-coloured treesitter
+-- groups (so it survives colourscheme switches + transparency) with an extra
+-- style bump. Parameters are intentionally left to hlargs, which owns them.
+local function tune_semantic_tokens()
+	local function based_on(group, base, extra)
+		local base_hl = vim.api.nvim_get_hl(0, { name = base, link = false })
+		vim.api.nvim_set_hl(0, group, vim.tbl_extend("force", base_hl, extra or {}))
+	end
+
+	-- const-qualified variables: read like constants, slanted
+	based_on("@lsp.typemod.variable.readonly", "@constant", { italic = true })
+	-- #define macros: macro colour, bold so they pop
+	based_on("@lsp.type.macro", "@constant.macro", { bold = true })
+	-- libc / stdlib functions (printf, malloc, …): builtin-function colour
+	based_on("@lsp.typemod.function.defaultLibrary", "@function.builtin", { italic = true })
+	-- struct / union members: keep them consistent with treesitter members
+	vim.api.nvim_set_hl(0, "@lsp.type.property", { link = "@variable.member" })
+end
+
 return {
 	{
 		"p00f/clangd_extensions.nvim",
@@ -47,6 +67,12 @@ return {
 						pcall(vim.lsp.inlay_hint.enable, true, { bufnr = args.buf })
 					end
 				end,
+			})
+
+			-- Apply semantic-token styling now, and re-apply after any colourscheme change
+			tune_semantic_tokens()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = tune_semantic_tokens,
 			})
 		end,
 	},

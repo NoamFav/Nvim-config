@@ -4,12 +4,7 @@ return {
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
 
 	-- Simple plugins without config
-	{ "tfnico/vim-gradle" },
-	{ "NoamFav/Zarya.nvim", lazy = false },
-	{ "jaxbot/semantic-highlight.vim" },
 	{ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" },
-	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
-	{ "OXY2DEV/markview.nvim" },
 	{ "folke/todo-comments.nvim" },
 	{ "preservim/tagbar" },
 	{ import = "plugins.ui" },

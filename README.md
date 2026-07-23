@@ -109,6 +109,7 @@ A single Neovim config that stays fast across **28 language servers** without tu
 </td>
 <td width="50%" valign="top">
 
+=======
 #### 🌐 Git & Tools
 - **LazyGit**, Diffview, Gitsigns, git-blame, git-conflict — all wired through Snacks/native keymaps
 - **Toggleterm** — floating terminal, one keystroke away
@@ -159,8 +160,9 @@ brew install neovim git ripgrep fd lazygit tree-sitter universal-ctags
 mv ~/.config/nvim ~/.config/nvim.bak
 mv ~/.local/share/nvim ~/.local/share/nvim.bak
 
-# Clone this config
-git clone https://github.com/NoamFav/Nvim-config ~/.config/nvim
+---
+
+## Installation
 
 # Create the backup/swap/undo dirs lua/core/options.lua expects
 mkdir -p ~/.logs/nvim/backup ~/.logs/nvim/swap ~/.logs/nvim/undo
