@@ -1,5 +1,14 @@
 local autocmd = vim.api.nvim_create_autocmd
 
+vim.filetype.add({ extension = { ino = "arduino" } })
+vim.filetype.add({ extension = { m = "matlab" } })
+
+autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*.ttl",
+	callback = function()
+		vim.bo.filetype = "turtle"
+	end,
+})
 -- Highlight on yank
 autocmd("TextYankPost", {
 	callback = function()
