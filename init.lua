@@ -23,6 +23,7 @@ require("core.autocmds")
 require("core.diagnostics")
 require("core.norminette").setup()
 require("core.semantic_tokens").setup()
+require("core.rainbow_var").setup()
 
 -- Setup lazy.nvim
 require("lazy").setup("plugins", {
