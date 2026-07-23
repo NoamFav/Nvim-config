@@ -46,6 +46,14 @@ M.setup_server_configs = function()
 	---------------------------------------------------------------------------
 	-- Minimal/no-op configs (let defaults do their thing)
 	---------------------------------------------------------------------------
+    vim.lsp.config("clangd", {
+		cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
+		filetypes = { "c", "cpp", "objc", "objcpp" },
+		root_markers = { "Makefile", "compile_commands.json", ".clangd", ".git" },
+        init_options = {
+            fallbackFlags = {"-Wall", "-Wextra"},
+        },
+    })
 	vim.lsp.config("ts_ls", {})
 	vim.lsp.config("tailwindcss", {})
 

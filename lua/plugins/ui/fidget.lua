@@ -6,7 +6,7 @@ return {
 			suppress_on_insert = true,
 			ignore_done_already = true,
 			ignore_empty_message = true,
-			ignore = { "tailwindcss", "ltex", "eslint" }, -- silence noisy LSPs
+			ignore = {}, -- no noisy LSPs left to silence
 
 			display = {
 				render_limit = 10,
