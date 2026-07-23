@@ -22,6 +22,7 @@ require("core.keymaps")
 require("core.autocmds")
 require("core.diagnostics")
 require("core.norminette").setup()
+require("core.semantic_tokens").setup()
 
 -- Setup lazy.nvim
 require("lazy").setup("plugins", {

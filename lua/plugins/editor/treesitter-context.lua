@@ -1,5 +1,5 @@
 -- Sticky header pinned to the top of the window showing the enclosing
--- function / loop / if while you scroll a long C function.
+-- function / loop / if while you scroll — great for long functions in any lang.
 return {
 	"nvim-treesitter/nvim-treesitter-context",
 	event = { "BufReadPost", "BufNewFile" },

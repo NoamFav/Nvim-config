@@ -1,6 +1,7 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+-- Window nav moved to smart-splits.nvim (lua/plugins/tools/smart-splits.lua)
 
 -- Buffer navigation
 keymap("n", "<leader>bn", ":bnext<CR>", opts)

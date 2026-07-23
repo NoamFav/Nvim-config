@@ -83,9 +83,10 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = {
 			-- hlargs' priority (10000) already beats LSP semantic tokens, so
-			-- parameters keep this colour consistently, LSP-attached or not.
+			-- parameters keep this colour consistently across every language it
+			-- supports (C/C++, Go, Rust, Lua, Python, JS/TS, Java, …).
 			color = "#e0af68", -- tokyonight-ish amber; distinct from vars/globals
-			excluded_filetypes = { "sh", "bash", "make", "markdown" },
+			excluded_filetypes = { "markdown", "text", "help", "sh", "bash", "make" },
 		},
 	},
 }
