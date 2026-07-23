@@ -21,6 +21,9 @@ M.setup_server_configs = function()
 		cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
 		filetypes = { "c", "cpp", "objc", "objcpp" },
 		root_markers = { "Makefile", "compile_commands.json", ".clangd", ".git" },
+        init_options = {
+            fallbackFlags = {"-Wall", "-Wextra"},
+        },
 	})
 
 	---------------------------------------------------------------------------
