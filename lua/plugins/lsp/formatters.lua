@@ -80,7 +80,7 @@ return {
 					json = { require("formatter.filetypes.json").prettier },
 					yaml = { require("formatter.filetypes.yaml").prettier },
 					toml = { require("formatter.filetypes.toml").prettier },
-					markdown = { require("formatter.filetypes.markdown").prettier },
+					--markdown = { require("formatter.filetypes.markdown").prettier },
 					sql = {
 						function()
 							return { exe = "sqlfmt", args = { "-" }, stdin = true }
