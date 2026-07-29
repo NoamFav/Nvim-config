@@ -46,14 +46,14 @@ M.setup_server_configs = function()
 	---------------------------------------------------------------------------
 	-- Minimal/no-op configs (let defaults do their thing)
 	---------------------------------------------------------------------------
-    vim.lsp.config("clangd", {
+	vim.lsp.config("clangd", {
 		cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
 		filetypes = { "c", "cpp", "objc", "objcpp" },
 		root_markers = { "Makefile", "compile_commands.json", ".clangd", ".git" },
-        init_options = {
-            fallbackFlags = {"-Wall", "-Wextra"},
-        },
-    })
+		init_options = {
+			fallbackFlags = { "-Wall", "-Wextra" },
+		},
+	})
 	vim.lsp.config("ts_ls", {})
 	vim.lsp.config("tailwindcss", {})
 
@@ -67,7 +67,7 @@ M.setup_server_configs = function()
 		root_markers = { "go.work", "go.mod", ".git" },
 		settings = {
 			gopls = {
-				semanticTokens = true, -- <- unlocks semantic-token styling for Go
+				semanticTokens = true,
 				staticcheck = true,
 				gofumpt = true,
 				usePlaceholders = true,
@@ -88,6 +88,7 @@ M.setup_server_configs = function()
 					parameterNames = true,
 					rangeVariableTypes = true,
 				},
+				standaloneTags = { "ignore", "leetcode" },
 			},
 		},
 	})
