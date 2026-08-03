@@ -13,7 +13,7 @@
 local M = {}
 
 local ns = vim.api.nvim_create_namespace("norminette")
-local enabled = true
+local enabled = false
 local timer -- debounce timer
 local job -- in-flight vim.system handle
 
@@ -23,8 +23,7 @@ local function parse(output, bufnr)
 	local diags = {}
 	for raw in output:gmatch("[^\r\n]+") do
 		local line = raw:gsub("\27%[[%d;]*m", "") -- strip ANSI colour codes
-		local kind, code, lnum, col, msg =
-			line:match("^(%a+):%s+(%S+)%s+%(line:%s*(%d+),%s+col:%s*(%d+)%):%s*(.+)$")
+		local kind, code, lnum, col, msg = line:match("^(%a+):%s+(%S+)%s+%(line:%s*(%d+),%s+col:%s*(%d+)%):%s*(.+)$")
 		if code then
 			local l = math.max((tonumber(lnum) or 1) - 1, 0)
 			local c = math.max((tonumber(col) or 1) - 1, 0)
