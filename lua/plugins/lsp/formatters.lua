@@ -11,6 +11,7 @@ return {
 				"isort",
 				"stylua",
 				"clang-format",
+				"taplo",
 				"csharpier",
 				"google-java-format",
 				"ktlint",
@@ -79,7 +80,7 @@ return {
 					css = { require("formatter.filetypes.css").prettier },
 					json = { require("formatter.filetypes.json").prettier },
 					yaml = { require("formatter.filetypes.yaml").prettier },
-					toml = { require("formatter.filetypes.toml").prettier },
+					toml = { require("formatter.filetypes.toml").taplo },
 					--markdown = { require("formatter.filetypes.markdown").prettier },
 					sql = {
 						function()
