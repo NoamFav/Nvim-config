@@ -1,14 +1,9 @@
--- Piscine boilerplate as LuaSnip snippets.
--- Loaded from lua/plugins/coding/snippets.lua. Double-quoted "\t" is a real tab,
--- which matters for both the Norm (C uses tabs) and Makefile recipe lines.
-
 local ls = require("luasnip")
 local s = ls.snippet
 local i = ls.insert_node
 local t = ls.text_node
 local f = ls.function_node
 
--- Turn the current file name into an include-guard macro, e.g. ft_printf.h -> FT_PRINTF_H
 local function guard()
 	local name = vim.fn.expand("%:t")
 	if name == "" then
@@ -20,21 +15,18 @@ end
 local M = {}
 
 M.c = {
-	-- A minimal main()
 	s("main", {
 		t({ "int\tmain(void)", "{", "\t" }),
 		i(1),
 		t({ "", "\treturn (0);", "}" }),
 	}),
 
-	-- main() with args
 	s("mainargs", {
 		t({ "int\tmain(int argc, char **argv)", "{", "\t" }),
 		i(1),
 		t({ "", "\treturn (0);", "}" }),
 	}),
 
-	-- A norm-shaped function stub
 	s("ftfn", {
 		i(1, "int"),
 		t("\tft_"),
@@ -46,7 +38,6 @@ M.c = {
 		t({ "", "}" }),
 	}),
 
-	-- Include guard driven by the file name
 	s("guard", {
 		t("#ifndef "),
 		f(guard),
@@ -59,7 +50,6 @@ M.c = {
 }
 
 M.make = {
-	-- A norm-compliant 42 Makefile
 	s("makefile", {
 		t("NAME\t= "),
 		i(1, "a.out"),

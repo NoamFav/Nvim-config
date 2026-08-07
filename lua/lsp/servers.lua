@@ -1,7 +1,3 @@
--- lua/lsp/servers.lua
--- Central place to declare server lists and per-server configs
--- Neovim 0.11+ native LSP style: vim.lsp.config(...) + root_markers
-
 local M = {}
 
 M.get_server_list = function()
@@ -43,9 +39,6 @@ M.get_server_list = function()
 end
 
 M.setup_server_configs = function()
-	---------------------------------------------------------------------------
-	-- Minimal/no-op configs (let defaults do their thing)
-	---------------------------------------------------------------------------
 	vim.lsp.config("clangd", {
 		cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
 		filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -54,14 +47,12 @@ M.setup_server_configs = function()
 			fallbackFlags = { "-Wall", "-Wextra" },
 		},
 	})
+
 	vim.lsp.config("ts_ls", {})
+
 	vim.lsp.config("tailwindcss", {})
 
-	---------------------------------------------------------------------------
-	-- Go (gopls) — favourite language, so give it the works.
-	-- NOTE: semanticTokens MUST be on for the @lsp.* styling in
-	-- core/semantic_tokens.lua to reach Go at all (gopls keeps them off by default).
-	---------------------------------------------------------------------------
+	-- Go (gopls)
 	vim.lsp.config("gopls", {
 		filetypes = { "go", "gomod", "gowork", "gotmpl" },
 		root_markers = { "go.work", "go.mod", ".git" },
@@ -93,8 +84,6 @@ M.setup_server_configs = function()
 		},
 	})
 
-	-- Turn on inlay hints for Go buffers (kept out of gopls on_attach so the
-	-- wildcard on_attach that sets omnifunc still applies).
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
 			if vim.bo[args.buf].filetype == "go" then
@@ -103,10 +92,7 @@ M.setup_server_configs = function()
 		end,
 	})
 
-	---------------------------------------------------------------------------
 	-- Java (JDTLS)
-	-- NOTE: no `require("jdtls.setup")` and no `root_dir` callback.
-	---------------------------------------------------------------------------
 	vim.lsp.config("jdtls", {
 		cmd = { "jdtls" },
 		filetypes = { "java" },
@@ -120,9 +106,7 @@ M.setup_server_configs = function()
 		},
 	})
 
-	---------------------------------------------------------------------------
 	-- Python
-	---------------------------------------------------------------------------
 	vim.lsp.config("pyright", {
 		filetypes = { "python" },
 		root_markers = {
@@ -134,9 +118,7 @@ M.setup_server_configs = function()
 		},
 	})
 
-	----------------------------------------------------------------------------
 	-- Lua
-	---------------------------------------------------------------------------
 	vim.lsp.config("lua_ls", {
 		settings = {
 			Lua = {
@@ -151,10 +133,7 @@ M.setup_server_configs = function()
 		},
 	})
 
-	---------------------------------------------------------------------------
 	-- C# / Unity (OmniSharp)
-	-- root_markers drives project detection; no hardcoded solution path.
-	---------------------------------------------------------------------------
 	local mono_path = vim.fn.exepath("mono")
 	vim.lsp.config("omnisharp", {
 		cmd = {
@@ -202,9 +181,7 @@ M.setup_server_configs = function()
 		},
 	})
 
-	---------------------------------------------------------------------------
 	-- Kotlin
-	---------------------------------------------------------------------------
 	vim.lsp.config("kotlin_language_server", {
 		cmd = { "kotlin-language-server" },
 		filetypes = { "kotlin" },
@@ -216,18 +193,15 @@ M.setup_server_configs = function()
 		},
 	})
 
-	---------------------------------------------------------------------------
 	-- Swift
-	---------------------------------------------------------------------------
 	vim.lsp.config("sourcekit", {
 		cmd = { "xcrun", "sourcekit-lsp" },
 		filetypes = { "swift" },
 		root_markers = { "Package.swift", "*.xcodeproj", "*.xcworkspace" },
 	})
 	vim.lsp.enable("sourcekit")
-	---------------------------------------------------------------------------
+
 	-- Dart
-	---------------------------------------------------------------------------
 	vim.lsp.config("dartls", {
 		cmd = { "dart", "language-server", "--protocol=lsp" },
 		filetypes = { "dart" },
@@ -247,9 +221,7 @@ M.setup_server_configs = function()
 		},
 	})
 
-	---------------------------------------------------------------------------
 	-- Scala (Metals)
-	---------------------------------------------------------------------------
 	vim.lsp.config("metals", {
 		filetypes = { "scala", "sbt" },
 		root_markers = { "build.sbt", "build.sc", ".git" },
@@ -262,23 +234,17 @@ M.setup_server_configs = function()
 		},
 	})
 
-	---------------------------------------------------------------------------
 	-- SQL
-	---------------------------------------------------------------------------
 	vim.lsp.config("sqlls", {
 		root_markers = { ".sql_project", ".git" },
 	})
 
-	---------------------------------------------------------------------------
 	-- Perl
-	---------------------------------------------------------------------------
 	vim.lsp.config("perlnavigator", {
 		root_markers = { ".git" },
 	})
 
-	---------------------------------------------------------------------------
 	-- Arduino
-	---------------------------------------------------------------------------
 	vim.lsp.config("arduino_language_server", {
 		cmd = {
 			"arduino-language-server",

@@ -43,9 +43,9 @@ return {
 			window = {
 				border = "rounded",
 				normal_hl = "Comment",
-				winblend = 0, -- keep opaque so transparent UIs look clean
+				winblend = 0,
 				zindex = 60,
-				align = "bottom", -- bottom-right
+				align = "bottom",
 				relative = "editor",
 				x_padding = 1,
 				y_padding = 0,

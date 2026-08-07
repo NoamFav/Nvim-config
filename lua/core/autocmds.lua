@@ -9,14 +9,13 @@ autocmd({ "BufRead", "BufNewFile" }, {
 		vim.bo.filetype = "turtle"
 	end,
 })
--- Highlight on yank
+
 autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({ timeout = 200 })
 	end,
 })
 
--- Auto format on save
 autocmd("BufWritePost", {
 	pattern = "*",
 	callback = function()
@@ -26,13 +25,11 @@ autocmd("BufWritePost", {
 	end,
 })
 
--- Remove trailing whitespace on save
 autocmd("BufWritePre", {
 	pattern = "*",
 	command = [[%s/\s\+$//e]],
 })
 
--- C / H: real tabs, 4 wide (the Norm)
 autocmd("FileType", {
 	pattern = { "c", "h", "cpp", "hpp" },
 	callback = function()
@@ -42,7 +39,6 @@ autocmd("FileType", {
 	end,
 })
 
--- Makefiles: tabs are mandatory, never expand them
 autocmd("FileType", {
 	pattern = "make",
 	callback = function()
@@ -52,7 +48,6 @@ autocmd("FileType", {
 	end,
 })
 
--- Shell scripts: 4-space indent
 autocmd("FileType", {
 	pattern = { "sh", "bash" },
 	callback = function()

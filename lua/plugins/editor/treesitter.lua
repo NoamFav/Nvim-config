@@ -49,13 +49,11 @@ return {
 					}
 					if langs[ft] then
 						pcall(vim.treesitter.start)
-						-- treesitter-based indentexpr (optional)
 						vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 					end
 				end,
 			})
 
-			-- folding via treesitter
 			vim.opt.foldmethod = "expr"
 			vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 			vim.opt.foldlevel = 99

@@ -1,5 +1,4 @@
 return {
-	-- Git Blame
 	{
 		"f-person/git-blame.nvim",
 		event = "VeryLazy",
@@ -13,7 +12,6 @@ return {
 		end,
 	},
 
-	-- DiffView
 	{
 		"sindrets/diffview.nvim",
 		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
@@ -32,23 +30,21 @@ return {
 		},
 	},
 
-	-- GitSigns
 	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			signs = {
-				add = { text = "" }, -- Plus sign for added lines
-				change = { text = "" }, -- Dot icon for changed lines
-				delete = { text = "✘" }, -- Cross icon for deleted lines
-				topdelete = { text = "" }, -- Arrow up for topdelete
-				changedelete = { text = "" }, -- Circular arrow for changed + deleted
+				add = { text = "" },
+				change = { text = "" },
+				delete = { text = "✘" },
+				topdelete = { text = "" },
+				changedelete = { text = "" },
 			},
 		},
 	},
 
-	-- Git Conflict
 	{
 		"akinsho/git-conflict.nvim",
 		event = "VeryLazy",

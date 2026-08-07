@@ -6,7 +6,6 @@ return {
 		local ls = require("luasnip")
 		require("luasnip.loaders.from_vscode").lazy_load()
 
-		-- 42 piscine boilerplate (see lua/snippets/fortytwo.lua)
 		local ok, fortytwo = pcall(require, "snippets.fortytwo")
 		if ok then
 			ls.add_snippets("c", fortytwo.c)

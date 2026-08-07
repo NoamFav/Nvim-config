@@ -1,5 +1,4 @@
 return {
-	-- Core LSP
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
@@ -9,9 +8,6 @@ return {
 
 			vim.lsp.config("*", {
 				capabilities = caps,
-				on_attach = function(_, bufnr)
-					vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-				end,
 			})
 
 			local ok, servers = pcall(require, "lsp.servers")
@@ -23,7 +19,6 @@ return {
 		end,
 	},
 
-	-- Mason
 	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
@@ -40,7 +35,6 @@ return {
 		},
 	},
 
-	-- Mason LSP Config
 	{
 		"williamboman/mason-lspconfig.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -63,12 +57,13 @@ return {
 			end)
 		end,
 	},
+
 	{
 		"Hoffs/omnisharp-extended-lsp.nvim",
 		lazy = true,
 		ft = { "cs" },
 	},
-	-- LSP UI Enhancement
+
 	{
 		"nvimdev/lspsaga.nvim",
 		event = "LspAttach",
