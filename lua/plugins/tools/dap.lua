@@ -5,6 +5,8 @@ return {
 		"nvim-neotest/nvim-nio",
 		"leoluz/nvim-dap-go",
 	},
+	-- no rhs on any of these, they're just lazy-load triggers + which-key
+	-- labels, the real bindings are down in config() once dap actually exists
 	keys = {
 		{ "<leader>db", desc = "Toggle breakpoint" },
 		{ "<leader>dc", desc = "Continue" },
@@ -17,6 +19,8 @@ return {
 		dapui.setup()
 		require("dap-go").setup()
 
+		-- codelldb isn't in the ensure_installed lists anywhere, :MasonInstall
+		-- codelldb by hand or this path just doesn't exist
 		local codelldb_path = vim.fn.stdpath("data") .. "/mason/bin/codelldb"
 		dap.adapters.codelldb = {
 			type = "server",
@@ -26,6 +30,7 @@ return {
 				args = { "--port", "${port}" },
 			},
 		}
+		-- c only, no cpp config — everything I debug here is 42 C anyway
 		dap.configurations.c = {
 			{
 				name = "Launch file",

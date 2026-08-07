@@ -1,3 +1,5 @@
+-- snippets only surface after typing this, see the snippets source below —
+-- otherwise every LuaSnip trigger word (main, guard, ...) clutters normal completion
 local trigger_text = ";"
 
 return {
@@ -12,6 +14,7 @@ return {
 		},
 
 		opts = function(_, opts)
+			-- picker/prompt inputs aren't code, don't try to autocomplete a search query
 			opts.enabled = function()
 				local filetype = vim.bo[0].filetype
 				if filetype == "TelescopePrompt" or filetype == "minifiles" or filetype == "snacks_picker_input" then
@@ -63,12 +66,15 @@ return {
 						min_keyword_length = 2,
 						module = "blink.cmp.sources.snippets",
 						score_offset = 85,
+						-- only show up right after typing ";", e.g. ";main"
 						should_show_items = function()
 							local col = vim.api.nvim_win_get_cursor(0)[2]
 							local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
 							return before_cursor:match(trigger_text .. "%w*$") ~= nil
 						end,
 
+						-- accepting the item replaces the whole ";main", not just "main",
+						-- so the semicolon doesn't linger in the buffer
 						transform_items = function(_, items)
 							local col = vim.api.nvim_win_get_cursor(0)[2]
 							local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
@@ -108,6 +114,7 @@ return {
 						min_keyword_length = 3,
 						opts = {
 							dictionary_directories = { vim.fn.expand("~/.config/dictionaries") },
+							-- en + es, both languages I actually write in
 							dictionary_files = {
 								vim.fn.expand("~/.config/spell/en.utf-8.add"),
 								vim.fn.expand("~/.config/spell/es.utf-8.add"),
@@ -148,6 +155,8 @@ return {
 
 				list = {
 					selection = {
+						-- don't preselect mid-snippet, or <CR> to jump to the next
+						-- placeholder ends up accepting a completion instead
 						preselect = function(ctx)
 							return ctx.mode ~= "cmdline" and not require("blink.cmp").snippet_active({ direction = 1 })
 						end,

@@ -3,6 +3,7 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
+		-- a giant file with full LSP + treesitter running is how you get a frozen editor
 		bigfile = { enabled = true, auto_disable_lsp = true, auto_disable_treesitter = true },
 		explorer = { enabled = true },
 		animate = { enabled = true },
@@ -21,7 +22,7 @@ return {
 					icon = " ",
 					title = "Git Status",
 					section = "terminal",
-					enabled = vim.fn.isdirectory(".git") == 1,
+					enabled = vim.fn.isdirectory(".git") == 1, -- skip it outside a repo, git status would just error
 					cmd = "git status --short --branch",
 					height = 5,
 					padding = 1,
@@ -70,6 +71,7 @@ return {
 			row = 1,
 			col = 1,
 		},
+		-- assets/third_party show up in every project and are never what I'm looking for
 		picker = {
 			enabled = true,
 			sources = {

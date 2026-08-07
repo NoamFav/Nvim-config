@@ -15,6 +15,8 @@ local palette = {
 	"#bb9af7",
 }
 
+-- "identifier" covers most languages fine on its own, JS/TS just split
+-- variable names across a few different node types
 local queries = {
 	default = "(identifier) @markid",
 	javascript = [[
@@ -33,6 +35,7 @@ local function set_highlights()
 	end
 end
 
+-- same name always lands on the same color, that's the whole point
 local function hash(name)
 	local h = 5381
 	for i = 1, #name do
@@ -64,6 +67,7 @@ local function highlight(bufnr)
 			if name and name ~= "" then
 				local group = "RainbowVar" .. ((hash(name) % #palette) + 1)
 				local srow, scol, erow, ecol = node:range()
+				-- priority above regular treesitter highlighting so the color actually shows
 				pcall(vim.api.nvim_buf_set_extmark, bufnr, ns, srow, scol, {
 					end_row = erow,
 					end_col = ecol,
@@ -76,6 +80,7 @@ local function highlight(bufnr)
 end
 
 local timers = {}
+-- re-highlighting the whole tree on every keystroke would be miserable, debounce it
 local function schedule_highlight(bufnr)
 	if timers[bufnr] then
 		timers[bufnr]:stop()

@@ -1,6 +1,7 @@
 local M = {}
 
 local ns = vim.api.nvim_create_namespace("norminette")
+-- off by default: nobody wants a linter forking a process every time they open a .c file
 local enabled = false
 local timer
 local job
@@ -8,7 +9,7 @@ local job
 local function parse(output, bufnr)
 	local diags = {}
 	for raw in output:gmatch("[^\r\n]+") do
-		local line = raw:gsub("\27%[[%d;]*m", "") -- strip ANSI colour codes
+		local line = raw:gsub("\27%[[%d;]*m", "") -- NO_COLOR isn't always respected, strip ANSI just in case
 		local kind, code, lnum, col, msg = line:match("^(%a+):%s+(%S+)%s+%(line:%s*(%d+),%s+col:%s*(%d+)%):%s*(.+)$")
 		if code then
 			local l = math.max((tonumber(lnum) or 1) - 1, 0)
@@ -42,6 +43,7 @@ local function run(bufnr)
 		return
 	end
 
+	-- a slow norminette run finishing late shouldn't stomp a fresher one, kill it first
 	if job then
 		pcall(function()
 			job:kill(9)
@@ -72,6 +74,8 @@ local function schedule(bufnr)
 	end
 	local t = vim.uv.new_timer()
 	timer = t
+	-- auto-save.nvim writes on InsertLeave/TextChanged, without this debounce
+	-- every one of those writes would spawn its own norminette process
 	t:start(400, 0, function()
 		t:stop()
 		pcall(function()

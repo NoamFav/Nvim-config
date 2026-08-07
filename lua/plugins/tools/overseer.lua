@@ -83,6 +83,8 @@ return {
 	},
 	opts = {
 		component_aliases = {
+			-- dispose closes the output once you've actually looked at it,
+			-- not the second it finishes — otherwise a fast success flashes and vanishes
 			default = {
 				"on_exit_set_status",
 				"on_complete_notify",
@@ -94,6 +96,8 @@ return {
 		local overseer = require("overseer")
 		overseer.setup(opts)
 
+		-- walks up from wherever the current file actually is, so this still
+		-- finds the right Makefile from three directories deep in a 42 project
 		local function project_root()
 			local start = vim.fn.expand("%:p:h")
 			if start == "" then
@@ -146,6 +150,7 @@ return {
 			end,
 		})
 
+		-- for when I just want to know if this one file compiles, not the whole project
 		overseer.register_template({
 			name = "42: cc (this file)",
 			builder = function()
@@ -181,6 +186,8 @@ return {
 			end,
 		})
 
+		-- norm first: no point burning a build cycle on code that's about to
+		-- get rejected for indentation anyway
 		overseer.register_template({
 			name = "42: norm + build",
 			builder = function()

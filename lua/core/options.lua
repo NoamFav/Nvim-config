@@ -9,6 +9,7 @@ opt.signcolumn = "yes"
 
 -- Behavior
 opt.mouse = "a"
+-- noselect: nothing pre-picked, so <CR> never inserts a completion I didn't ask for
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.updatetime = 300
 opt.timeoutlen = 400
@@ -30,6 +31,8 @@ opt.swapfile = true
 opt.backup = true
 opt.writebackup = true
 opt.undofile = true
+-- out of the project tree, so no more .swp files showing up in git status
+-- or random directories because I opened a file from somewhere weird
 opt.backupdir = vim.fn.expand("~/.logs/nvim/backup")
 opt.directory = vim.fn.expand("~/.logs/nvim/swap")
 opt.undodir = vim.fn.expand("~/.logs/nvim/undo")
@@ -42,5 +45,6 @@ opt.splitbelow = true
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 
+-- read by lua/plugins/lsp/header42.lua for the 42-header stamp
 g.user42 = "nfavier"
 g.mail42 = "noam.favier@learner.42.tech"

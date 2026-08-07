@@ -1,6 +1,8 @@
 return {
 	"akinsho/toggleterm.nvim",
 	cmd = "ToggleTerm",
+	-- keys triggers the lazy-load, open_mapping below is toggleterm's own
+	-- binding that also works from inside the terminal itself
 	keys = {
 		{ "<C-t>", ":ToggleTerm<CR>", desc = "Toggle Terminal" },
 	},

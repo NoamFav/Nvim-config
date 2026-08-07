@@ -1,3 +1,5 @@
+-- most colorschemes only bother styling treesitter's @variable/@type/etc groups
+-- and leave LSP's @lsp.type.* ones to fall back on nothing, this fixes that
 local M = {}
 
 local set = vim.api.nvim_set_hl
@@ -35,6 +37,8 @@ local function apply()
 
 	based_on("@lsp.type.interface", "@type", { italic = true })
 	link("@lsp.typemod.type.defaultLibrary", "@type.builtin")
+	-- gopls tags imported stdlib functions as defaultLibrary same as true builtins,
+	-- close enough that they should look the same
 	link("@lsp.typemod.function.defaultLibrary.go", "@function.builtin")
 	set(0, "@lsp.typemod.variable.readonly.go", { italic = true })
 	set(0, "@lsp.typemod.type.pointer", { italic = true })
@@ -42,6 +46,7 @@ end
 
 function M.setup()
 	apply()
+	-- colors reset on every colorscheme switch, so this has to rerun each time
 	vim.api.nvim_create_autocmd("ColorScheme", { callback = apply })
 end
 

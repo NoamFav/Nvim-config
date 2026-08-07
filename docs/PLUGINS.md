@@ -32,7 +32,6 @@ Small, self-contained plugins that don't warrant their own file.
 | [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) | Filetype icon set used by lualine, the file explorer, which-key, and more |
 | [tfnico/vim-gradle](https://github.com/tfnico/vim-gradle) | Syntax highlighting for Gradle build files |
 | [NoamFav/Zarya.nvim](https://github.com/NoamFav/Zarya.nvim) | Control and visualize Apple Music playback from inside Neovim |
-| [jaxbot/semantic-highlight.vim](https://github.com/jaxbot/semantic-highlight.vim) | Colors each variable name consistently across a buffer; toggled with `<leader>s` |
 | [weilbith/nvim-code-action-menu](https://github.com/weilbith/nvim-code-action-menu) | Floating preview menu for LSP code actions (`:CodeActionMenu`, `<leader>ca`) |
 | [ellisonleao/glow.nvim](https://github.com/ellisonleao/glow.nvim) | Renders Markdown in a floating preview via `glow` (`:Glow`) |
 | [OXY2DEV/markview.nvim](https://github.com/OXY2Dev/markview.nvim) | Live in-buffer Markdown rendering (headings, tables, code blocks, checkboxes) without leaving the editor |

@@ -21,6 +21,7 @@ return {
 		},
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
+			-- wrapped diff lines are unreadable, and whitespace symbols just add noise here
 			hooks = {
 				diff_buf_read = function()
 					vim.opt_local.wrap = false
@@ -54,6 +55,7 @@ return {
 				incoming = "DiffText",
 				current = "DiffAdd",
 			},
+			-- otherwise every conflict marker gets diagnosed as broken syntax on top of everything else
 			disable_diagnostics = true,
 		},
 	},

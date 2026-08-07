@@ -13,11 +13,13 @@ return {
 		events = { "BufLeave" },
 		conditions = {
 			exists = true,
-			filename_is_not = {},
+			filename_is_not = {}, -- empty on purpose, nothing's exempt
 			filetype_is_not = {},
 			modifiable = true,
 		},
 		write_all_buffers = false,
+		-- this is why core/norminette.lua debounces its own runs by 400ms —
+		-- this fires way more often than a person actually hits :w
 		debounce_delay = 135,
 	},
 }
