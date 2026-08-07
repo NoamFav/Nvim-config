@@ -20,40 +20,6 @@ return {
 			},
 		},
 
-		notification = {
-			override_vim_notify = true,
-
-			filter = vim.log.levels.INFO,
-			history_size = 100,
-
-			redirect = false,
-
-			view = {
-				stack_upwards = true,
-				reflow = false,
-				icon_separator = " ",
-				group_separator = " ",
-				group_separator_hl = "Comment",
-				line_margin = 1,
-				render_message = function(msg, cnt)
-					return cnt == 1 and msg or ("(" .. cnt .. "x) " .. msg)
-				end,
-			},
-
-			window = {
-				border = "rounded",
-				normal_hl = "Comment",
-				winblend = 0,
-				zindex = 60,
-				align = "bottom",
-				relative = "editor",
-				x_padding = 1,
-				y_padding = 0,
-				max_width = 0,
-				max_height = 0,
-			},
-		},
-
 		integration = { ["nvim-tree"] = { enable = false } },
 	},
 }

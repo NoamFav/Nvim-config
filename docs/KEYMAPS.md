@@ -137,13 +137,13 @@ Defined in [`lua/core/keymaps.lua`](../lua/core/keymaps.lua) and [`lua/plugins/t
 | Key | Action |
 |-----|--------|
 | `<C-t>` | Toggle floating terminal |
-| `<leader>mi` | `mvn clean install` |
-| `<leader>mk` | `mvn clean package` |
-| `<leader>mc` | `mvn clean` |
-| `<leader>mt` | `mvn test` |
-| `<leader>me` | `mvn exec:exec` |
-| `<leader>mf` | `mvn javafx:run` |
-| `<leader>mj` | `mvn javadoc:javadoc` |
+| `<leader>ji` | `mvn clean install` |
+| `<leader>jk` | `mvn clean package` |
+| `<leader>jc` | `mvn clean` |
+| `<leader>jt` | `mvn test` |
+| `<leader>je` | `mvn exec:exec` |
+| `<leader>jf` | `mvn javafx:run` |
+| `<leader>jd` | `mvn javadoc:javadoc` |
 | `<leader>cc` | `cmake .` |
 | `<leader>cm` | `cmake --build .` |
 | `<leader>cr` | `cmake --build . --target run` |
@@ -194,8 +194,11 @@ Defined in [`lua/plugins/editor/comment.lua`](../lua/plugins/editor/comment.lua)
 | `<leader>d` | diagnostics |
 | `<leader>f` | find |
 | `<leader>g` | git |
+| `<leader>j` | java/maven |
 | `<leader>l` | lsp |
-| `<leader>m` | maven |
+| `<leader>m` | make/42 |
 | `<leader>n` | notifications |
+| `<leader>o` | octo/pr |
+| `<leader>r` | run/rename |
 | `<leader>t` | tabs/terminal |
 | `<leader>x` | trouble |

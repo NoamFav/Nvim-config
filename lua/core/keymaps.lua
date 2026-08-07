@@ -6,14 +6,14 @@ local opts = { noremap = true, silent = true }
 -- Semantic Highlight
 keymap("n", "<Leader>s", ":SemanticHighlightToggle<cr>", opts)
 
--- Maven shortcuts
-keymap("n", "<leader>mi", ":!mvn clean install<CR>", opts)
-keymap("n", "<leader>mk", ":!mvn clean package<CR>", opts)
-keymap("n", "<leader>mc", ":!mvn clean<CR>", opts)
-keymap("n", "<leader>mt", ":!mvn test<CR>", opts)
-keymap("n", "<leader>me", ":!mvn exec:exec<CR>", opts)
-keymap("n", "<leader>mf", ":!mvn javafx:run<CR>", opts)
-keymap("n", "<leader>mj", ":!mvn javadoc:javadoc<CR>", opts)
+-- Maven shortcuts (leader>m is taken by overseer's make/42 group)
+keymap("n", "<leader>ji", ":!mvn clean install<CR>", opts)
+keymap("n", "<leader>jk", ":!mvn clean package<CR>", opts)
+keymap("n", "<leader>jc", ":!mvn clean<CR>", opts)
+keymap("n", "<leader>jt", ":!mvn test<CR>", opts)
+keymap("n", "<leader>je", ":!mvn exec:exec<CR>", opts)
+keymap("n", "<leader>jf", ":!mvn javafx:run<CR>", opts)
+keymap("n", "<leader>jd", ":!mvn javadoc:javadoc<CR>", opts)
 
 -- CMake shortcuts
 keymap("n", "<leader>cc", ":!cmake .<CR>", opts)

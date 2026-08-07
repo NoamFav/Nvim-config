@@ -89,14 +89,14 @@ brew install imagemagick
 
 ## 42 School Tooling (optional)
 
-[lua/plugins/lsp/norminette.lua](../lua/plugins/lsp/norminette.lua) adds header-stamping + Norm checking; `<leader>cf` shells out to a formatter.
+[lua/plugins/lsp/header42.lua](../lua/plugins/lsp/header42.lua) adds header-stamping (`<F1>`); Norm checking is its own hand-rolled module, [lua/core/norminette.lua](../lua/core/norminette.lua) (`:NorminetteToggle`); `<leader>cf` shells out to a formatter.
 
 ```bash
 pip install norminette
 # c_formatter_42 must be on $PATH — https://github.com/42-Short/c_formatter_42
 ```
 
-Update `user`/`mail` in [lua/plugins/lsp/norminette.lua](../lua/plugins/lsp/norminette.lua) and `vim.g.user42`/`vim.g.mail42` in [lua/core/options.lua](../lua/core/options.lua) to your own login.
+Update `user`/`mail` in [lua/plugins/lsp/header42.lua](../lua/plugins/lsp/header42.lua) and `vim.g.user42`/`vim.g.mail42` in [lua/core/options.lua](../lua/core/options.lua) to your own login.
 
 ## Dictionary Completion (optional)
 

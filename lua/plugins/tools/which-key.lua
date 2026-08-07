@@ -39,6 +39,7 @@ return {
 			{ "<leader>d", group = "diagnostics/debug" },
 			{ "<leader>f", group = "find" },
 			{ "<leader>g", group = "git" },
+			{ "<leader>j", group = "java/maven" },
 			{ "<leader>l", group = "lsp" },
 			{ "<leader>m", group = "make/42" },
 			{ "<leader>n", group = "notifications" },
