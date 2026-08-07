@@ -46,6 +46,9 @@ return {
 			return {
 				ensure_installed = servers,
 				automatic_installation = true,
+				-- rustaceanvim (plugins/lang/rust.lua) starts rust_analyzer itself,
+				-- letting mason-lspconfig enable it too would attach it twice
+				automatic_enable = { exclude = { "rust_analyzer" } },
 			}
 		end,
 		config = function(_, opts)
@@ -56,7 +59,9 @@ return {
 			-- enabling it too early just errors instead of waiting politely
 			vim.schedule(function()
 				for _, name in ipairs(opts.ensure_installed) do
-					pcall(vim.lsp.enable, name)
+					if name ~= "rust_analyzer" then
+						pcall(vim.lsp.enable, name)
+					end
 				end
 			end)
 		end,

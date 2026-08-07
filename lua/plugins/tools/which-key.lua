@@ -41,7 +41,7 @@ return {
 			{ "<leader>g", group = "git" },
 			{ "<leader>j", group = "java/maven" },
 			{ "<leader>l", group = "lsp" },
-			{ "<leader>m", group = "make/42" },
+			{ "<leader>m", group = "make" },
 			{ "<leader>n", group = "notifications" },
 			{ "<leader>o", group = "octo/pr" },
 			{ "<leader>r", group = "run/rename" },

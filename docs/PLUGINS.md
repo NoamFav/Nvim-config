@@ -122,6 +122,7 @@ These sit **on top of** the LSP servers defined in [`lua/lsp/servers.lua`](../lu
 | Plugin | What it does |
 |---|---|
 | [ray-x/go.nvim](https://github.com/ray-x/go.nvim) (+ [guihua.lua](https://github.com/ray-x/guihua.lua)) | Go tooling: `:GoRun`, `:GoTest*`, coverage overlay, `:GoAddTag`/`:GoRmTag`, `:GoIfErr`, `:GoFillStruct`, `:GoImpl`; installs `gomodifytags`/`gotests`/`iferr`/`impl`/`dlv` on build. `gopls` itself stays owned by `servers.lua` (`lsp_cfg = false`) |
+| [mrcjkb/rustaceanvim](https://github.com/mrcjkb/rustaceanvim) | Rust tooling: clippy-on-save, `:RustLsp` runnables/debuggables/hover actions. Unlike every other language here, it owns `rust_analyzer`'s startup itself — `servers.lua` still lists it so mason installs/updates the binary, but `mason-lspconfig`'s auto-enable explicitly excludes it |
 | [mfussenegger/nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) | Java-specific extensions on top of `jdtls` |
 | [p00f/clangd_extensions.nvim](https://github.com/p00f/clangd_extensions.nvim) | C/C++ inlay hints (param names/types) and an AST viewer, built on `clangd` |
 | [m-demare/hlargs.nvim](https://github.com/m-demare/hlargs.nvim) | Colors function parameters consistently across C/C++, Go, Rust, Lua, Python, JS/TS, Java, and more |

@@ -6,7 +6,9 @@ return {
 		opts = {
 			-- isort/beautysh/rustywind used to be here too, dropped them —
 			-- nothing below ever actually calls them, formatter.nvim uses
-			-- black/shfmt/rustfmt instead
+			-- black/shfmt/rustfmt instead. codelldb/delve aren't formatters at
+			-- all, but mason-tool-installer installs any mason package and
+			-- this is the one list that already auto-updates on start
 			ensure_installed = {
 				"prettierd",
 				"black",
@@ -21,6 +23,8 @@ return {
 				"sqlfmt",
 				"xmlformatter",
 				"latexindent",
+				"codelldb",
+				"delve",
 			},
 			auto_update = true,
 			run_on_start = true,

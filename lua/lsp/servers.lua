@@ -5,6 +5,9 @@ M.get_server_list = function()
 		-- core
 		"jdtls",
 		"pyright",
+		-- installed here so mason tracks/updates it, but NOT auto-enabled below —
+		-- plugins/lang/rust.lua's rustaceanvim starts and owns this client itself,
+		-- see plugins/lsp/mason.lua's automatic_enable.exclude
 		"rust_analyzer",
 		"clangd",
 		"gopls",
@@ -88,10 +91,10 @@ M.setup_server_configs = function()
 		},
 	})
 
-	-- only go, inlay hints everywhere else gets noisy fast
+	-- go and rust only, inlay hints everywhere else gets noisy fast
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
-			if vim.bo[args.buf].filetype == "go" then
+			if vim.tbl_contains({ "go", "rust" }, vim.bo[args.buf].filetype) then
 				pcall(vim.lsp.inlay_hint.enable, true, { bufnr = args.buf })
 			end
 		end,
