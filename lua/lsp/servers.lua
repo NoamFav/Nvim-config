@@ -40,6 +40,7 @@ end
 
 M.setup_server_configs = function()
 	vim.lsp.config("clangd", {
+		-- header-insertion=never: it kept guessing wrong and adding headers I didn't ask for
 		cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
 		filetypes = { "c", "cpp", "objc", "objcpp" },
 		root_markers = { "Makefile", "compile_commands.json", ".clangd", ".git" },
@@ -48,8 +49,8 @@ M.setup_server_configs = function()
 		},
 	})
 
+	-- empty on purpose, mason-lspconfig's defaults are already fine here
 	vim.lsp.config("ts_ls", {})
-
 	vim.lsp.config("tailwindcss", {})
 
 	-- Go (gopls)
@@ -79,11 +80,15 @@ M.setup_server_configs = function()
 					parameterNames = true,
 					rangeVariableTypes = true,
 				},
+				-- lets a lone scratch file (e.g. a leetcode.nvim buffer, no go.mod
+				-- in sight) skip the "not part of a module" complaints with a
+				-- //go:build leetcode tag instead of needing a whole module
 				standaloneTags = { "ignore", "leetcode" },
 			},
 		},
 	})
 
+	-- only go, inlay hints everywhere else gets noisy fast
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
 			if vim.bo[args.buf].filetype == "go" then
@@ -133,7 +138,8 @@ M.setup_server_configs = function()
 		},
 	})
 
-	-- C# / Unity (OmniSharp)
+	-- C# / Unity (OmniSharp) — Unity projects still lean on the old .NET
+	-- Framework build, which means mono, when it's around
 	local mono_path = vim.fn.exepath("mono")
 	vim.lsp.config("omnisharp", {
 		cmd = {
@@ -194,6 +200,7 @@ M.setup_server_configs = function()
 	})
 
 	-- Swift
+	-- ships with Xcode, mason doesn't manage this one, so it needs its own enable() call
 	vim.lsp.config("sourcekit", {
 		cmd = { "xcrun", "sourcekit-lsp" },
 		filetypes = { "swift" },

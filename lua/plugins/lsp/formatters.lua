@@ -4,10 +4,12 @@ return {
 		event = "VeryLazy",
 		dependencies = { "williamboman/mason.nvim" },
 		opts = {
+			-- isort/beautysh/rustywind used to be here too, dropped them —
+			-- nothing below ever actually calls them, formatter.nvim uses
+			-- black/shfmt/rustfmt instead
 			ensure_installed = {
 				"prettierd",
 				"black",
-				"isort",
 				"stylua",
 				"clang-format",
 				"taplo",
@@ -15,8 +17,6 @@ return {
 				"google-java-format",
 				"ktlint",
 				"shfmt",
-				"beautysh",
-				"rustywind",
 				"gofumpt",
 				"sqlfmt",
 				"xmlformatter",
@@ -39,6 +39,8 @@ return {
 
 			null_ls.setup({
 				sources = {
+					-- downgraded to HINT, pyright's actual errors shouldn't have
+					-- to compete with flake8 opinions for attention
 					require("none-ls.diagnostics.flake8").with({
 						diagnostics_postprocess = function(diagnostic)
 							diagnostic.severity = vim.diagnostic.severity.HINT
@@ -103,6 +105,8 @@ return {
 							}
 						end,
 					},
+					-- .ino is just C++ wearing a costume, clang-format needs a
+					-- fake filename or it won't recognize the syntax
 					arduino = {
 						function()
 							return {

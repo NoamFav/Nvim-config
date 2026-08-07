@@ -1,4 +1,3 @@
--- lua/plugins/trouble.lua
 return {
 	"folke/trouble.nvim",
 	cmd = "Trouble",

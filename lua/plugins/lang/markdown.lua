@@ -1,6 +1,6 @@
 return {
 	"OXY2DEV/markview.nvim",
-	lazy = false,
+	ft = "markdown", -- was lazy=false, loading on literally every buffer for a markdown renderer
 
 	dependencies = { "saghen/blink.cmp" },
 }

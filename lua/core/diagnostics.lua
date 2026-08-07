@@ -1,5 +1,7 @@
 vim.diagnostic.config({
 	virtual_text = true,
+	-- yes it jitters while you type, no I'm not turning it off, I'd rather
+	-- know the line is broken now than find out on save
 	update_in_insert = true,
 	severity_sort = true,
 	underline = true,

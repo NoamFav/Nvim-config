@@ -1,13 +1,15 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		-- main is the rewrite: no more auto-highlighting on setup(), every
+		-- filetype needs its own vim.treesitter.start() below or nothing renders
 		branch = "main",
 		build = ":TSUpdate",
 		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("nvim-treesitter").setup()
 
-			-- install parsers (main branch API)
+			-- turtle here is for the *.ttl override in core/autocmds.lua
 			require("nvim-treesitter").install({
 				"lua",
 				"bash",
@@ -26,7 +28,7 @@ return {
 				"turtle",
 			})
 
-			-- enable highlight + indent per-filetype (main branch style)
+			-- opt-in per filetype, see the branch comment above for why
 			vim.api.nvim_create_autocmd("FileType", {
 				callback = function(args)
 					local ft = args.match
@@ -71,6 +73,8 @@ return {
 				},
 				query = {
 					[""] = "rainbow-delimiters",
+					-- lua leans on do/end more than brackets, blocks is the
+					-- query that actually has something to color
 					lua = "rainbow-blocks",
 				},
 				highlight = {

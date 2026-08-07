@@ -22,6 +22,8 @@ return {
 				parameter_hints_prefix = "<- ",
 				other_hints_prefix = "=> ",
 			},
+			-- these came in empty and I never noticed until just now, AST
+			-- view works fine without them so leaving it alone for today
 			ast = {
 				role_icons = {
 					type = "",
@@ -42,6 +44,7 @@ return {
 				},
 			},
 		},
+		-- inlay hints have to be turned on by hand per buffer, clangd doesn't do it for you
 		config = function(_, opts)
 			require("clangd_extensions").setup(opts)
 
@@ -54,6 +57,8 @@ return {
 				end,
 			})
 
+			-- half of this overlaps core/semantic_tokens.lua, kept local
+			-- because it only matters once clangd_extensions is actually loaded
 			tune_semantic_tokens()
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				callback = tune_semantic_tokens,

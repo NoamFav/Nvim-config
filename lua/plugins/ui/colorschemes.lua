@@ -55,15 +55,15 @@ return {
 				hl.DiagnosticUnderlineHint = { sp = c.teal, undercurl = true }
 			end,
 		},
+		-- the actual active theme, everything else here is just available on standby
 		config = function(_, opts)
 			require("tokyonight").setup(opts)
 			vim.cmd.colorscheme("tokyonight-night")
 		end,
 	},
 	{
+		-- not the active theme, no need to load it at startup like tokyonight
 		"scottmckendry/cyberdream.nvim",
-		lazy = false,
-		priority = 1000,
 		opts = {
 			variant = "default",
 			transparent = true,

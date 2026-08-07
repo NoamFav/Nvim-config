@@ -1,4 +1,6 @@
 return {
+	-- default branch is harpoon v1 — mark/ui api, hardcoded 4 slots, not the
+	-- newer list-based v2. works fine, never had a reason to migrate
 	"ThePrimeagen/harpoon",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	keys = {

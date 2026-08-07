@@ -12,7 +12,7 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		opts = {
-			server = { override = false },
+			server = { override = false }, -- tailwindcss LSP is already set up in lsp/servers.lua, don't fight it
 		},
 	},
 }

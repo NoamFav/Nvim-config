@@ -6,7 +6,7 @@ return {
 		options = {
 			theme = "auto", -- follow active colorscheme
 			globalstatus = true,
-			disabled_filetypes = { "snacks_dashboard" },
+			disabled_filetypes = { "snacks_dashboard" }, -- the dashboard is its own thing, doesn't need a statusline on top
 			section_separators = { left = "", right = "" },
 			component_separators = { left = "", right = "" },
 			always_divide_middle = true,
@@ -15,6 +15,7 @@ return {
 		sections = {
 			lualine_a = { {
 				"mode",
+				-- "NORMAL" takes up half the statusline, "N" doesn't
 				fmt = function(str)
 					return str:sub(1, 1)
 				end,
@@ -32,6 +33,6 @@ return {
 			lualine_a = { { "buffers", use_mode_colors = true, symbols = { alternate_file = "" } } },
 			lualine_z = { { "tabs", use_mode_colors = true } },
 		},
-		extensions = { "nvim-tree", "quickfix", "fugitive" },
+		extensions = { "quickfix" }, -- nvim-tree/fugitive extensions dropped, neither plugin is installed
 	},
 }

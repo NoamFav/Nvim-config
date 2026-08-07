@@ -4,6 +4,8 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = { "saghen/blink.cmp" },
 		config = function()
+			-- "*" applies to every server config below, so blink.cmp's
+			-- capabilities don't have to be repeated in each one
 			local caps = require("blink.cmp").get_lsp_capabilities()
 
 			vim.lsp.config("*", {
@@ -50,6 +52,8 @@ return {
 			local mlsp = require("mason-lspconfig")
 			mlsp.setup(opts)
 
+			-- scheduled + pcall'd: a server can still be mid-install here,
+			-- enabling it too early just errors instead of waiting politely
 			vim.schedule(function()
 				for _, name in ipairs(opts.ensure_installed) do
 					pcall(vim.lsp.enable, name)

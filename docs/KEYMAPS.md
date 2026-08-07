@@ -179,7 +179,6 @@ Defined in [`lua/plugins/editor/comment.lua`](../lua/plugins/editor/comment.lua)
 | `gbc` | Toggle comment, current block |
 | `gb` (normal/operator/visual) | Toggle comment, blockwise |
 | `<leader>uk` | Toggle sticky treesitter-context header |
-| `<Leader>s` | Toggle semantic-highlight |
 
 ---
 
