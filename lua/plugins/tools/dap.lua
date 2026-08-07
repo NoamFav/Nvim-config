@@ -19,8 +19,7 @@ return {
 		dapui.setup()
 		require("dap-go").setup()
 
-		-- codelldb isn't in the ensure_installed lists anywhere, :MasonInstall
-		-- codelldb by hand or this path just doesn't exist
+		-- mason-tool-installer (plugins/lsp/formatters.lua) keeps this installed
 		local codelldb_path = vim.fn.stdpath("data") .. "/mason/bin/codelldb"
 		dap.adapters.codelldb = {
 			type = "server",
@@ -30,7 +29,11 @@ return {
 				args = { "--port", "${port}" },
 			},
 		}
-		-- c only, no cpp config — everything I debug here is 42 C anyway
+		-- c only, no cpp config — everything I debug here is 42 C anyway.
+		-- go gets its config for free from dap-go.setup() above (uses delve,
+		-- not this codelldb adapter). rust's is in plugins/lang/rust.lua —
+		-- rustaceanvim drives its own dap session, it just borrows this same
+		-- nvim-dap/dapui instance rather than needing a separate one
 		dap.configurations.c = {
 			{
 				name = "Launch file",

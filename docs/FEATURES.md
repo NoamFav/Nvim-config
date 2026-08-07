@@ -63,6 +63,7 @@ Everything search-related goes through [`snacks.nvim`](https://github.com/folke/
 Beyond the LSP server itself, a few languages get dedicated tooling layered on top (all in [`lua/plugins/lang/`](../lua/plugins/lang/) — see [Plugin Reference](PLUGINS.md#language-extras-pluginslang) for the full list):
 
 - **Go** — [go.nvim](https://github.com/ray-x/go.nvim) adds `:GoRun`, `:GoTest*`, a coverage overlay, struct-tag editing, `:GoIfErr`, `:GoFillStruct`, `:GoImpl` — all without touching `gopls` itself, which stays owned by `servers.lua`
+- **Rust** — [rustaceanvim](https://github.com/mrcjkb/rustaceanvim) owns `rust_analyzer` outright (clippy-on-save, `:RustLsp` runnables/debuggables/hover actions) instead of going through `servers.lua` like every other server
 - **C/C++** — [clangd_extensions.nvim](https://github.com/p00f/clangd_extensions.nvim) adds inlay hints and an AST viewer on top of `clangd`
 - **Web** — Tailwind class previews ([tailwind-tools.nvim](https://github.com/luckasRanarison/tailwind-tools.nvim)) and JSX/TSX highlighting
 - **42 School** — automatic header stamping (`<F1>`) and live Norm linting on `.c`/`.h` save, plus a `<leader>cf` shortcut to run `c_formatter_42`

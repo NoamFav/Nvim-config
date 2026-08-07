@@ -195,7 +195,7 @@ Defined in [`lua/plugins/editor/comment.lua`](../lua/plugins/editor/comment.lua)
 | `<leader>g` | git |
 | `<leader>j` | java/maven |
 | `<leader>l` | lsp |
-| `<leader>m` | make/42 |
+| `<leader>m` | make |
 | `<leader>n` | notifications |
 | `<leader>o` | octo/pr |
 | `<leader>r` | run/rename |
