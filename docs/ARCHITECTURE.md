@@ -78,6 +78,8 @@ init.lua
     │   ├── keymaps.lua         Non-plugin-owned keymaps (windows, buffers, tabs, Maven, CMake, MATLAB…)
     │   ├── autocmds.lua        Autocommands
     │   ├── diagnostics.lua     Diagnostic sign/virtual-text config
+    │   ├── norminette.lua      Async norminette diagnostics on save for .c/.h (hand-rolled, no plugin)
+    │   ├── rainbow_var.lua     Per-variable consistent-color highlighting via treesitter
     │   └── semantic_tokens.lua Cross-language @lsp.* highlight styling
     ├── lsp/
     │   └── servers.lua         get_server_list() (Mason ensure_installed) + setup_server_configs()
@@ -86,7 +88,7 @@ init.lua
         ├── coding/              blink.cmp, snippets
         ├── editor/              treesitter, harpoon, autopairs, autosave, comment…
         ├── lang/                Per-language extras (go, java, c, web, latex, matlab, jupyter)
-        ├── lsp/                 mason, formatters, norminette
+        ├── lsp/                 mason, formatters, 42-header.nvim
         ├── tools/               git, terminal, trouble, which-key
         └── ui/                  colorschemes, lualine, snacks, devicons, fidget…
 ```

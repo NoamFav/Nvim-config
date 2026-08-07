@@ -99,7 +99,6 @@ Small, self-contained plugins that don't warrant their own file.
 | [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim) (+ [none-ls-extras.nvim](https://github.com/nvimtools/none-ls-extras.nvim)) | Runs external linters as LSP diagnostics — currently just `flake8` for Python |
 | [mhartington/formatter.nvim](https://github.com/mhartington/formatter.nvim) | Per-filetype formatter dispatch (`<leader>df` / format-on-save) — see the full exe list in [`formatters.lua`](../lua/plugins/lsp/formatters.lua) |
 | [Diogo-ss/42-header.nvim](https://github.com/Diogo-ss/42-header.nvim) | Stamps/updates the 42 School standard header comment (`<F1>`, `:Stdheader`) |
-| [hardyrafael17/norminette42.nvim](https://github.com/hardyrafael17/norminette42.nvim) | Runs the 42 School `norminette` linter on save for `.c`/`.h` files |
 
 ---
 
