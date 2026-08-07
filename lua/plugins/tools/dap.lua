@@ -1,5 +1,3 @@
--- nvim-dap + dap-ui. dap-go for Go, codelldb for C.
--- codelldb needs :MasonInstall codelldb first.
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
@@ -19,7 +17,6 @@ return {
 		dapui.setup()
 		require("dap-go").setup()
 
-		-- C via codelldb (installed through Mason)
 		local codelldb_path = vim.fn.stdpath("data") .. "/mason/bin/codelldb"
 		dap.adapters.codelldb = {
 			type = "server",

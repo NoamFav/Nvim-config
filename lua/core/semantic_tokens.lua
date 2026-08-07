@@ -1,20 +1,3 @@
--- Cross-language LSP semantic-token styling.
---
--- Any language server that emits standard semantic tokens (clangd, rust-analyzer,
--- gopls, lua_ls, ts_ls, pyright, …) gets a consistent, pretty treatment here.
---
--- Two techniques:
---   * TYPE groups (@lsp.type.*)      -> linked/recoloured to a matching
---                                       treesitter group (they ARE the token's
---                                       primary colour).
---   * MODIFIER groups (@lsp.mod.* /  -> style only (italic/bold/underline/
---     @lsp.typemod.*.<mod>)             strikethrough). Neovim layers these on
---                                       top of the base type colour, so the
---                                       language's palette is preserved and we
---                                       just add emphasis.
---
--- Parameters are deliberately untouched: hlargs owns those (see lang/c.lua).
-
 local M = {}
 
 local set = vim.api.nvim_set_hl
@@ -30,50 +13,35 @@ local function link(group, target)
 end
 
 local function apply()
-	-------------------------------------------------------------------------
-	-- Universal type roles — colour them like the equivalent treesitter group
-	-------------------------------------------------------------------------
-	link("@lsp.type.property", "@variable.member") -- struct/obj fields (C, Go, Rust, TS…)
-	link("@lsp.type.namespace", "@module") -- packages / modules / namespaces
-	link("@lsp.type.enumMember", "@constant") -- enum variants
-	link("@lsp.type.decorator", "@attribute") -- @decorators / #[attrs]
-	based_on("@lsp.type.macro", "@constant.macro", { bold = true }) -- C / Rust macros
+	link("@lsp.type.property", "@variable.member")
+	link("@lsp.type.namespace", "@module")
+	link("@lsp.type.enumMember", "@constant")
+	link("@lsp.type.decorator", "@attribute")
 
-	-------------------------------------------------------------------------
-	-- Universal modifier roles — STYLE ONLY, layered over the base colour
-	-------------------------------------------------------------------------
-	set(0, "@lsp.typemod.variable.readonly", { italic = true }) -- const / final / readonly
+	based_on("@lsp.type.macro", "@constant.macro", { bold = true })
+	set(0, "@lsp.typemod.variable.readonly", { italic = true })
 	set(0, "@lsp.typemod.property.readonly", { italic = true })
-	set(0, "@lsp.typemod.function.defaultLibrary", { italic = true }) -- stdlib fns (printf, print, fmt.*)
-	set(0, "@lsp.typemod.variable.defaultLibrary", { italic = true }) -- stdlib vars/consts
-	based_on("@lsp.mod.deprecated", "@comment", { strikethrough = true }) -- deprecated → greyed + struck
+	set(0, "@lsp.typemod.function.defaultLibrary", { italic = true })
+	set(0, "@lsp.typemod.variable.defaultLibrary", { italic = true })
+	based_on("@lsp.mod.deprecated", "@comment", { strikethrough = true })
 
-	-------------------------------------------------------------------------
-	-- Rust (rust-analyzer has the richest token set) — make it sing
-	-------------------------------------------------------------------------
-	based_on("@lsp.type.lifetime", "@comment", { italic = true }) -- 'a lifetimes
-	link("@lsp.type.selfKeyword", "@variable.builtin") -- self
-	link("@lsp.type.builtinType", "@type.builtin") -- i32, usize, bool…
+	based_on("@lsp.type.lifetime", "@comment", { italic = true })
+	link("@lsp.type.selfKeyword", "@variable.builtin")
+	link("@lsp.type.builtinType", "@type.builtin")
 	link("@lsp.type.typeAlias", "@type")
-	link("@lsp.type.formatSpecifier", "@punctuation.special") -- {} inside format!()
-	link("@lsp.type.derive", "@attribute") -- #[derive(...)]
-	set(0, "@lsp.typemod.variable.mutable", { underline = true }) -- `mut` bindings underlined
+	link("@lsp.type.formatSpecifier", "@punctuation.special")
+	link("@lsp.type.derive", "@attribute")
+	set(0, "@lsp.typemod.variable.mutable", { underline = true })
 
-	-------------------------------------------------------------------------
-	-- Go (gopls) — favourite language. Needs `semanticTokens = true` in gopls
-	-- settings (set in lua/lsp/servers.lua) or none of this reaches Go.
-	-------------------------------------------------------------------------
-	based_on("@lsp.type.interface", "@type", { italic = true }) -- interface types, slanted
-	link("@lsp.typemod.type.defaultLibrary", "@type.builtin") -- int, string, error, rune…
-	link("@lsp.typemod.function.defaultLibrary.go", "@function.builtin") -- make, len, append, panic…
-	-- gopls tags variables with their underlying kind — flag the sharp ones:
-	set(0, "@lsp.typemod.variable.readonly.go", { italic = true }) -- package-level consts / iota
-	set(0, "@lsp.typemod.type.pointer", { italic = true }) -- pointer-typed things read as "indirect"
+	based_on("@lsp.type.interface", "@type", { italic = true })
+	link("@lsp.typemod.type.defaultLibrary", "@type.builtin")
+	link("@lsp.typemod.function.defaultLibrary.go", "@function.builtin")
+	set(0, "@lsp.typemod.variable.readonly.go", { italic = true })
+	set(0, "@lsp.typemod.type.pointer", { italic = true })
 end
 
 function M.setup()
 	apply()
-	-- Re-apply after any colourscheme switch (highlights get reset)
 	vim.api.nvim_create_autocmd("ColorScheme", { callback = apply })
 end
 

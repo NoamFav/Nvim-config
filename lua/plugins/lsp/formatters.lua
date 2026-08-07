@@ -1,5 +1,4 @@
 return {
-	-- Mason Tool Installer
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
@@ -50,12 +49,10 @@ return {
 		end,
 	},
 
-	-- Formatter
 	{
 		"mhartington/formatter.nvim",
 		event = "VeryLazy",
 		opts = function()
-			local util = require("formatter.util")
 			return {
 				filetype = {
 					javascript = { require("formatter.filetypes.javascript").prettier },
@@ -81,7 +78,7 @@ return {
 					json = { require("formatter.filetypes.json").prettier },
 					yaml = { require("formatter.filetypes.yaml").prettier },
 					toml = { require("formatter.filetypes.toml").taplo },
-					--markdown = { require("formatter.filetypes.markdown").prettier },
+					markdown = { require("formatter.filetypes.markdown").prettier },
 					sql = {
 						function()
 							return { exe = "sqlfmt", args = { "-" }, stdin = true }

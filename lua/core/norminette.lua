@@ -1,24 +1,10 @@
--- Async norminette diagnostics for C / H buffers.
---
--- Replaces norminette42.nvim, whose io.popen("norminette …") ran the linter
--- *synchronously on the UI thread* — on BufEnter and every BufWritePost. With
--- auto-save firing right after completions, that meant a blocking subprocess on
--- every accepted completion, and a hard freeze whenever norminette was slow or
--- hung.
---
--- This runs norminette via vim.system() (async), debounced so auto-save storms
--- collapse into one run, cancelling any in-flight run, with a hard timeout so a
--- stuck norminette can never block Neovim.
-
 local M = {}
 
 local ns = vim.api.nvim_create_namespace("norminette")
 local enabled = false
-local timer -- debounce timer
-local job -- in-flight vim.system handle
+local timer
+local job
 
--- Parse norminette v3 output lines:
---   Error:  SPACE_REPLACE_TAB (line:   3, col:   1):\tFound space when expecting tab
 local function parse(output, bufnr)
 	local diags = {}
 	for raw in output:gmatch("[^\r\n]+") do
@@ -56,7 +42,6 @@ local function run(bufnr)
 		return
 	end
 
-	-- cancel any in-flight run before starting a new one
 	if job then
 		pcall(function()
 			job:kill(9)
@@ -66,8 +51,6 @@ local function run(bufnr)
 
 	job = vim.system(
 		{ "norminette", name },
-		-- NO_COLOR asks norminette to skip ANSI codes; timeout is a hard cap so a
-		-- hung norminette is killed and never blocks the editor.
 		{ text = true, timeout = 5000, env = { NO_COLOR = "1" } },
 		vim.schedule_wrap(function(res)
 			job = nil
@@ -80,8 +63,6 @@ local function run(bufnr)
 	)
 end
 
--- Debounce: collapse rapid saves (auto-save) into a single run 400ms after the
--- last event.
 local function schedule(bufnr)
 	if timer then
 		timer:stop()

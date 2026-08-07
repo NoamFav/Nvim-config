@@ -2,6 +2,7 @@ local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Window nav moved to smart-splits.nvim (lua/plugins/tools/smart-splits.lua)
+--
 -- Semantic Highlight
 keymap("n", "<Leader>s", ":SemanticHighlightToggle<cr>", opts)
 

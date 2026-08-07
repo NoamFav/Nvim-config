@@ -16,7 +16,7 @@ return {
 				g = true,
 			},
 		},
-		-- window is deprecated -> use win
+
 		win = {
 			border = "rounded",
 			padding = { 2, 2, 2, 2 },

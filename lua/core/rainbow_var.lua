@@ -1,12 +1,3 @@
--- Give every unique identifier name a stable colour ("rainbow variables"),
--- so the same variable reads the same everywhere instead of being coloured
--- purely by its syntax-node kind.
---
--- This reimplements the idea behind david-kunz/markid directly against the
--- core `vim.treesitter` query API instead of using that plugin: markid only
--- hooks into nvim-treesitter's old `nvim-treesitter.configs` module system,
--- which the `main` branch (see plugins/editor/treesitter.lua) removed.
-
 local M = {}
 
 local ns = vim.api.nvim_create_namespace("rainbow_var")
@@ -24,8 +15,6 @@ local palette = {
 	"#bb9af7",
 }
 
--- Per-language capture queries: plain `(identifier)` covers most grammars,
--- but e.g. JS/TS object keys are a different node type.
 local queries = {
 	default = "(identifier) @markid",
 	javascript = [[
@@ -34,6 +23,7 @@ local queries = {
 		(shorthand_property_identifier_pattern) @markid
 	]],
 }
+
 queries.typescript = queries.javascript
 queries.tsx = queries.javascript
 
@@ -43,7 +33,6 @@ local function set_highlights()
 	end
 end
 
--- djb2, good enough for a stable name -> colour bucket.
 local function hash(name)
 	local h = 5381
 	for i = 1, #name do
@@ -79,14 +68,13 @@ local function highlight(bufnr)
 					end_row = erow,
 					end_col = ecol,
 					hl_group = group,
-					priority = 110, -- above treesitter's default of 100
+					priority = 110,
 				})
 			end
 		end
 	end)
 end
 
--- Debounce: re-highlighting walks the whole tree, so don't do it on every keystroke.
 local timers = {}
 local function schedule_highlight(bufnr)
 	if timers[bufnr] then

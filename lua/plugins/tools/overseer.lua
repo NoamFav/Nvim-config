@@ -1,5 +1,3 @@
-
--- Async build/task runner. Picks up Makefiles automatically.
 return {
 	"stevearc/overseer.nvim",
 	cmd = {
@@ -57,8 +55,6 @@ return {
 			"<leader>mx",
 			function()
 				local overseer = require("overseer")
-				-- Open the task's terminal in a split so output is visible and the
-				-- program can read stdin (piscine binaries often do).
 				overseer.run_template({ name = "42: run" })
 			end,
 			desc = "run compiled binary",
@@ -74,8 +70,6 @@ return {
 			"<leader>mv",
 			function()
 				local overseer = require("overseer")
-				-- Open the task terminal in a split so the leak report is visible
-				-- (and the program under test can still read stdin).
 				overseer.run_template({ name = "42: valgrind" }, function(task)
 					if task then
 						overseer.run_action(task, "open hsplit")
@@ -88,8 +82,6 @@ return {
 		{ "<leader>ml", "<cmd>OverseerRun<cr>", desc = "run task (menu)" },
 	},
 	opts = {
-		-- Keep the default components notify-only (skip open_output) so
-		-- nothing pops a window on its own — <leader>rt is the only way in.
 		component_aliases = {
 			default = {
 				"on_exit_set_status",
@@ -102,7 +94,6 @@ return {
 		local overseer = require("overseer")
 		overseer.setup(opts)
 
-		-- Nearest directory that owns a Makefile, else cwd.
 		local function project_root()
 			local start = vim.fn.expand("%:p:h")
 			if start == "" then
@@ -112,7 +103,6 @@ return {
 			return found and vim.fs.dirname(found) or vim.fn.getcwd()
 		end
 
-		-- A make target as an overseer template, output routed to quickfix.
 		local function make_target(name, target)
 			overseer.register_template({
 				name = name,
@@ -135,7 +125,6 @@ return {
 		make_target("42: make clean", "clean")
 		make_target("42: make fclean", "fclean")
 
-		-- norminette on the current file
 		overseer.register_template({
 			name = "42: norminette (file)",
 			builder = function()
@@ -147,7 +136,6 @@ return {
 			condition = { filetype = { "c", "cpp" } },
 		})
 
-		-- norminette on the whole project
 		overseer.register_template({
 			name = "42: norminette (project)",
 			builder = function()
@@ -158,9 +146,6 @@ return {
 			end,
 		})
 
-		-- Quick single-file compile with the mandatory flags.
-		-- Output binary is named after the source and dropped right next to it:
-		--   ft_strlen.c -> ft_strlen   (run it with <leader>mx)
 		overseer.register_template({
 			name = "42: cc (this file)",
 			builder = function()
@@ -180,7 +165,6 @@ return {
 			condition = { filetype = { "c", "cpp" } },
 		})
 
-		-- Run the binary produced above (source stem), falling back to ./a.out
 		overseer.register_template({
 			name = "42: run",
 			builder = function()
@@ -197,7 +181,6 @@ return {
 			end,
 		})
 
-		-- The piscine "CI" gate: norminette, then make, in sequence.
 		overseer.register_template({
 			name = "42: norm + build",
 			builder = function()
@@ -222,9 +205,6 @@ return {
 			condition = { filetype = { "c", "cpp", "make" } },
 		})
 
-		-- Run the compiled binary under valgrind with the 42-standard leak checks.
-		-- Resolves the binary the same way "42: run" does: source stem, else a.out.
-		-- NOTE: valgrind is Linux-only — this works on the cluster, not on macOS.
 		overseer.register_template({
 			name = "42: valgrind",
 			builder = function()

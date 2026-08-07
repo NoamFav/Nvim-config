@@ -1,5 +1,3 @@
--- PR review. Needs `gh` authenticated.
--- :Octo review start opens the diff; <leader>ca to comment, <leader>vs to submit.
 return {
 	"pwntester/octo.nvim",
 	dependencies = {
