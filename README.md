@@ -9,6 +9,7 @@
 <br>
 
 <!-- Badges -->
+
 [![Neovim](https://img.shields.io/badge/Neovim-0.11+-57A143?style=for-the-badge&logo=neovim&logoColor=white&labelColor=0D1117)](https://neovim.io)
 [![Lua](https://img.shields.io/badge/Lua-5.1+-2C2D72?style=for-the-badge&logo=lua&logoColor=white&labelColor=0D1117)](https://www.lua.org)
 [![lazy.nvim](https://img.shields.io/badge/lazy.nvim-plugin_manager-7AA2F7?style=for-the-badge&labelColor=0D1117)](https://github.com/folke/lazy.nvim)
@@ -23,9 +24,9 @@
 <div align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=24&pause=1000&color=9B59B6&center=true&width=800&lines=%F0%9F%93%9A+DOCUMENTATION" alt="Documentation" />
 
-| | | |
-|---|---|---|
-| 🚀 [**Features**](docs/FEATURES.md) | ⌨️ [**Key Mappings**](docs/KEYMAPS.md) | 🧩 [**Plugin Reference**](docs/PLUGINS.md) |
+|                                             |                                                  |                                             |
+| ------------------------------------------- | ------------------------------------------------ | ------------------------------------------- |
+| 🚀 [**Features**](docs/FEATURES.md)         | ⌨️ [**Key Mappings**](docs/KEYMAPS.md)           | 🧩 [**Plugin Reference**](docs/PLUGINS.md)  |
 | 📦 [**Requirements**](docs/REQUIREMENTS.md) | 🛠️ [**Install Guide (per-OS)**](docs/INSTALL.md) | 🏗️ [**Architecture**](docs/ARCHITECTURE.md) |
 
 </div>
@@ -55,12 +56,14 @@ A single Neovim config that stays fast across **28 language servers** without tu
 <div align="center">
 
 ### Core
+
 <img src="https://skillicons.dev/icons?i=neovim,lua&theme=dark" />
 <img src="https://img.shields.io/badge/tree--sitter-CLI%20%2B%20C%20compiler-DD4B39?style=for-the-badge&labelColor=0D1117" />
 
 <br>
 
 ### Plugin & LSP Layer
+
 <img src="https://img.shields.io/badge/lazy.nvim-Plugin%20Manager-7AA2F7?style=for-the-badge&labelColor=0D1117" />
 <img src="https://img.shields.io/badge/mason.nvim-LSP%2FFormatter%20Installer-00D9FF?style=for-the-badge&labelColor=0D1117" />
 <img src="https://img.shields.io/badge/blink.cmp-Completion-9B59B6?style=for-the-badge&labelColor=0D1117" />
@@ -69,6 +72,7 @@ A single Neovim config that stays fast across **28 language servers** without tu
 <br>
 
 ### UI & Navigation
+
 <img src="https://img.shields.io/badge/snacks.nvim-Picker%20%C2%B7%20Dashboard%20%C2%B7%20Explorer-00D9FF?style=for-the-badge&labelColor=0D1117" />
 <img src="https://img.shields.io/badge/Harpoon-File%20Nav-FF4500?style=for-the-badge&labelColor=0D1117" />
 <img src="https://img.shields.io/badge/LazyGit-Git%20TUI-FF69B4?style=for-the-badge&labelColor=0D1117" />
@@ -77,6 +81,7 @@ A single Neovim config that stays fast across **28 language servers** without tu
 <br>
 
 ### Languages
+
 <img src="https://skillicons.dev/icons?i=go,rust,py,java,c,cpp,cs,kotlin,swift,dart,scala,js,ts,react,html,css,tailwind,graphql,php,ruby,bash,docker,perl,arduino&theme=dark" />
 
 </div>
@@ -96,11 +101,13 @@ A single Neovim config that stays fast across **28 language servers** without tu
 <td width="50%" valign="top">
 
 #### 🔍 Finding Things
+
 - **Smart picker** — `Snacks.picker` for files, grep, buffers, git, LSP symbols, diagnostics, and more
 - **Harpoon** — pin & jump between 4 files instantly
 - **Dashboard** — recent files, projects, live git status
 
 #### 🧠 LSP & Completion
+
 - **28 language servers**, native `vim.lsp.config`, zero `nvim-lspconfig` boilerplate
 - **blink.cmp** — LSP + path + snippets + buffer + emoji + dictionary sources
 - **Trouble** — pinned diagnostics/symbols panes, follow-cursor
@@ -110,12 +117,15 @@ A single Neovim config that stays fast across **28 language servers** without tu
 <td width="50%" valign="top">
 
 =======
+
 #### 🌐 Git & Tools
+
 - **LazyGit**, Diffview, Gitsigns, git-blame, git-conflict — all wired through Snacks/native keymaps
 - **Toggleterm** — floating terminal, one keystroke away
 - **42 School** — header stamping + Norm linting + `c_formatter_42`
 
 #### 📚 Language Extras
+
 - **Jupyter notebooks** — Molten + image.nvim (Kitty graphics protocol)
 - **LaTeX** — VimTeX + latexmk, live compile
 - **Go** — go.nvim: run/test/coverage/struct-tags/`iferr`, all layered over `gopls`
@@ -178,14 +188,15 @@ nvim
 > [!NOTE]
 > Only need a couple of languages? Don't install every runtime in [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) — Mason only installs servers/formatters, not compilers/SDKs, so add those as you actually need them.
 
-> [!WARNING]
-> [scripts/install.sh](scripts/install.sh) covers macOS (Homebrew), Ubuntu/Debian (apt), Fedora (dnf), and Arch (pacman) — no Windows/WSL path. Language runtimes it can't install cleanly (e.g. Dart/Terraform on apt, most AUR-only packages on Arch) print a warning with a link instead of silently skipping. Piping any script into `bash` runs arbitrary code with your permissions — read it first if that matters to you: [scripts/install.sh](scripts/install.sh).
+> [!WARNING] > [scripts/install.sh](scripts/install.sh) covers macOS (Homebrew), Ubuntu/Debian (apt), Fedora (dnf), and Arch (pacman) — no Windows/WSL path. Language runtimes it can't install cleanly (e.g. Dart/Terraform on apt, most AUR-only packages on Arch) print a warning with a link instead of silently skipping. Piping any script into `bash` runs arbitrary code with your permissions — read it first if that matters to you: [scripts/install.sh](scripts/install.sh).
 
 <!-- Divider -->
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
 <!-- Colorschemes -->
+
 <a name="colorschemes"></a>
+
 <div align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&pause=1000&color=6A5ACD&center=true&width=800&lines=%F0%9F%8E%A8+COLORSCHEMES+%F0%9F%8E%A8" alt="Colorschemes" />
 </div>
