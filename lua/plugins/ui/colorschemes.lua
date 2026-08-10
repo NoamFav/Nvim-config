@@ -38,6 +38,16 @@ return {
 			},
 			lualine_bold = true,
 			on_highlights = function(hl, c)
+				local util = require("tokyonight.util")
+
+				-- slightly lighter comments and line numbers
+				local comment = util.blend_fg(c.comment, 0.8, c.fg)
+				local gutter = util.blend_fg(c.fg_gutter, 0.8, c.fg)
+				hl.Comment.fg = comment
+				hl.LineNr.fg = gutter
+				hl.LineNrAbove.fg = gutter
+				hl.LineNrBelow.fg = gutter
+
 				-- make floats/globals super clean
 				hl.NormalFloat = { bg = "NONE" }
 				hl.FloatBorder = { fg = c.border_highlight or c.blue, bg = "NONE" }
