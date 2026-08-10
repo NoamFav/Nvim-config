@@ -11,15 +11,90 @@ return {
 		scroll = { enabled = true },
 		dashboard = {
 			enabled = true,
+			-- left pane: keymaps. right pane: recent files, projects, git status.
+			pane_gap = 8,
+			width = 70,
+			-- header padded (asymmetrically) to the combined width of both panes so it visually
+			-- centers above both -- snacks re-centers an overflowing pane-1 line using half of
+			-- (line_width - single_pane_width) as a LEFT shift, so straight symmetric padding
+			-- lands off-center; this compensates for that shift.
+			preset = {
+				header = table.concat({
+					"                                                                                                                                                    ",
+					"                                                                                                                                                  ",
+					"                                                                                    ████ ██████           █████      ██                     ",
+					"                                                                                   ███████████             █████                             ",
+					"                                                                                   █████████ ███████████████████ ███   ███████████   ",
+					"                                                                                  █████████  ███    █████████████ █████ ██████████████   ",
+					"                                                                                 █████████ ██████████ █████████ █████ █████ ████ █████   ",
+					"                                                                               ███████████ ███    ███ █████████ █████ █████ ████ █████  ",
+					"                                                                              ██████  █████████████████████ ████ █████ █████ ████ ██████ ",
+					"                                                                                                                                                    ",
+				}, "\n"),
+				-- default keys list plus harpoon (mirrors the real bindings in plugins/editor/harpoon.lua)
+				keys = {
+					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+					{
+						icon = " ",
+						key = "g",
+						desc = "Find Text",
+						action = ":lua Snacks.dashboard.pick('live_grep')",
+					},
+					{
+						icon = " ",
+						key = "r",
+						desc = "Recent Files",
+						action = ":lua Snacks.dashboard.pick('oldfiles')",
+					},
+					-- no "Harpoon Add File" here: the dashboard buffer isn't a real file, so
+					-- there's nothing for harpoon.mark.add_file() to mark from this context
+					{
+						icon = "󰛢 ",
+						key = "h",
+						desc = "Harpoon Menu",
+						action = function()
+							require("harpoon.ui").toggle_quick_menu()
+						end,
+					},
+					{
+						icon = " ",
+						key = "o",
+						desc = "Overseer Task Action",
+						action = ":OverseerTaskAction",
+					},
+					{
+						icon = " ",
+						key = "c",
+						desc = "Config",
+						action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+					},
+					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
+					{
+						icon = "󰒲 ",
+						key = "L",
+						desc = "Lazy",
+						action = ":Lazy",
+						enabled = package.loaded.lazy ~= nil,
+					},
+					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+				},
+			},
 			sections = {
 				{ section = "header" },
-				{ pane = 2, section = "terminal", cmd = "colorscript -e fade", height = 5, padding = 1 },
 				{ section = "keys", gap = 1, padding = 1 },
-				{ pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-				{ pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+				-- blank filler: pane rows are shared by absolute index across panes, and every
+				-- header line is padded to the full 148-wide span, so all 10 header rows (+2
+				-- trailing padding rows from the header's own `padding=2`) overflow pane 1's
+				-- width -- anything landing on those same rows inherits that extra-wide offset
+				-- (this is why, without the filler, "Recent Files" below would render shifted
+				-- right while "Projects" doesn't -- it starts later, past the header block)
+				{ pane = 2, text = "\n\n\n\n\n\n\n\n\n\n\n" },
+				{ pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+				{ pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 				{
 					pane = 2,
-					icon = " ",
+					icon = " ",
 					title = "Git Status",
 					section = "terminal",
 					enabled = vim.fn.isdirectory(".git") == 1, -- skip it outside a repo, git status would just error
@@ -27,9 +102,42 @@ return {
 					height = 5,
 					padding = 1,
 					ttl = 5 * 60,
-					indent = 3,
+					indent = 2,
 				},
-				{ section = "startup" },
+				-- reimplements section="startup", but padded wide enough to overflow pane 1
+				-- (same trick as the header) so it re-centers across both panes instead of
+				-- just within the left one -- the built-in version is only ~40 chars wide,
+				-- well under one pane's width, so it never overflows on its own
+				function(self)
+					local ok, lazy_stats = pcall(require, "lazy.stats")
+					local stats = ok and lazy_stats.stats() or { loaded = 0, count = 0, startuptime = 0 }
+					local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
+					local icon = "⚡ "
+					local label = icon
+						.. "Neovim loaded "
+						.. stats.loaded
+						.. "/"
+						.. stats.count
+						.. " plugins in "
+						.. ms
+						.. "ms"
+					local pane_width = self.opts.width
+					local total_width = pane_width * 2 + self.opts.pane_gap
+					local label_w = vim.api.nvim_strwidth(label)
+					local lib_shift = math.floor((total_width - pane_width) / 2)
+					local leading = math.floor((total_width - label_w) / 2) + lib_shift
+					local trailing = math.max(0, total_width - label_w - leading)
+					return {
+						text = {
+							{ (" "):rep(leading) },
+							{ icon .. "Neovim loaded ", hl = "footer" },
+							{ tostring(stats.loaded) .. "/" .. tostring(stats.count), hl = "special" },
+							{ " plugins in ", hl = "footer" },
+							{ tostring(ms) .. "ms", hl = "special" },
+							{ (" "):rep(trailing) },
+						},
+					}
+				end,
 			},
 		},
 		notifier = {

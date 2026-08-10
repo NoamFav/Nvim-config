@@ -4,11 +4,13 @@ return {
 		"OverseerRun",
 		"OverseerToggle",
 		"OverseerOpen",
-		"OverseerRunCmd",
-		"OverseerQuickAction",
+		"OverseerShell",
+		"OverseerTaskAction",
 	},
 	keys = {
-		{ "<leader>mm", "<cmd>OverseerRunCmd make<cr>", desc = "make" },
+		-- OverseerRunCmd isn't a real overseer command (never was) -- OverseerShell
+		-- is the actual one for running an arbitrary shell command as a task
+		{ "<leader>mm", "<cmd>OverseerShell make<cr>", desc = "make" },
 		{
 			"<leader>mr",
 			function()
@@ -148,6 +150,12 @@ return {
 
 		overseer.register_template({
 			name = "norminette (project)",
+			-- has no filetype condition (norming the whole project shouldn't require
+			-- being in a c/cpp file), which means it matches every buffer -- hidden
+			-- from the <leader>ml run-menu so it can't become the lone match there and
+			-- silently auto-run instead of showing a picker (overseer skips the picker
+			-- whenever exactly one template matches). still reachable via <leader>mN.
+			hide = true,
 			builder = function()
 				return {
 					cmd = { "norminette" },

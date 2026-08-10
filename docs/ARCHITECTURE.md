@@ -4,7 +4,7 @@ title: Architecture
 
 # Architecture
 
-How this config is put together, for anyone extending it. For *what it does* see [Features](FEATURES.md); for *what's installed* see [Plugin Reference](PLUGINS.md).
+How this config is put together, for anyone extending it. For _what it does_ see [Features](FEATURES.md); for _what's installed_ see [Plugin Reference](PLUGINS.md).
 
 ← Back to [README](../README.md)
 
@@ -32,7 +32,7 @@ The same one-file-per-concern pattern repeats elsewhere:
 
 - **Formatters** — [`lua/plugins/lsp/formatters.lua`](../lua/plugins/lsp/formatters.lua) is the single filetype → formatter-exe mapping (used by both `mason-tool-installer`'s `ensure_installed` and `formatter.nvim`'s dispatch table)
 - **Colorschemes** — [`lua/plugins/ui/colorschemes.lua`](../lua/plugins/ui/colorschemes.lua) declares every scheme; only Tokyo Night is `lazy = false` (the default), the rest load on-demand when picked via `<leader>uC`
-- **Semantic-token styling** — [`lua/core/semantic_tokens.lua`](../lua/core/semantic_tokens.lua) is one styling pass that applies to *any* LSP emitting standard `@lsp.type.*`/`@lsp.mod.*` tokens, re-applied on every `ColorScheme` event so it survives switching themes
+- **Semantic-token styling** — [`lua/core/semantic_tokens.lua`](../lua/core/semantic_tokens.lua) is one styling pass that applies to _any_ LSP emitting standard `@lsp.type.*`/`@lsp.mod.*` tokens, re-applied on every `ColorScheme` event so it survives switching themes
 
 ## The LSP Pipeline
 
