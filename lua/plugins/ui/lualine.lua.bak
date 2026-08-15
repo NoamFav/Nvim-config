@@ -3,8 +3,8 @@ return {
 	event = "VeryLazy",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-		-- pulled from the active wallpaper colorscheme (shaped like tokyonight's palette on purpose) so this stays in sync as the wallpaper changes
-		local c = require("colors_generated")
+		-- pulled straight from tokyonight-night so this stays in sync if the palette ever changes
+		local c = require("tokyonight.colors").setup()
 
 		-- StatusLine/StatusLineNC/TabLine/TabLineFill all have a solid bg by default, which is
 		-- what paints a full-width dark rectangle behind empty space -- clearing them is what

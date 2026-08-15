@@ -23,13 +23,9 @@ return {
 		},
 	},
 	{
-		-- not the active theme (see nvim/colors/wallpaper.lua), but lazy=false
-		-- so it's loaded at startup like before -- otherwise its colors/ files
-		-- aren't on runtimepath yet and ":colorscheme tok<Tab>" finds nothing
-		-- until you've already loaded it once. Your original tuning is intact
-		-- so ":colorscheme tokyonight-night" still looks right when you switch.
 		"folke/tokyonight.nvim",
 		lazy = false,
+		priority = 1000,
 		opts = {
 			style = "night",
 			transparent = true,
@@ -69,6 +65,11 @@ return {
 				hl.DiagnosticUnderlineHint = { sp = c.teal, undercurl = true }
 			end,
 		},
+		-- the actual active theme, everything else here is just available on standby
+		config = function(_, opts)
+			require("tokyonight").setup(opts)
+			vim.cmd.colorscheme("tokyonight-night")
+		end,
 	},
 	{
 		-- not the active theme, no need to load it at startup like tokyonight

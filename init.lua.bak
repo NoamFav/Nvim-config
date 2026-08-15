@@ -16,12 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Wallpaper-driven colorscheme (nvim/colors/wallpaper.lua, palette from
--- nvim/lua/colors_generated.lua). Set early so it's active before any
--- plugin loads, no dependency on lazy.nvim/tokyonight.
-vim.o.termguicolors = true
-vim.cmd.colorscheme("wallpaper")
-
 -- Load core configuration
 require("core.options")
 require("core.keymaps")
