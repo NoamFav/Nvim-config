@@ -19,7 +19,10 @@ return {
 		},
 
 			-- Prevent autosave on undo/redo operations
-			condition = function()
+			condition = function(buf)
+                if not vim.api.nvim_buf_is_valid(buf) then
+                    return false -- check buffer valid before evaluate condition
+                end
 				-- Get the undo tree state
 				local undo_state = vim.fn.undotree()
 				local seq_cur = undo_state.seq_cur
