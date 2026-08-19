@@ -190,8 +190,8 @@ return {
 				["<Up>"] = { "snippet_forward", "fallback" },
 				["<Down>"] = { "snippet_backward", "fallback" },
 
-				["<Tab>"] = { "select_prev", "fallback" },
-				["<S-Tab>"] = { "select_next", "fallback" },
+				["<Tab>"] = { "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "fallback" },
 				["<C-p>"] = { "select_prev", "fallback" },
 				["<C-n>"] = { "select_next", "fallback" },
 
