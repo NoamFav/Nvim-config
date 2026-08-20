@@ -15,9 +15,7 @@ SKIP_FONT=0
 SKIP_OMNISHARP=0
 LANGUAGES=""
 
-# ---------------------------------------------------------------------------
-# Output helpers
-# ---------------------------------------------------------------------------
+# ── Output helpers ──────────────────────────────────────────────────────────
 log() { printf '\033[1;36m==>\033[0m %s\n' "$1"; }
 warn() { printf '\033[1;33m!!\033[0m %s\n' "$1" >&2; }
 err() { printf '\033[1;31mxx\033[0m %s\n' "$1" >&2; }
@@ -51,9 +49,7 @@ Windows: use WSL2 and run this inside it, or see docs/INSTALL.md#windows.
 EOF
 }
 
-# ---------------------------------------------------------------------------
-# Arg parsing
-# ---------------------------------------------------------------------------
+# ── Arg parsing ──────────────────────────────────────────────────────────────
 while [[ $# -gt 0 ]]; do
 	case "$1" in
 	-l | --languages)
@@ -82,9 +78,7 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-# ---------------------------------------------------------------------------
-# OS / arch detection
-# ---------------------------------------------------------------------------
+# ── OS / arch detection ──────────────────────────────────────────────────────
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 PM=""
@@ -115,12 +109,11 @@ Linux)
 esac
 log "Detected: $DISTRO ($PM), arch $ARCH"
 
-# ---------------------------------------------------------------------------
-# GitHub release binary fetcher — used for tools whose distro packages are
-# missing, ancient, or inconsistent (lazygit, tree-sitter CLI, arduino-cli,
-# OmniSharp). Downloads the newest release asset whose name matches $2,
-# extracts it if needed, and installs the resulting binary as $LOCAL_BIN/$3.
-# ---------------------------------------------------------------------------
+# ── GitHub release binary fetcher ────────────────────────────────────────────
+# Used for tools whose distro packages are missing, ancient, or inconsistent
+# (lazygit, tree-sitter CLI, arduino-cli, OmniSharp). Downloads the newest
+# release asset whose name matches $2, extracts it if needed, and installs
+# the resulting binary as $LOCAL_BIN/$3.
 fetch_release_asset_url() {
 	local repo="$1" pattern="$2"
 	curl -fsSL "https://api.github.com/repos/${repo}/releases/latest" |
@@ -195,9 +188,7 @@ tree_sitter_arch() {
 	esac
 }
 
-# ---------------------------------------------------------------------------
-# Core requirements
-# ---------------------------------------------------------------------------
+# ── Core requirements ────────────────────────────────────────────────────────
 install_nerd_font() {
 	[[ "$SKIP_FONT" -eq 1 ]] && return 0
 	log "Installing JetBrainsMono Nerd Font"
@@ -292,9 +283,7 @@ install_core() {
 	export PATH="$LOCAL_BIN:$PATH"
 }
 
-# ---------------------------------------------------------------------------
-# Language runtimes — see docs/REQUIREMENTS.md#language-runtimes
-# ---------------------------------------------------------------------------
+# ── Language runtimes — see docs/REQUIREMENTS.md#language-runtimes ─────────
 install_language() {
 	local lang="$1"
 	log "Installing runtime: $lang"
@@ -392,9 +381,7 @@ install_languages() {
 	done
 }
 
-# ---------------------------------------------------------------------------
-# OmniSharp — not Mason-managed, servers.lua expects it at ~/.local/bin/omnisharp
-# ---------------------------------------------------------------------------
+# ── OmniSharp — not Mason-managed, servers.lua expects it at ~/.local/bin/omnisharp ──
 install_omnisharp() {
 	[[ "$SKIP_OMNISHARP" -eq 1 ]] && return 0
 	case ":$LANGUAGES:" in
@@ -417,9 +404,7 @@ install_omnisharp() {
 		warn "OmniSharp fetch failed — see docs/REQUIREMENTS.md#manual-setup-omnisharp"
 }
 
-# ---------------------------------------------------------------------------
-# Backup, clone, prep dirs
-# ---------------------------------------------------------------------------
+# ── Backup, clone, prep dirs ─────────────────────────────────────────────────
 backup_existing() {
 	if [[ -d "$CONFIG_DIR" ]]; then
 		local backup
@@ -438,9 +423,7 @@ clone_and_prep() {
 	mkdir -p "$HOME/.logs/nvim/backup" "$HOME/.logs/nvim/swap" "$HOME/.logs/nvim/undo"
 }
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
+# ── Main ─────────────────────────────────────────────────────────────────────
 main() {
 	install_core
 

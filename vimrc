@@ -1,19 +1,16 @@
-" ============================================================================
-" nvim-42 — bare-Vim fallback (.vimrc)
-" ----------------------------------------------------------------------------
-" For the 42 cluster / any box where you only have plain `vim` and can't
-" install plugins. No dependencies, no plugin manager — just sane defaults,
-" the 42 C style, and a byte-correct 42 header (`<F1>`) that passes the Norm.
+" nvim-42 — bare-Vim fallback (.vimrc), for the 42 cluster or any box where
+" you only have plain `vim` and can't install plugins. No dependencies, no
+" plugin manager — just sane defaults, the 42 C style, and a byte-correct
+" 42 header (`<F1>`) that passes the Norm.
 "
-"   Install:  cp vimrc ~/.vimrc      (or: curl ... > ~/.vimrc)
-"   Identity: export USER / MAIL in your shell so the header is *yours*.
-" ============================================================================
+" Install:  cp vimrc ~/.vimrc      (or: curl ... > ~/.vimrc)
+" Identity: export USER / MAIL in your shell so the header is *yours*.
 
 set nocompatible
 filetype plugin indent on
 syntax on
 
-" --- General -----------------------------------------------------------------
+" ── General ─────────────────────────────────────────────────────────────────
 set encoding=utf-8
 set number
 set relativenumber
@@ -28,13 +25,13 @@ set scrolloff=8
 set backspace=indent,eol,start
 set clipboard=unnamed
 
-" --- Search ------------------------------------------------------------------
+" ── Search ──────────────────────────────────────────────────────────────────
 set ignorecase
 set smartcase
 set incsearch
 set hlsearch
 
-" --- 42 C style: TABS, width 4 (the Norm requires tabs, not spaces) ----------
+" ── 42 C style: tabs, width 4 — the Norm requires tabs, not spaces ──────────
 set tabstop=4
 set shiftwidth=4
 set noexpandtab
@@ -50,7 +47,7 @@ set listchars=tab:\ \ ,trail:·,nbsp:+
 highlight ColorColumn ctermbg=236
 set colorcolumn=80
 
-" --- Leader + quick mappings -------------------------------------------------
+" ── Leader + quick mappings ─────────────────────────────────────────────────
 let mapleader = " "
 " clear search highlight
 nnoremap <leader>h :nohlsearch<CR>
@@ -61,11 +58,9 @@ nnoremap <leader>mc :!make clean<CR>
 nnoremap <leader>mn :!norminette %<CR>
 nnoremap <leader>mb :!cc -Wall -Wextra -Werror % && ./a.out<CR>
 
-" ============================================================================
-" 42 HEADER  —  faithful port of the official Stdheader algorithm.
+" ── 42 header — faithful port of the official Stdheader algorithm ──────────
 " Produces a byte-identical 80-column header, so norminette accepts it.
-"   <F1>  or  :Stdheader   inserts (or, if present, is refreshed on save)
-" ============================================================================
+" <F1> or :Stdheader inserts it (or refreshes it, if one's already there).
 
 let s:asciiart = [
 	\"        :::      ::::::::",
