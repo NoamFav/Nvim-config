@@ -206,8 +206,8 @@ M.setup_server_configs = function()
 	-- ships with Xcode, mason doesn't manage this one, so it needs its own enable() call
 	vim.lsp.config("sourcekit", {
 		cmd = { "xcrun", "sourcekit-lsp" },
-		filetypes = { "swift" },
-		root_markers = { "Package.swift", "*.xcodeproj", "*.xcworkspace" },
+		filetypes = { "swift", "objc", "objcpp", "c", "cpp" },
+		root_markers = { "Package.swift", "*.xcodeproj", "*.xcworkspace", ".git", "buildServer.json" },
 	})
 	vim.lsp.enable("sourcekit")
 
