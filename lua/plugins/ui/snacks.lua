@@ -148,7 +148,6 @@ return {
 			enabled = true,
 			relative = "cursor",
 			img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments" },
-			force = true,
 			border = "rounded",
 			focusable = false,
 			math = {
