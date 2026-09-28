@@ -13,7 +13,7 @@
 [![Neovim](https://img.shields.io/badge/Neovim-0.11+-57A143?style=for-the-badge&logo=neovim&logoColor=white&labelColor=0D1117)](https://neovim.io)
 [![Lua](https://img.shields.io/badge/Lua-5.1+-2C2D72?style=for-the-badge&logo=lua&logoColor=white&labelColor=0D1117)](https://www.lua.org)
 [![lazy.nvim](https://img.shields.io/badge/lazy.nvim-plugin_manager-7AA2F7?style=for-the-badge&labelColor=0D1117)](https://github.com/folke/lazy.nvim)
-[![License](https://img.shields.io/badge/License-MIT-FF69B4?style=for-the-badge&labelColor=0D1117)](./LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-FF69B4?style=for-the-badge&labelColor=0D1117)](./LICENSE)
 
 </div>
 
@@ -226,7 +226,7 @@ Switch with `<leader>uC` — all configured transparent by default.
 
 <br>
 
-MIT — see [LICENSE](LICENSE)
+Apache 2.0 — see [LICENSE](LICENSE)
 
 Made with ♥ by [NoamFav](https://github.com/NoamFav)
 
