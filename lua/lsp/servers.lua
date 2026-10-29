@@ -1,5 +1,30 @@
 local M = {}
 
+-- core bug workaround: vim.lsp.inlay_hint's decoration provider can reapply a
+-- cached hint position that's past the end of a line (after an edit shortens
+-- it, or after another LSP client's stale hints get applied) and crash
+-- nvim_buf_set_extmark with "Invalid 'col'/'line': out of range". unfixed
+-- upstream as of 0.12.6 — see neovim/neovim#39772 and #36318 (fix PR #36333
+-- was never merged) — so clamp it ourselves for just this one namespace.
+do
+	local inlay_hint_ns = vim.api.nvim_create_namespace("nvim.lsp.inlayhint")
+	local set_extmark = vim.api.nvim_buf_set_extmark
+
+	vim.api.nvim_buf_set_extmark = function(bufnr, ns_id, line, col, opts)
+		if ns_id == inlay_hint_ns then
+			local ok, line_count = pcall(vim.api.nvim_buf_line_count, bufnr)
+			if not ok or line >= line_count then
+				return -1
+			end
+			local cur_line = vim.api.nvim_buf_get_lines(bufnr, line, line + 1, false)[1] or ""
+			if col > #cur_line then
+				col = #cur_line
+			end
+		end
+		return set_extmark(bufnr, ns_id, line, col, opts)
+	end
+end
+
 M.get_server_list = function()
 	return {
 		-- core

@@ -17,7 +17,10 @@ return {
 		vim.keymap.set("n", "<C-j>", ss.move_cursor_down)
 		vim.keymap.set("n", "<C-k>", ss.move_cursor_up)
 		vim.keymap.set("n", "<C-l>", ss.move_cursor_right)
-		vim.keymap.set("n", "<C-\\>", ss.move_cursor_previous)
+		-- smart-splits v3 dropped move_cursor_previous ("it could never work
+		-- across a multiplexer boundary" - see its README's v2->v3 migration
+		-- table), so fall back to core's own previous-window jump
+		vim.keymap.set("n", "<C-\\>", "<C-w>p")
 		-- swapping buffers between windows
 		vim.keymap.set("n", "<leader><leader>h", ss.swap_buf_left)
 		vim.keymap.set("n", "<leader><leader>j", ss.swap_buf_down)
