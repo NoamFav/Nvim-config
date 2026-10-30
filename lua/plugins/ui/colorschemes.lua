@@ -1,6 +1,9 @@
 return {
 	{
+		-- lazy=false so colors/*.lua lands on runtimepath; without it
+		-- ":colorscheme onedark" fails with "cannot find color scheme"
 		"navarasu/onedark.nvim",
+		lazy = false,
 		opts = {
 			transparent = true,
 			styles = {
@@ -11,9 +14,11 @@ return {
 	},
 	{
 		"NoamFav/2077.nvim",
+		lazy = false,
 	},
 	{
 		"sainnhe/sonokai",
+		lazy = false,
 		opts = {
 			transparent = true,
 			styles = {
@@ -68,8 +73,10 @@ return {
 		},
 	},
 	{
-		-- not the active theme, no need to load it at startup like tokyonight
+		-- not the active theme, but still lazy=false so ":colorscheme
+		-- cyberdream" actually finds it (see the tokyonight entry above)
 		"scottmckendry/cyberdream.nvim",
+		lazy = false,
 		opts = {
 			variant = "default",
 			transparent = true,
@@ -84,6 +91,7 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+		lazy = false,
 		priority = 1000,
 		opts = {
 			flavour = "auto",

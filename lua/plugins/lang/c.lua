@@ -22,27 +22,6 @@ return {
 				parameter_hints_prefix = "<- ",
 				other_hints_prefix = "=> ",
 			},
-			-- these came in empty and I never noticed until just now, AST
-			-- view works fine without them so leaving it alone for today
-			ast = {
-				role_icons = {
-					type = "",
-					declaration = "",
-					expression = "",
-					statement = ";",
-					specifier = "",
-					["template argument"] = "",
-				},
-				kind_icons = {
-					Compound = "",
-					Recovery = "",
-					TranslationUnit = "",
-					PackExpansion = "",
-					TemplateTypeParm = "",
-					TemplateTemplateParm = "",
-					TemplateParamObject = "",
-				},
-			},
 		},
 		-- inlay hints have to be turned on by hand per buffer, clangd doesn't do it for you
 		config = function(_, opts)

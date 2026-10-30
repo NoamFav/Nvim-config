@@ -29,9 +29,11 @@ autocmd("BufWritePost", {
 	end,
 })
 
--- norminette will fail you over a trailing space you'll never see in the diff
+-- norminette will fail you over a trailing space you'll never see in the diff;
+-- scoped to the C filetypes it actually checks, since markdown's trailing
+-- double-space is a meaningful hard line-break, not cruft to strip
 autocmd("BufWritePre", {
-	pattern = "*",
+	pattern = { "*.c", "*.h", "*.cpp", "*.hpp" },
 	command = [[%s/\s\+$//e]],
 })
 

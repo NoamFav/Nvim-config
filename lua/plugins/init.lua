@@ -8,7 +8,6 @@ return {
 	{ "folke/todo-comments.nvim" },
 	{ "preservim/tagbar" },
 	{ "tfnico/vim-gradle" },
-	{ "NoamFav/Zarya.nvim", lazy = false }, -- mine, Apple Music control, wants to be up from the start
 	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 	{ import = "plugins.ui" },
 	{ import = "plugins.editor" },

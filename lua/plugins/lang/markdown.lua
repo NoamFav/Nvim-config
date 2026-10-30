@@ -1,6 +1,6 @@
 return {
-	"OXY2DEV/markview.nvim",
-	ft = "markdown", -- was lazy=false, loading on literally every buffer for a markdown renderer
-
-	dependencies = { "saghen/blink.cmp" },
+	"blackhat-7/vellum.nvim",
+	ft = "markdown",
+	keys = { { "<leader>mp", "<cmd>Vellum<cr>", desc = "Markdown preview" } },
+	opts = {},
 }
