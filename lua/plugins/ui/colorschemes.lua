@@ -23,11 +23,8 @@ return {
 		},
 	},
 	{
-		-- not the active theme (see nvim/colors/wallpaper.lua), but lazy=false
-		-- so it's loaded at startup like before -- otherwise its colors/ files
-		-- aren't on runtimepath yet and ":colorscheme tok<Tab>" finds nothing
-		-- until you've already loaded it once. Your original tuning is intact
-		-- so ":colorscheme tokyonight-night" still looks right when you switch.
+		-- the active theme (applied in init.lua); lazy=false so it's loaded
+		-- before that call and before lualine reads tokyonight.colors
 		"folke/tokyonight.nvim",
 		lazy = false,
 		opts = {

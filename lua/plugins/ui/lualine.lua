@@ -3,13 +3,7 @@ return {
 	event = "VeryLazy",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-		-- pulled from the active colorscheme -- colors_generated when wallpaper
-		-- is active, or the real tokyonight-night when that's the fallback
-		-- (see init.lua: colors_generated.lua is gitignored/machine-specific)
-		local ok_colors, c = pcall(require, "colors_generated")
-		if not ok_colors then
-			c = require("tokyonight.colors").setup()
-		end
+		local c = require("tokyonight.colors").setup()
 
 		-- StatusLine/StatusLineNC/TabLine/TabLineFill all have a solid bg by default, which is
 		-- what paints a full-width dark rectangle behind empty space -- clearing them is what
