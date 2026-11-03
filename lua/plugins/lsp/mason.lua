@@ -68,12 +68,6 @@ return {
 	},
 
 	{
-		"Hoffs/omnisharp-extended-lsp.nvim",
-		lazy = true,
-		ft = { "cs" },
-	},
-
-	{
 		"nvimdev/lspsaga.nvim",
 		event = "LspAttach",
 		dependencies = { "neovim/nvim-lspconfig" },

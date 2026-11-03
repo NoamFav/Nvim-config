@@ -3,32 +3,22 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
 		dependencies = { "williamboman/mason.nvim" },
-		opts = {
-			-- isort/beautysh/rustywind used to be here too, dropped them —
-			-- nothing below ever actually calls them, formatter.nvim uses
-			-- black/shfmt/rustfmt instead. codelldb/delve aren't formatters at
-			-- all, but mason-tool-installer installs any mason package and
-			-- this is the one list that already auto-updates on start
-			ensure_installed = {
-				"prettierd",
-				"black",
-				"stylua",
-				"clang-format",
-				"taplo",
-				"csharpier",
-				"google-java-format",
-				"ktlint",
-				"shfmt",
-				"gofumpt",
-				"sqlfmt",
-				"xmlformatter",
-				"latexindent",
-				"codelldb",
-				"delve",
-			},
-			auto_update = true,
-			run_on_start = true,
-		},
+		opts = function()
+			-- 42 branch: only the target languages, home quota is ~5GB.
+			-- go/rust format via their own toolchains (gofmt/rustfmt).
+			-- codelldb (~150MB) isn't auto-installed: `:MasonInstall codelldb`
+			-- the day you actually need the debugger
+			local tools = { "prettier", "black", "stylua", "taplo", "shfmt" }
+			-- the cluster ships clang-format, mason's copy is just a duplicate
+			if vim.fn.executable("clang-format") == 0 then
+				table.insert(tools, "clang-format")
+			end
+			return {
+				ensure_installed = tools,
+				auto_update = true,
+				run_on_start = true,
+			}
+		end,
 	},
 
 	{
@@ -61,65 +51,16 @@ return {
 		opts = function()
 			return {
 				filetype = {
-					javascript = { require("formatter.filetypes.javascript").prettier },
-					typescript = { require("formatter.filetypes.javascript").prettier },
-					javascriptreact = { require("formatter.filetypes.javascript").prettier },
-					typescriptreact = { require("formatter.filetypes.typescript").prettier },
 					python = { require("formatter.filetypes.python").black },
 					lua = { require("formatter.filetypes.lua").stylua },
 					cpp = { require("formatter.filetypes.cpp").clangformat },
 					c = { require("formatter.filetypes.c").clangformat },
-
-					cs = {
-						function()
-							return { exe = "dotnet-csharpier", args = { "--write-stdout" }, stdin = true }
-						end,
-					},
-					java = { require("formatter.filetypes.java").google_java_format },
 					sh = { require("formatter.filetypes.sh").shfmt },
 					rust = { require("formatter.filetypes.rust").rustfmt },
 					go = { require("formatter.filetypes.go").gofmt },
-					html = { require("formatter.filetypes.html").prettier },
-					css = { require("formatter.filetypes.css").prettier },
 					json = { require("formatter.filetypes.json").prettier },
 					yaml = { require("formatter.filetypes.yaml").prettier },
 					toml = { require("formatter.filetypes.toml").taplo },
-					markdown = { require("formatter.filetypes.markdown").prettier },
-					sql = {
-						function()
-							return { exe = "sqlfmt", args = { "-" }, stdin = true }
-						end,
-					},
-					xml = {
-						function()
-							return { exe = "xmlformatter", args = { "-" }, stdin = true }
-						end,
-					},
-					latex = {
-						function()
-							return { exe = "latexindent", args = { "-" }, stdin = true }
-						end,
-					},
-					dockerfile = {
-						function()
-							return {
-								exe = "dockerfilelint",
-								args = { vim.api.nvim_buf_get_name(0) },
-								stdin = true,
-							}
-						end,
-					},
-					-- .ino is just C++ wearing a costume, clang-format needs a
-					-- fake filename or it won't recognize the syntax
-					arduino = {
-						function()
-							return {
-								exe = "clang-format",
-								args = { "--assume-filename=sketch.ino" },
-								stdin = true,
-							}
-						end,
-					},
 				},
 			}
 		end,

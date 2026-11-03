@@ -9,23 +9,21 @@ return {
 		config = function()
 			require("nvim-treesitter").setup()
 
-			-- turtle here is for the *.ttl override in core/autocmds.lua
 			require("nvim-treesitter").install({
 				"lua",
 				"bash",
 				"vim",
-				"swift",
-				"go",
-				"rust",
-				"c_sharp",
 				"vimdoc",
-				"python",
-				"javascript",
-				"typescript",
 				"c",
 				"cpp",
-				"java",
-				"turtle",
+				"python",
+				"rust",
+				"go",
+				"json",
+				"toml",
+				"yaml",
+				"dockerfile",
+				"make",
 			})
 
 			-- opt-in per filetype, see the branch comment above for why
@@ -34,20 +32,20 @@ return {
 					local ft = args.match
 					local langs = {
 						lua = true,
-						bash = true,
-						swift = true,
-						go = true,
-						rust = true,
-						c_sharp = true,
 						vim = true,
 						vimdoc = true,
-						python = true,
-						javascript = true,
-						typescript = true,
 						c = true,
 						cpp = true,
-						java = true,
-						turtle = true,
+						python = true,
+						rust = true,
+						go = true,
+						json = true,
+						toml = true,
+						yaml = true,
+						dockerfile = true,
+						make = true,
+						bash = true,
+						sh = true, -- bash parser, filetype is "sh"
 					}
 					if langs[ft] then
 						pcall(vim.treesitter.start)

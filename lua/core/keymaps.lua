@@ -3,15 +3,6 @@ local opts = { noremap = true, silent = true }
 
 -- window nav lives in smart-splits.nvim now (lua/plugins/tools/smart-splits.lua)
 
--- Maven shortcuts. <leader>m is overseer's make/42 territory, this is <leader>j
-keymap("n", "<leader>ji", ":!mvn clean install<CR>", opts)
-keymap("n", "<leader>jk", ":!mvn clean package<CR>", opts)
-keymap("n", "<leader>jc", ":!mvn clean<CR>", opts)
-keymap("n", "<leader>jt", ":!mvn test<CR>", opts)
-keymap("n", "<leader>je", ":!mvn exec:exec<CR>", opts)
-keymap("n", "<leader>jf", ":!mvn javafx:run<CR>", opts)
-keymap("n", "<leader>jd", ":!mvn javadoc:javadoc<CR>", opts)
-
 -- CMake shortcuts
 keymap("n", "<leader>cc", ":!cmake .<CR>", opts)
 keymap("n", "<leader>cm", ":!cmake --build .<CR>", opts)

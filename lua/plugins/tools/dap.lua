@@ -3,7 +3,6 @@ return {
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 		"nvim-neotest/nvim-nio",
-		"leoluz/nvim-dap-go",
 	},
 	-- no rhs on any of these, they're just lazy-load triggers + which-key
 	-- labels, the real bindings are down in config() once dap actually exists
@@ -17,9 +16,8 @@ return {
 	config = function()
 		local dap, dapui = require("dap"), require("dapui")
 		dapui.setup()
-		require("dap-go").setup()
 
-		-- mason-tool-installer (plugins/lsp/formatters.lua) keeps this installed
+		-- not auto-installed on the 42 branch (size), `:MasonInstall codelldb` first
 		local codelldb_path = vim.fn.stdpath("data") .. "/mason/bin/codelldb"
 		dap.adapters.codelldb = {
 			type = "server",
@@ -30,8 +28,7 @@ return {
 			},
 		}
 		-- c only, no cpp config — everything I debug here is 42 C anyway.
-		-- go gets its config for free from dap-go.setup() above (uses delve,
-		-- not this codelldb adapter). rust's is in plugins/lang/rust.lua —
+		-- rust's is in plugins/lang/rust.lua —
 		-- rustaceanvim drives its own dap session, it just borrows this same
 		-- nvim-dap/dapui instance rather than needing a separate one
 		dap.configurations.c = {

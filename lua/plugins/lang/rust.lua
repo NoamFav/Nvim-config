@@ -24,7 +24,7 @@ return {
 					})
 				end,
 			},
-			-- same codelldb binary tools/dap.lua uses for C, mason-tool-installer keeps it installed
+			-- same codelldb binary tools/dap.lua uses for C (`:MasonInstall codelldb`)
 			dap = {
 				adapter = {
 					type = "server",
