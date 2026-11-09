@@ -52,18 +52,12 @@ return {
 			}
 		end,
 		config = function(_, opts)
-			local mlsp = require("mason-lspconfig")
-			mlsp.setup(opts)
-
-			-- scheduled + pcall'd: a server can still be mid-install here,
-			-- enabling it too early just errors instead of waiting politely
-			vim.schedule(function()
-				for _, name in ipairs(opts.ensure_installed) do
-					if name ~= "rust_analyzer" then
-						pcall(vim.lsp.enable, name)
-					end
-				end
-			end)
+			-- automatic_enable already calls vim.lsp.enable() for every
+			-- installed server; calling it again here raced with that call
+			-- and attached clangd twice to the same buffer (vim.lsp.enable's
+			-- doautoall re-triggers client start before the first client
+			-- finishes attaching), doubling inlay hints
+			require("mason-lspconfig").setup(opts)
 		end,
 	},
 
