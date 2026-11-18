@@ -229,9 +229,11 @@ M.setup_server_configs = function()
 
 	-- Swift
 	-- ships with Xcode, mason doesn't manage this one, so it needs its own enable() call
+	-- swift only: sourcekit-lsp wraps its own clangd, so letting it take c/cpp/objc
+	-- attached a second server next to clangd and doubled hints/completions/symbols
 	vim.lsp.config("sourcekit", {
 		cmd = { "xcrun", "sourcekit-lsp" },
-		filetypes = { "swift", "objc", "objcpp", "c", "cpp" },
+		filetypes = { "swift" },
 		root_markers = { "Package.swift", "*.xcodeproj", "*.xcworkspace", ".git", "buildServer.json" },
 	})
 	vim.lsp.enable("sourcekit")

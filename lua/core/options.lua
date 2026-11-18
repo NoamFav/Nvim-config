@@ -46,5 +46,5 @@ opt.scrolloff = 8
 opt.sidescrolloff = 8
 
 -- read by lua/plugins/lsp/header42.lua for the 42-header stamp
-g.user42 = "nfavier"
-g.mail42 = "noam.favier@learner.42.tech"
+g.user = "nfavier"
+g.mail = "noam.favier@learner.42.tech"

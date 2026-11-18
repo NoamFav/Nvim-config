@@ -6,8 +6,8 @@ return {
 		opts = {
 			default_map = true,
 			auto_update = true,
-			user = vim.g.user42,
-			mail = vim.g.mail42,
+			user = vim.g.user,
+			mail = vim.g.mail,
 		},
 		config = function(_, opts)
 			require("42header").setup(opts)
