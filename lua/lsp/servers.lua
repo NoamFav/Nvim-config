@@ -150,6 +150,11 @@ M.setup_server_configs = function()
 			"requirements.txt",
 			".git",
 		},
+		-- ruff owns imports now, two servers fighting over the same import
+		-- block is how you get code actions that undo each other
+		settings = {
+			pyright = { disableOrganizeImports = true },
+		},
 	})
 
 	-- Lua

@@ -6,12 +6,12 @@ return {
 		opts = {
 			-- isort/beautysh/rustywind used to be here too, dropped them —
 			-- nothing below ever actually calls them, formatter.nvim uses
-			-- black/shfmt/rustfmt instead. codelldb/delve aren't formatters at
+			-- ruff/shfmt/rustfmt instead. codelldb/delve aren't formatters at
 			-- all, but mason-tool-installer installs any mason package and
 			-- this is the one list that already auto-updates on start
 			ensure_installed = {
 				"prettierd",
-				"black",
+				"ruff",
 				"stylua",
 				"clang-format",
 				"taplo",
@@ -32,30 +32,6 @@ return {
 	},
 
 	{
-		"nvimtools/none-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvimtools/none-ls-extras.nvim",
-		},
-		config = function()
-			local null_ls = require("null-ls")
-
-			null_ls.setup({
-				sources = {
-					-- downgraded to HINT, pyright's actual errors shouldn't have
-					-- to compete with flake8 opinions for attention
-					require("none-ls.diagnostics.flake8").with({
-						diagnostics_postprocess = function(diagnostic)
-							diagnostic.severity = vim.diagnostic.severity.HINT
-						end,
-					}),
-				},
-			})
-		end,
-	},
-
-	{
 		"mhartington/formatter.nvim",
 		event = "VeryLazy",
 		opts = function()
@@ -65,7 +41,23 @@ return {
 					typescript = { require("formatter.filetypes.javascript").prettier },
 					javascriptreact = { require("formatter.filetypes.javascript").prettier },
 					typescriptreact = { require("formatter.filetypes.typescript").prettier },
-					python = { require("formatter.filetypes.python").black },
+					-- ruff format, black-compatible minus the venv; --stdin-filename is
+					-- how it finds ruff.toml/pyproject.toml when the code comes in on stdin
+					python = {
+						function()
+							local util = require("formatter.util")
+							return {
+								exe = "ruff",
+								args = {
+									"format",
+									"--stdin-filename",
+									util.escape_path(util.get_current_buffer_file_path()),
+									"-",
+								},
+								stdin = true,
+							}
+						end,
+					},
 					lua = { require("formatter.filetypes.lua").stylua },
 					cpp = { require("formatter.filetypes.cpp").clangformat },
 					c = { require("formatter.filetypes.c").clangformat },
