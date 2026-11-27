@@ -7,7 +7,15 @@ return {
 		bigfile = { enabled = true, auto_disable_lsp = true, auto_disable_treesitter = true },
 		explorer = { enabled = true },
 		animate = { enabled = true },
-		indent = { enabled = true },
+		-- chunk draws a bracket around the block the cursor is in; the closest
+		-- python will ever get to braces without lying about what's in the file
+		indent = {
+			enabled = true,
+			chunk = {
+				enabled = true,
+				char = { corner_top = "╭", corner_bottom = "╰" }, -- rounded reads more like a brace than ┌└
+			},
+		},
 		scroll = { enabled = true },
 		dashboard = {
 			enabled = true,

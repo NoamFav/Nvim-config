@@ -6,6 +6,13 @@ opt.termguicolors = true
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes"
+-- tab needs two chars (arrow + filler), eol is the return arrow; with
+-- expandtab on, a → in a .py file means a real tab snuck in. trail/nbsp
+-- only show up when a space is actually a problem: trailing ones get
+-- flagged by flake8 and norminette, and a U+00A0 pasted from a subject
+-- PDF looks like a space right up until python refuses to parse it
+opt.list = true
+opt.listchars = { tab = "→ ", eol = "↵", trail = "·", nbsp = "␣" }
 
 -- Behavior
 opt.mouse = "a"
