@@ -63,6 +63,7 @@ M.get_server_list = function()
 		"perlnavigator",
 		"kotlin_language_server",
 		"arduino_language_server",
+		"ruff",
 	}
 end
 
