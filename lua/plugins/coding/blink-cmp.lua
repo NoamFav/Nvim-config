@@ -10,7 +10,6 @@ return {
 
 		dependencies = {
 			"moyiz/blink-emoji.nvim",
-			"Kaiser-Yang/blink-cmp-dictionary",
 		},
 
 		opts = function(_, opts)
@@ -24,7 +23,7 @@ return {
 			end
 
 			opts.sources = vim.tbl_deep_extend("force", opts.sources or {}, {
-				default = { "lsp", "path", "snippets", "buffer", "emoji", "dictionary" },
+				default = { "lsp", "path", "snippets", "buffer", "emoji"  },
 				providers = {
 					lsp = {
 						name = "lsp",
@@ -103,23 +102,6 @@ return {
 						score_offset = 93,
 						min_keyword_length = 2,
 						opts = { insert = true },
-					},
-
-					dictionary = {
-						module = "blink-cmp-dictionary",
-						name = "Dict",
-						score_offset = 20,
-						enabled = true,
-						max_items = 8,
-						min_keyword_length = 3,
-						opts = {
-							dictionary_directories = { vim.fn.expand("~/.config/dictionaries") },
-							-- en + es, both languages I actually write in
-							dictionary_files = {
-								vim.fn.expand("~/.config/spell/en.utf-8.add"),
-								vim.fn.expand("~/.config/spell/es.utf-8.add"),
-							},
-						},
 					},
 				},
 			})

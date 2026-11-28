@@ -38,9 +38,6 @@ M.get_server_list = function()
 		-- see plugins/lsp/mason.lua's automatic_enable.exclude
 		"rust_analyzer",
 		"gopls",
-		"jsonls",
-		"yamlls",
-		"taplo",
 	}
 	-- mason's clangd is a full ~400MB clang release; the cluster already ships
 	-- one, so only fall back to mason's when there's no system clangd

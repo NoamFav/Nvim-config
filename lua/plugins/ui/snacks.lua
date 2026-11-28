@@ -7,7 +7,13 @@ return {
 		bigfile = { enabled = true, auto_disable_lsp = true, auto_disable_treesitter = true },
 		explorer = { enabled = true },
 		animate = { enabled = true },
-		indent = { enabled = true },
+        indent = {
+			enabled = true,
+			chunk = {
+				enabled = true,
+				char = { corner_top = "╭", corner_bottom = "╰" }, -- rounded reads more like a brace than ┌└
+			},
+		},
 		scroll = { enabled = true },
 		dashboard = {
 			enabled = true,
@@ -20,16 +26,16 @@ return {
 			-- lands off-center; this compensates for that shift.
 			preset = {
 				header = table.concat({
-					"                                                                                                                                                    ",
-					"                                                                                                                                                  ",
-					"                                                                                    ████ ██████           █████      ██                     ",
-					"                                                                                   ███████████             █████                             ",
-					"                                                                                   █████████ ███████████████████ ███   ███████████   ",
-					"                                                                                  █████████  ███    █████████████ █████ ██████████████   ",
-					"                                                                                 █████████ ██████████ █████████ █████ █████ ████ █████   ",
-					"                                                                               ███████████ ███    ███ █████████ █████ █████ ████ █████  ",
-					"                                                                              ██████  █████████████████████ ████ █████ █████ ████ ██████ ",
-					"                                                                                                                                                    ",
+					"                                                                                                                                            ",
+					"                                                                                                                                          ",
+					"                                                                            ████ ██████           █████      ██                     ",
+					"                                                                           ███████████             █████                             ",
+					"                                                                           █████████ ███████████████████ ███   ███████████   ",
+					"                                                                          █████████  ███    █████████████ █████ ██████████████   ",
+					"                                                                         █████████ ██████████ █████████ █████ █████ ████ █████   ",
+					"                                                                       ███████████ ███    ███ █████████ █████ █████ ████ █████  ",
+					"                                                                      ██████  █████████████████████ ████ █████ █████ ████ ██████ ",
+					"                                                                                                                                            ",
 				}, "\n"),
 				-- default keys list plus harpoon (mirrors the real bindings in plugins/editor/harpoon.lua)
 				keys = {
